@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.management.ManagementFragment">
+    tools:context=".ui.management.ManagementFragment"
+    android:orientation="horizontal"
+    android:paddingTop="80dp">
 
     <!--<TextView
         android:id="@+id/text_management"
@@ -20,17 +22,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pie_chart"
-        android:layout_width="300dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="220dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        app:tabTextColor="@color/black_200"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/purple_600"
+        tools:ignore="MissingConstraints" />
 
-    </com.github.mikephil.charting.charts.PieChart>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs" />
 </androidx.constraintlayout.widget.ConstraintLayout>
