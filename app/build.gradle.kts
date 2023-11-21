@@ -53,5 +53,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.github.furkanaskin:ClickablePieChart:1.0.9")
 
+    //chartdkk
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.akexorcist:round-corner-progress-bar:2.2.1")
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }

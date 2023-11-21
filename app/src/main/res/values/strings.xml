@@ -54,4 +54,10 @@
     </string>
     <string name="allocation">Alokasi</string>
     <string name="report">Report</string>
+
+    <string name="rupiah">Rp%d</string>
+    <string name="income">Pemasukkan</string>
+    <string name="editallocation">edit alokasi</string>
+    <string name="historyallocation">Riwayat Alokasi</string>
+    <string name="detailallocation">Detail Alokasi</string>
 </resources>

@@ -31,9 +31,9 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.goPieChart.setOnClickListener {
+        /*binding.goPieChart.setOnClickListener {
             startActivity(Intent(requireContext(), PieChartActivity::class.java))
-        }
+        }*/
 
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)

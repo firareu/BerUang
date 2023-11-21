@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BerUang"
         tools:targetApi="31">
         <activity
+            android:name=".ui.management.edit.EditActivity"
+            android:exported="false" />
+        <activity
             android:name=".PieChartActivity"
             android:exported="false"
             android:label="@string/title_activity_pie_chart"
