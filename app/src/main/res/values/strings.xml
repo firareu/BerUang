@@ -56,6 +56,7 @@
     <string name="report">Report</string>
 
     <string name="rupiah">Rp%d</string>
+    <string name="percent">%d %</string>
     <string name="income">Pemasukkan</string>
     <string name="editallocation">edit alokasi</string>
     <string name="historyallocation">Riwayat Alokasi</string>

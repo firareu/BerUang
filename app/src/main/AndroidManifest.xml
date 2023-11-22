@@ -16,13 +16,7 @@
             android:name=".ui.management.edit.EditActivity"
             android:exported="false" />
         <activity
-            android:name=".PieChartActivity"
-            android:exported="false"
-            android:label="@string/title_activity_pie_chart"
-            android:theme="@style/Theme.BerUang" />
-        <activity
-            android:name=".PieActivity"
-            android:exported="false" />
+            android:name=".ui.management.allocation.AllocationFragment" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

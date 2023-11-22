@@ -29,9 +29,9 @@
             tools:src="@tools:sample/avatars" />-->
 
         <TextView
-            android:id="@+id/img_item_photo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/tv_percent"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/square"
             android:gravity="center"
@@ -46,10 +46,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_toEndOf="@id/img_item_photo"
-            card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
-            card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/tv_percent"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_percent"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_percent"
             tools:text="@string/allocation" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
