@@ -59,15 +59,6 @@ class AllocationFragment : Fragment() {
                 setFragmentData(ArrayList(allocations))
             }
         })
-        /*viewModel = ViewModelProvider(requireActivity()).get(AllocationViewModel::class.java)
-        viewModel.allocations.observe(viewLifecycleOwner, Observer { allocations ->
-            if (allocations != null) {
-                setFragmentData(allocations)
-            } else {
-                Log.d("AllocationFragment", "Data allocations null")
-                Toast.makeText(requireContext(), "Data allocations is null", Toast.LENGTH_SHORT).show()
-            }
-        })*/
 
         setMoneyData()
         return root
@@ -82,7 +73,7 @@ class AllocationFragment : Fragment() {
 
     private fun setMoneyData() {
         val num: Int? = null // Misalnya: num = 1000
-        
+
         //pemasukkan
         val TVMoney = getString(R.string.rupiah, num ?: 0)
         binding.tvMoney.text = TVMoney

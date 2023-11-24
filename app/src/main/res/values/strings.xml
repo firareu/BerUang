@@ -56,9 +56,17 @@
     <string name="report">Report</string>
 
     <string name="rupiah">Rp%d</string>
-    <string name="percent">%d %</string>
+    <string name="percent">%d%</string>
+    <string name="percenttext">Persen</string>
     <string name="income">Pemasukkan</string>
+    <string name="salarynow">Saldo terkini</string>
+    <string name="spendingnow">Jumlah pengeluaran</string>
     <string name="editallocation">edit alokasi</string>
     <string name="historyallocation">Riwayat Alokasi</string>
     <string name="detailallocation">Detail Alokasi</string>
+    <string name="categoryallocation">Kategori Alokasi</string>
+    <string name="nameallocation">Nama Alokasi</string>
+    <string name="add">Tambah+</string>
+    <string name="cd_previous">Previous</string>
+    <string name="cd_next">Next</string>
 </resources>

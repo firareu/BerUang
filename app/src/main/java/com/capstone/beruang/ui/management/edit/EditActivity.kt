@@ -11,6 +11,7 @@ import com.capstone.beruang.R
 import com.capstone.beruang.data.Allocation
 import com.capstone.beruang.data.DatabaseContract
 import com.capstone.beruang.data.DatabaseHelper
+import com.capstone.beruang.data.Salary
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.allocation.AllocationFragment
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
@@ -18,6 +19,7 @@ import com.capstone.beruang.ui.management.allocation.AllocationViewModel
 class EditActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityEditBinding
     private lateinit var viewModel: AllocationViewModel
+    private lateinit var editViewModel: EditViewModel
     private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,7 @@ class EditActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(AllocationViewModel::class.java)
+        editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
         // Inisialisasi databaseHelper
         databaseHelper = DatabaseHelper(this)
@@ -35,15 +38,18 @@ class EditActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         if (view.id == R.id.btn_submit) {
-            val salary = binding.edtSalary.text.toString()
             val needsValue = binding.edtNeeds.text.toString().toFloatOrNull() ?: 0f
             val lifestyleValue = binding.edtLifestyle.text.toString().toFloatOrNull() ?: 0f
             val goalsValue = binding.edtGoals.text.toString().toFloatOrNull() ?: 0f
+            val salary = binding.edtSalary.text.toString().toFloatOrNull() ?: 0f
 
-            val needsAllocation = Allocation(1, "Needs", needsValue, null)
-            val lifestyleAllocation = Allocation(2, "Lifestyle", lifestyleValue, null)
-            val goalsAllocation = Allocation(3, "Goals", goalsValue, null)
+            editViewModel.calculateAllocations(salary, needsValue, lifestyleValue, goalsValue)
 
+            val needsAllocation = Allocation(1, "Needs", needsValue, editViewModel.needsAllocation.value)
+            val lifestyleAllocation = Allocation(2, "Lifestyle", lifestyleValue, editViewModel.lifestyleAllocation.value)
+            val goalsAllocation = Allocation(3, "Goals", goalsValue, editViewModel.goalsAllocation.value)
+
+            /*Salary(1, salary)*/
             val allocations = arrayListOf(needsAllocation, lifestyleAllocation, goalsAllocation)
 
             // Simpan data ke database menggunakan DatabaseHelper
@@ -53,25 +59,6 @@ class EditActivity : AppCompatActivity(), View.OnClickListener {
 
             val intentfav = Intent(this, AllocationFragment::class.java)
             startActivity(intentfav)
-
-            // Menutup Activity Edit setelah menyimpan data
-            /*finish()*/
-
-            /*viewModel.setAllocations(allocations)
-
-            val allocationFragment = AllocationFragment()
-            val bundle = Bundle()
-            allocationFragment.arguments = bundle
-
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame_allocation, allocationFragment)
-                .commit()
-
-            val existingFragment = supportFragmentManager.findFragmentById(R.id.frame_allocation)
-            if (existingFragment is AllocationFragment) {
-                existingFragment.setFragmentData(allocations) // Kirim data yang baru saja dikirim ke fragment
-            }*/
         }
     }
 

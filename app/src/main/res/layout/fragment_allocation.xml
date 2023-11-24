@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.management.allocation.AllocationFragment"
-    android:paddingTop="12dp">
+    android:paddingTop="12dp"
+    android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_allocation"
@@ -164,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="@string/income"
+                        android:text="@string/spendingnow"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
 
@@ -195,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="@string/income"
+                        android:text="@string/salarynow"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
 

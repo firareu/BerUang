@@ -13,4 +13,6 @@ object DatabaseContract {
             const val COLUMN_TOTAL = "total"
         }
     }
+
+
 }

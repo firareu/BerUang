@@ -42,7 +42,7 @@ class AllocationViewModel : ViewModel() {
                 val id = getInt(getColumnIndexOrThrow(DatabaseContract.AllocationEntry.COLUMN_ID))
                 val name = getString(getColumnIndexOrThrow(DatabaseContract.AllocationEntry.COLUMN_NAME))
                 val percent = getFloat(getColumnIndexOrThrow(DatabaseContract.AllocationEntry.COLUMN_PERCENT))
-                val total = getInt(getColumnIndexOrThrow(DatabaseContract.AllocationEntry.COLUMN_TOTAL))
+                val total = getFloat(getColumnIndexOrThrow(DatabaseContract.AllocationEntry.COLUMN_TOTAL))
 
                 val allocation = Allocation(id, name, percent, total)
                 allocations.add(allocation)
@@ -51,11 +51,4 @@ class AllocationViewModel : ViewModel() {
 
         _allocations.postValue(allocations)
     }
-
-    /*private val _allocations = MutableLiveData<ArrayList<Allocation>>()
-    val allocations: LiveData<ArrayList<Allocation>> get() = _allocations
-
-    fun setAllocations(allocations: ArrayList<Allocation>) {
-        _allocations.value = allocations
-    }*/
 }

@@ -34,8 +34,11 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(allocation: Allocation) {
-            binding.tvPercent.text = allocation.percent?.toString() ?: "0%"
+            val formattedPercent = String.format("%d %%", allocation.percent?.toInt() ?: 0)
+            // Set teks pada TextView
+            binding.tvPercent.text = formattedPercent
             binding.tvAllocationtype.text = allocation.allocation_name
+            binding.tvRp.text = allocation.total.toString()
             // Set other views if needed based on Allocation data
         }
     }

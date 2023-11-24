@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.management.allocation.AllocationFragment"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp">
+    tools:context=".ui.management.allocation.AllocationFragment">
 
     <ImageView
         android:id="@+id/iv_calendar_previous"
