@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">capstone</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="valid_email">INPUT VALID EMAIL</string>
+    <string name="email_cannot_empty">EMAIL CANNOT BE EMPTY</string>
+    <string name="email_hint">Enter Your Email</string>
+    <string name="password_less">Password Must More Than 8 Characters</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Enter Your Password</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="nameInput">Enter Your Name</string>
+    <string name="logout">Log Out</string>
+    <string name="redirectRegis">Don\'t Have Account?</string>
+    <string name="redirectLogin">Already Hava An Account</string>
+</resources>
