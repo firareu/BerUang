@@ -13,6 +13,19 @@
         android:theme="@style/Theme.BerUang"
         tools:targetApi="31">
         <activity
+            android:name=".ui.BlankActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CalenderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.management.allocation.detail.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.management.edit.EditActivity"
+            android:exported="false" />
+        <activity android:name=".ui.management.allocation.AllocationFragment" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">

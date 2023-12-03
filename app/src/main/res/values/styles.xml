@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="authTextBox" >
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+     <style name="titleToolBar"  >
+         <item name="fontFamily">@font/poppins_medium</item>
+         <item name="titleTextColor">@color/black_200</item>
+         <item name="android:textSize">24sp</item>
+     </style>
+
+    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox" >
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <!--<item name="boxStrokeColor">@color/light_gray</item>-->
+        <item name="marginHorizontal">32dp</item>
+    </style>
+
+</resources>
