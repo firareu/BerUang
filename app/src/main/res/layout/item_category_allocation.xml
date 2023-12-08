@@ -12,84 +12,92 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="4dp"
     card_view:cardCornerRadius="4dp">
-    <ImageButton
-        android:id="@+id/btn_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_gravity="end"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_cross"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="20dp">
-        <LinearLayout
-            android:id="@+id/ll_category"
-            android:layout_width="256dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="12dp">
+
+        <ImageButton
+            android:id="@+id/btn_cross"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingEnd="4dp"
-            tools:context=".NoteAddUpdateActivity"
-            tools:ignore="MissingConstraints">
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_cross"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_nameallocation"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/nameallocation"
+                card_view:layout_constraintTop_toBottomOf="@id/btn_cross"
                 android:textColor="@color/black_200"
-                app:layout_constraint_toBottomOf="@id/frame"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="MissingConstraints" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_nameallocation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                card_view:layout_constraintStart_toStartOf="@id/tv_nameallocation"
+                card_view:layout_constraintTop_toBottomOf="@id/tv_nameallocation"
+                tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_category"
+                    android:id="@+id/edt_nameallocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Rp"
+                    android:hint=""
                     android:inputType="textCapSentences"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingStart="4dp"
-            tools:context=".NoteAddUpdateActivity"
-            card_view:layout_constraintStart_toEndOf="@id/ll_category"
-            tools:ignore="MissingConstraints">
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_percent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/percenttext"
                 android:textColor="@color/black_200"
-                app:layout_constraint_toBottomOf="@id/frame"
+                android:layout_marginStart="4dp"
+                card_view:layout_constraintStart_toEndOf="@id/ti_nameallocation"
+                card_view:layout_constraintBottom_toBottomOf="@id/tv_nameallocation"
                 android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                card_view:layout_constraintTop_toBottomOf="@id/tv_percent"
+                card_view:layout_constraintStart_toStartOf="@id/tv_percent"
+                card_view:layout_constraintEnd_toEndOf="@id/btn_cross"
+                tools:ignore="MissingClass,MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_percent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Rp"
+                    android:hint=""
                     android:inputType="textCapSentences"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/totalallocation"
+            android:layout_marginTop="4dp"
+            card_view:layout_constraintTop_toBottomOf="@id/ti_nameallocation"
+            card_view:layout_constraintStart_toStartOf="@id/ti_nameallocation"
+            android:textColor="@color/black_200"
+            android:textSize="14sp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,6 @@
 package com.capstone.beruang.data
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -20,6 +21,27 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS ${AllocationEntry.TABLE_NAME}")
         onCreate(db)
+    }
+
+    fun insertAllocation(allocation: Allocation): Long {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(AllocationEntry.COLUMN_NAME, allocation.allocation_name)
+        contentValues.put(AllocationEntry.COLUMN_PERCENT, allocation.percent)
+        contentValues.put(AllocationEntry.COLUMN_TOTAL, allocation.total)
+
+        val newRowId = db.insert(AllocationEntry.TABLE_NAME, null, contentValues)
+        db.close()
+        return newRowId
+    }
+
+    fun deleteAllocation(allocationId: Int): Int {
+        val db = this.writableDatabase
+        val selection = "${AllocationEntry.COLUMN_ID} = ?"
+        val selectionArgs = arrayOf(allocationId.toString())
+        val deletedRows = db.delete(AllocationEntry.TABLE_NAME, selection, selectionArgs)
+        db.close()
+        return deletedRows
     }
 
     companion object {

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.management.edit.EditActivity">
+    tools:context=".ui.management.allocation.edit.EditActivity">
 
+    <!-- FrameLayout -->
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -14,6 +16,8 @@
         android:background="@color/white"
         tools:ignore="MissingConstraints">
 
+        <!-- ImageButton for back -->
+        <!-- Corrected layout constraints -->
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -22,21 +26,22 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_back"/>
 
+        <!-- TextView for title -->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black_200"
             android:textSize="14sp"
-            android:text="@string/editallocation"/>
+            android:text="@string/editallocation" />
 
         <ImageButton
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="end"
             android:backgroundTint="@color/white"
+            android:layout_gravity="end"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_check"/>
     </FrameLayout>
@@ -60,7 +65,6 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="Gaji"
                 android:textColor="@color/black_200"
-                app:layout_constraint_toBottomOf="@id/frame"
                 android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -101,7 +105,7 @@
         <TextView
             android:id="@+id/tv_add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/add"
             android:layout_gravity="end"
@@ -111,11 +115,12 @@
             android:layout_marginBottom="12dp"
             android:textSize="14sp" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
             android:padding="12dp"
             tools:context=".NoteAddUpdateActivity">
             <androidx.recyclerview.widget.RecyclerView
@@ -126,7 +131,7 @@
                 android:overScrollMode="never"
                 android:scrollbarSize="0dp"
                 tools:listitem="@layout/item_category_allocation" />
-        </LinearLayout>
+        </ScrollView>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

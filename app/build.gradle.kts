@@ -61,4 +61,6 @@ dependencies {
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation ("io.github.farshidroohi:lineGraph:1.0.2")
+
 }

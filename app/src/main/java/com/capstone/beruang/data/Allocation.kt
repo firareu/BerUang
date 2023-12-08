@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Allocation(
     var id: Int = 0,
-    val allocation_name: String,
-    val percent: Float?,
-    val total: Float?
+    var allocation_name: String,
+    var percent: Float?,
+    var total: Float?
 ): Parcelable

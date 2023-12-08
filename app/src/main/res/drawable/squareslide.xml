@@ -7,8 +7,8 @@
         android:width="4dp"
         android:color="@color/purple_300"
         />-->
-    <corners
+    <!--<corners
         android:topRightRadius="28dp"
         android:topLeftRadius="28dp"
-        /> <!-- Corner radius -->
+        /> &lt;!&ndash; Corner radius &ndash;&gt;-->
 </shape>

@@ -66,6 +66,7 @@
     <string name="detailallocation">Detail Alokasi</string>
     <string name="categoryallocation">Kategori Alokasi</string>
     <string name="nameallocation">Nama Alokasi</string>
+    <string name="totalallocation">Total Alokasi Rp%s</string>
     <string name="add">Tambah+</string>
     <string name="cd_previous">Previous</string>
     <string name="cd_next">Next</string>

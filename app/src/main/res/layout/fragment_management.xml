@@ -9,7 +9,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
-        android:layout_width="220dp"
+        android:layout_width="212dp"
         android:layout_height="52dp"
         app:tabSelectedTextColor="@color/purple_600"
         app:tabTextColor="@color/black_200"

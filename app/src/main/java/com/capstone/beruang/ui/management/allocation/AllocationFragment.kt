@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
 import com.capstone.beruang.data.Allocation
 import com.capstone.beruang.databinding.FragmentAllocationBinding
-import com.capstone.beruang.ui.management.edit.EditActivity
+import com.capstone.beruang.ui.management.allocation.edit.EditActivity
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData

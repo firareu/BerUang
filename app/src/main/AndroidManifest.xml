@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BerUang"
         tools:targetApi="31">
         <activity
+            android:name=".ui.management.allocation.detail.DetailAllocationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.BlankActivity"
             android:exported="false" />
         <activity
@@ -22,7 +25,7 @@
             android:name=".ui.management.allocation.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.management.edit.EditActivity"
+            android:name=".ui.management.allocation.edit.EditActivity"
             android:exported="false" />
         <activity android:name=".ui.management.allocation.AllocationFragment" />
         <activity
