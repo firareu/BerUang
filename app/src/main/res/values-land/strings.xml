@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email_hint">Enter Your Email</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Enter Your Password</string>
+    <string name="redirectRegis">Don\'t Have Account?</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="nameInput">Enter Your Name</string>
+    <string name="redirectLogin">Already Have An Account?</string>
+    <string name="valid_email">Insert Valid Email</string>
+    <string name="email_cannot_empty">Email Cannot be Empty</string>
+    <string name="logout">Logout</string>
+    <string name="password_less">Your Password is Less than 8 Characters</string>
+</resources>
