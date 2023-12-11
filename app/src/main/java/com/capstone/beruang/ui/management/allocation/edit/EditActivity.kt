@@ -52,9 +52,10 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         startActivity(intentfav)
     }
 
-    private fun setUpClickListener() {
+    /*private fun setUpClickListener() {
         val tvAdd = findViewById<TextView>(R.id.tv_add)
         tvAdd.setOnClickListener {
+            Log.d("EditActivity", "Button Submit Clicked!")
             val namaAlokasi = "" // Ganti dengan nilai yang sesuai dari EditText nama alokasi
             val persentase = "" // Ganti dengan nilai yang sesuai dari EditText persentase
 
@@ -62,7 +63,43 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             editViewModel.addData(allocation)
             adapter.notifyDataSetChanged()
         }
+    }*/
+    private fun setUpClickListener() {
+        val tvAdd = findViewById<TextView>(R.id.tv_add)
+        tvAdd.setOnClickListener {
+            Log.d("EditActivity", "Button Add Clicked!")
+            val namaAlokasi = "" // Ganti dengan nilai yang sesuai dari EditText nama alokasi
+            val persentase = "" // Ganti dengan nilai yang sesuai dari EditText persentase
+
+            val allocation = Allocation(
+                allocation_name = namaAlokasi,
+                percent = persentase.toFloatOrNull(),
+                total = null // Atur total ke null jika belum dihitung
+            )
+
+            // Menambahkan alokasi baru ke daftar yang ditampilkan oleh adapter
+            adapter.addAllocation(allocation)
+        }
+
+        binding.btnSubmit.setOnClickListener {
+            Log.d("EditActivity", "Button Submit Clicked!")
+            // Simpan data ke database atau lakukan operasi penyimpanan yang diperlukan
+            saveDataToDatabase()
+
+            // Redirect atau lakukan tindakan setelah penyimpanan data
+            navigateToAllocationFragment()
+        }
     }
+
+    private fun saveDataToDatabase() {
+        // Dapatkan daftar alokasi dari adapter dan simpan ke dalam database
+        val allocations = adapter.getAllocations()
+
+        // Simpan ke database dengan logika yang sesuai
+        // databaseHelper.saveAllocationsToDatabase(allocations)
+    }
+
+
 
     private fun loadDataFromDatabase() {
         viewModel.loadAllocationsFromDatabase(this)

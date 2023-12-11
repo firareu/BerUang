@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-parcelize")
+    id ("kotlin-kapt")
     id("com.google.gms.google-services")
 }
 
@@ -65,5 +66,9 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation ("io.github.farshidroohi:lineGraph:1.0.2")
+
+    //room
+    implementation ("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 
 }

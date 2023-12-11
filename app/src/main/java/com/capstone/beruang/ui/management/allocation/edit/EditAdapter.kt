@@ -25,6 +25,38 @@ class EditAdapter(private val databaseHelper: DatabaseHelper) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
+    fun addAllocation(allocation: Allocation) {
+        allocationList.add(allocation)
+        notifyItemInserted(allocationList.size - 1)
+    }
+    fun getAllocations(): List<Allocation> {
+        return allocationList
+    }
+
+    fun removeAllocation(position: Int) {
+        if (position != RecyclerView.NO_POSITION) {
+            val deletedItem = allocationList[position]
+            allocationList.removeAt(position)
+            notifyItemRemoved(position)
+
+            // Hapus item dari database berdasarkan ID
+            databaseHelper.deleteAllocation(deletedItem.id)
+        }
+    }
+
+    fun clearAllocations() {
+        val size = allocationList.size
+        allocationList.clear()
+        notifyItemRangeRemoved(0, size)
+    }
+
+    fun updateAllocationList(allocations: List<Allocation>) {
+        allocationList.clear()
+        allocationList.addAll(allocations)
+        notifyDataSetChanged()
+    }
+
+
     fun updateSalary(newSalary: Float) {
         salary = newSalary
         notifyDataSetChanged()
@@ -75,8 +107,35 @@ class EditAdapter(private val databaseHelper: DatabaseHelper) : RecyclerView.Ada
 
     inner class ViewHolder(private val binding: ItemCategoryAllocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         init {
+            binding.btnCross.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    if (allocationList.isNotEmpty()) {
+                        val deletedItem = allocationList[position]
+                        allocationList.removeAt(position)
+                        notifyItemRemoved(position)
+
+                        // Hapus item dari database berdasarkan ID
+                        databaseHelper.deleteAllocation(deletedItem.id)
+                    } else {
+                        allocationList.removeAt(allocationList.size - 1)
+                        notifyItemRemoved(allocationList.size)
+                    }
+                }
+            }
+        }
+
+        fun bind(item: Allocation) {
+            binding.edtNameallocation.setText(item.allocation_name)
+            binding.edtPercent.setText(item.percent?.toString() ?: "")
+
+            // Tampilkan nilai total secara live di tv_total
+            val totalText = itemView.context.getString(R.string.totalallocation, item.total ?: "0")
+            binding.tvTotal.text = totalText
+        }
+
+        /*init {
             binding.btnCross.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -96,7 +155,8 @@ class EditAdapter(private val databaseHelper: DatabaseHelper) : RecyclerView.Ada
             // Tampilkan nilai total secara live di tv_total
             val totalText = itemView.context.getString(R.string.totalallocation, item.total ?: "0")
             binding.tvTotal.text = totalText
-        }
+        }*/
+
     }
 
 
