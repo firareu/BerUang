@@ -73,12 +73,13 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
 
     private fun setUpRecyclerView() {
         // Inisialisasi adapter dengan menyediakan aktivitas (this) dan DatabaseHelper
-//        adapter = EditAdapter(this, databaseHelper)
+        adapter = EditAdapter(databaseHelper) // Inisialisasi adapter sebelum menggunakannya
         val recyclerView: RecyclerView = findViewById(R.id.rv_Allocation)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter.setOnItemClickCallback(this)
     }
+
 
 
     override fun onItemClicked(data: Allocation) {

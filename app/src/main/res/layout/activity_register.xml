@@ -13,8 +13,8 @@
         android:layout_marginTop="60dp"
         android:layout_marginStart="32dp"
         android:text="@string/register"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textColor="@color/black_200"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +26,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:text="@string/name"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/black_200"
+        android:textStyle="bold"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
     <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +45,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="@string/nameInput"
             android:ems="10"
             android:inputType="text" />
@@ -57,8 +58,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:text="@string/email"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/black_200"
+        android:textStyle="bold"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout" />
 
@@ -76,7 +78,7 @@
         <com.team.capstone.ui.custom.EditText
             android:id="@+id/ed_regis_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
@@ -91,8 +93,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:text="@string/password"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/black_200"
+        android:textStyle="bold"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
 
@@ -111,7 +114,7 @@
         <com.team.capstone.ui.custom.Password
             android:id="@+id/ed_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textEmailAddress"
@@ -122,35 +125,36 @@
     <Button
         android:id="@+id/regButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:backgroundTint="@color/black"
+        android:layout_height="64dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="@color/black_200"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_height="40dp"
         android:layout_marginTop="4dp"
         android:text="@string/redirectLogin"
+        app:layout_constraintEnd_toStartOf="@+id/redirectToLogin"
         app:layout_constraintStart_toStartOf="@+id/regButton"
         app:layout_constraintTop_toBottomOf="@+id/regButton" />
 
     <TextView
         android:id="@+id/redirectToLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="40dp"
         android:text="@string/login"
-        android:textColor="@color/teal_200"
+        android:textColor="@color/purple_600"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/regButton"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/regButton" />
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
