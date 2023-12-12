@@ -52,9 +52,16 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+
+<!--    Home-->
+    <string name="hello">Hello,</string>
+    <string name="username">Bae Suzy</string>
+    <string name="categoryhomeallocation">Pembagian Pengeluaran Saat ini</string>
+
     <string name="allocation">Alokasi</string>
     <string name="report">Report</string>
-
+    <string name="date">tanggal</string>
     <string name="rupiah">Rp%d</string>
     <string name="percent">%d%</string>
     <string name="percenttext">Persen</string>
@@ -67,6 +74,7 @@
     <string name="categoryallocation">Kategori Alokasi</string>
     <string name="nameallocation">Nama Alokasi</string>
     <string name="totalallocation">Total Alokasi Rp%s</string>
+    <string name="dc_alocation">Alokasi keuangan</string>
     <string name="add">Tambah+</string>
     <string name="cd_previous">Previous</string>
     <string name="cd_next">Next</string>
@@ -84,4 +92,5 @@
     <string name="email_cannot_empty">Email Cannot be Empty</string>
     <string name="logout">Logout</string>
     <string name="password_less">Your Password is Less than 8 Characters</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.capstone.beruang.ui.management.report
+package com.capstone.beruang.ui.management
 
 import android.view.LayoutInflater
 import android.view.View

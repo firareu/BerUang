@@ -1,4 +1,4 @@
-package com.capstone.beruang.ui.management.report
+package com.capstone.beruang.ui.management
 
 import android.graphics.Rect
 import android.view.View

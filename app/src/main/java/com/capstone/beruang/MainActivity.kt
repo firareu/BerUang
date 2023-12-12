@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         // Atur toolbar sebagai ActionBar
         setSupportActionBar(binding.toolbar)
 
+        // Sembunyikan toolbar
+        supportActionBar?.hide()
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth.currentUser != null) {
@@ -48,5 +51,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 }

@@ -1,18 +1,19 @@
 package com.capstone.beruang.ui.management.allocation.edit
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
-import android.widget.TextView
+import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
 import com.capstone.beruang.data.Allocation
+import com.capstone.beruang.data.DatabaseContract
 import com.capstone.beruang.data.DatabaseHelper
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.allocation.AllocationFragment
@@ -37,69 +38,85 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         setUpRecyclerView()
         loadDataFromDatabase()
         setupAction()
-        setUpClickListener()
-        binding.btnSubmit.setOnClickListener {
-            // Tambahkan log atau pesan toast untuk memeriksa apakah fungsi ini dijalankan
-            Log.d("EditActivity", "Button Submit Clicked!")
+    }
+    private fun addNewAllocation() {
+        val allocation = Allocation(
+            allocation_name = "",
+            percent = null,
+            total = null
+        )
 
-            navigateToAllocationFragment()
-        }
-
+        // Menambahkan alokasi baru ke daftar yang ditampilkan oleh adapter
+        adapter.addAllocation(allocation)
+        adapter.notifyItemInserted(adapter.itemCount - 1)
     }
 
+    private fun saveAllocationData() {
+        val edtNameAlokasi = findViewById<EditText>(R.id.edt_nameallocation)
+        val edtPersentase = findViewById<EditText>(R.id.edt_percent)
+
+        val namaAlokasi = edtNameAlokasi.text.toString()
+        val persentase = edtPersentase.text.toString()
+
+        val allocation = Allocation(
+            allocation_name = namaAlokasi,
+            percent = persentase.toFloatOrNull(),
+            total = null // Atur total ke null jika belum dihitung
+        )
+
+        val existingAllocations = viewModel.allocations.value
+
+        if (existingAllocations.isNullOrEmpty()) {
+            removeAllDataFromDatabaseAndSave(allocation)
+        } else {
+            val allocationsList = existingAllocations.toMutableList()
+            allocationsList.add(allocation)
+
+            saveAllocationToDatabase(allocationsList)
+        }
+    }
     private fun navigateToAllocationFragment() {
         val intentfav = Intent(this, AllocationFragment::class.java)
         startActivity(intentfav)
     }
 
-    /*private fun setUpClickListener() {
-        val tvAdd = findViewById<TextView>(R.id.tv_add)
-        tvAdd.setOnClickListener {
-            Log.d("EditActivity", "Button Submit Clicked!")
-            val namaAlokasi = "" // Ganti dengan nilai yang sesuai dari EditText nama alokasi
-            val persentase = "" // Ganti dengan nilai yang sesuai dari EditText persentase
+    private fun saveAllocationToDatabase(allocations: List<Allocation>) {
+        val db = databaseHelper.writableDatabase
+        db.beginTransaction()
 
-            val allocation = Allocation(0, namaAlokasi, persentase.toFloatOrNull(), null)
-            editViewModel.addData(allocation)
-            adapter.notifyDataSetChanged()
-        }
-    }*/
-    private fun setUpClickListener() {
-        val tvAdd = findViewById<TextView>(R.id.tv_add)
-        tvAdd.setOnClickListener {
-            Log.d("EditActivity", "Button Add Clicked!")
-            val namaAlokasi = "" // Ganti dengan nilai yang sesuai dari EditText nama alokasi
-            val persentase = "" // Ganti dengan nilai yang sesuai dari EditText persentase
+        try {
+            for (allocation in allocations) {
+                val values = ContentValues().apply {
+                    put(DatabaseContract.AllocationEntry.COLUMN_NAME, allocation.allocation_name)
+                    put(DatabaseContract.AllocationEntry.COLUMN_PERCENT, allocation.percent)
+                    put(DatabaseContract.AllocationEntry.COLUMN_TOTAL, allocation.total)
+                }
 
-            val allocation = Allocation(
-                allocation_name = namaAlokasi,
-                percent = persentase.toFloatOrNull(),
-                total = null // Atur total ke null jika belum dihitung
-            )
-
-            // Menambahkan alokasi baru ke daftar yang ditampilkan oleh adapter
-            adapter.addAllocation(allocation)
-        }
-
-        binding.btnSubmit.setOnClickListener {
-            Log.d("EditActivity", "Button Submit Clicked!")
-            // Simpan data ke database atau lakukan operasi penyimpanan yang diperlukan
-            saveDataToDatabase()
-
-            // Redirect atau lakukan tindakan setelah penyimpanan data
-            navigateToAllocationFragment()
+                val newRowId = db.insert(DatabaseContract.AllocationEntry.TABLE_NAME, null, values)
+                Log.d("EditActivity", "New Row ID: $newRowId")
+            }
+            db.setTransactionSuccessful()
+        } catch (e: Exception) {
+            Log.e("EditActivity", "Error saving allocations to database: ${e.message}")
+        } finally {
+            db.endTransaction()
         }
     }
 
-    private fun saveDataToDatabase() {
-        // Dapatkan daftar alokasi dari adapter dan simpan ke dalam database
-        val allocations = adapter.getAllocations()
+    private fun removeAllDataFromDatabaseAndSave(allocation: Allocation) {
+        val db = databaseHelper.writableDatabase
 
-        // Simpan ke database dengan logika yang sesuai
-        // databaseHelper.saveAllocationsToDatabase(allocations)
+        db.delete(DatabaseContract.AllocationEntry.TABLE_NAME, null, null)
+
+        val values = ContentValues().apply {
+            put(DatabaseContract.AllocationEntry.COLUMN_NAME, allocation.allocation_name)
+            put(DatabaseContract.AllocationEntry.COLUMN_PERCENT, allocation.percent)
+            put(DatabaseContract.AllocationEntry.COLUMN_TOTAL, allocation.total)
+        }
+
+        val newRowId = db.insert(DatabaseContract.AllocationEntry.TABLE_NAME, null, values)
+        Log.d("EditActivity", "New Row ID: $newRowId")
     }
-
-
 
     private fun loadDataFromDatabase() {
         viewModel.loadAllocationsFromDatabase(this)
@@ -109,8 +126,7 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     }
 
     private fun setUpRecyclerView() {
-        // Inisialisasi adapter dengan menyediakan aktivitas (this) dan DatabaseHelper
-        adapter = EditAdapter(databaseHelper) // Inisialisasi adapter sebelum menggunakannya
+        adapter = EditAdapter(databaseHelper)
         val recyclerView: RecyclerView = findViewById(R.id.rv_Allocation)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -120,43 +136,26 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
 
 
     override fun onItemClicked(data: Allocation) {
-        // Lakukan tindakan yang diperlukan saat item diklik (misalnya, edit data)
-        val id = data.id // Mendapatkan ID dari item yang diklik
-        val name = "" // Ganti dengan nilai yang sesuai dari EditText nama alokasi
-        val percent = "" // Ganti dengan nilai yang sesuai dari EditText persentase
+        val id = data.id
+        val name = ""
+        val percent = ""
 
         editViewModel.updateData(id, name, percent.toFloatOrNull() ?: 0f)
         adapter.notifyDataSetChanged()
 
     }
 
-    /*override fun onClick(view: View) {
-        if (view.id == R.id.btn_submit) {
-            *//*val needsValue = binding.edtNeeds.text.toString().toFloatOrNull() ?: 0f
-            val lifestyleValue = binding.edtLifestyle.text.toString().toFloatOrNull() ?: 0f
-            val goalsValue = binding.edtGoals.text.toString().toFloatOrNull() ?: 0f
-            val salary = binding.edtSalary.text.toString().toFloatOrNull() ?: 0f
-
-            editViewModel.calculateAllocations(salary, needsValue, lifestyleValue, goalsValue)
-
-            val needsAllocation = Allocation(1, "Needs", needsValue, editViewModel.needsAllocation.value)
-            val lifestyleAllocation = Allocation(2, "Lifestyle", lifestyleValue, editViewModel.lifestyleAllocation.value)
-            val goalsAllocation = Allocation(3, "Goals", goalsValue, editViewModel.goalsAllocation.value)
-
-            *//**//*Salary(1, salary)*//**//*
-            val allocations = arrayListOf(needsAllocation, lifestyleAllocation, goalsAllocation)
-
-            // Simpan data ke database menggunakan DatabaseHelper
-            for (allocation in allocations) {
-                saveAllocationToDatabase(allocation)
-            }*//*
-
-            val intentfav = Intent(this, AllocationFragment::class.java)
-            startActivity(intentfav)
-        }
-    }*/
-
     private fun setupAction() {
+        binding.tvAdd.setOnClickListener {
+            Log.d("EditActivity", "Button Add Clicked!")
+            addNewAllocation()
+        }
+        binding.btnSubmit.setOnClickListener {
+            Log.d("EditActivity", "Button Submit Clicked!")
+            saveAllocationData()
+//            navigateToAllocationFragment()
+            finish()
+        }
         binding.btnBack.setOnClickListener {
             finish()
         }
