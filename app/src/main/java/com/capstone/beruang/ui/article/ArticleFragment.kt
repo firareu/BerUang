@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.adapter.RowAdapter
 import com.capstone.beruang.databinding.FragmentArticleBinding
 
@@ -19,11 +20,12 @@ class ArticleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val view = binding.root
 
         val articleList = listOf(
-            "Article 1",
+            "Fakta Koceng yang Mengira Dirinya Kura-Kura",
             "Article 2",
             "Article 3"
         )
@@ -31,6 +33,7 @@ class ArticleFragment : Fragment() {
         val recyclerView = binding.rvRow
         val adapter = RowAdapter(articleList)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         return view
     }
