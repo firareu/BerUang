@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="100dp"
     android:layout_gravity="center"
-
     android:layout_marginEnd="12dp"
     android:layout_marginBottom="4dp"
     android:background="@color/black"
@@ -35,6 +34,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
+            android:layout_margin="4dp"
             android:textAlignment="textStart"
             android:text="Fakta Koceng yang Mengira Dirinya Kura-Kura"
             android:textColor="@color/black"
