@@ -1,5 +1,6 @@
 package com.capstone.beruang.data.retrofit
 
+import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
@@ -8,9 +9,12 @@ import retrofit2.http.*
 
 interface ApiService {
     //mengambil seluruh data alokasi
+    /*@GET("allocations")
+    suspend fun getAllAllocations(): AllocationResponse*/
     @GET("allocations")
-    suspend fun getAllAllocations(): AllocationResponse
-
+    suspend fun getAllAllocations(): AllocationResponse {
+        return FakeDataGenerator.generateFakeAllocationResponse()
+    }
     // Menambahkan data alokasi
     @POST("allocations")
     suspend fun addAllocation(@Body allocation: ListAllocationItem): AllocationResponse

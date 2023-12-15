@@ -1,6 +1,6 @@
 package com.capstone.beruang.data
 
-import android.content.ContentValues
+/*import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -48,4 +48,4 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "Allocation.db"
     }
-}
+}*/

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -37,16 +38,31 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
 
-        val textView: TextView = binding.textHome
+        /*val textView: TextView = binding.textHome
         profileViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
+        }*/
         binding.logOutButton.setOnClickListener {
-            Firebase.auth.signOut()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
+            showAlertDialog()
         }
         return root
+    }
+
+    private fun showAlertDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        val alert = builder.create()
+        builder
+            .setTitle(getString(R.string.logout))
+            .setMessage(getString(R.string.logout_description))
+            .setPositiveButton(getString(R.string.logout_cancel)) { _, _ ->
+                alert.cancel()
+            }
+            .setNegativeButton(getString(R.string.yes)) { _, _ ->
+                Firebase.auth.signOut()
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+            }
+            .show()
     }
 
     override fun onDestroyView() {

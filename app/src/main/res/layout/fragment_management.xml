@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.management.ManagementFragment"
     android:orientation="horizontal">
+    <!--<androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/black_200"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"/>-->
+    <FrameLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/toolbar"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_moneymanagement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/bar_management"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:titleTextColor="@color/black_200"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -15,6 +44,7 @@
         app:tabTextColor="@color/black_200"
         android:background="@color/white"
         app:tabIndicatorColor="@color/purple_600"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:ignore="MissingConstraints" />
 
     <androidx.viewpager2.widget.ViewPager2

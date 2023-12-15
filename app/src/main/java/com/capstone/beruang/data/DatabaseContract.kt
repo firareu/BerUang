@@ -1,6 +1,6 @@
 package com.capstone.beruang.data
 
-import android.provider.BaseColumns
+/*import android.provider.BaseColumns
 
 object DatabaseContract {
     // Kontrak untuk tabel Allocations
@@ -15,4 +15,4 @@ object DatabaseContract {
     }
 
 
-}
+}*/

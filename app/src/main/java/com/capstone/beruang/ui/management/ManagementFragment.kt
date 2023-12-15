@@ -38,9 +38,6 @@ class ManagementFragment : Fragment() {
         _binding = FragmentManagementBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.visibility = View.VISIBLE
-
         val viewPager: ViewPager2 = root.findViewById(R.id.view_pager)
         val tabs: TabLayout = root.findViewById(R.id.tabs)
         val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity())

@@ -17,16 +17,17 @@
         android:id="@+id/tv_percent"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/square"
         android:fontFamily="@font/poppins_medium"
         android:gravity="center"
-        android:textSize="12sp"
         android:textColor="@color/white"
+        android:textSize="12sp"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent"
+        card_view:layout_constraintVertical_bias="0.0"
         tools:text="@string/percent" />
 
     <TextView

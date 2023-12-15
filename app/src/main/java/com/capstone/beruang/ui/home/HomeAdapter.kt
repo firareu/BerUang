@@ -1,13 +1,13 @@
-package com.capstone.beruang.ui.management.allocation
+package com.capstone.beruang.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
-import com.capstone.beruang.databinding.ItemAllocationBinding
+import com.capstone.beruang.databinding.ItemHomeAllocationBinding
 
-class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
+class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
     private val allocationList = ArrayList<ListAllocationItem>()
 
@@ -25,7 +25,7 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAllocationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemHomeAllocationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -38,7 +38,7 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
         return allocationList.size
     }
 
-    inner class ViewHolder(private val binding: ItemAllocationBinding) :
+    inner class ViewHolder(private val binding: ItemHomeAllocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(allocation: ListAllocationItem) {
@@ -46,7 +46,6 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
             // Set teks pada TextView
             binding.tvPercent.text = formattedPercent
             binding.tvAllocationtype.text = allocation.allocation_name
-            binding.tvRp.text = allocation.total.toString()
             // Set other views if needed based on ListAllocationItem data
         }
     }

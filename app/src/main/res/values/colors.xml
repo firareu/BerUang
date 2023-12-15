@@ -14,4 +14,6 @@
     <color name="purple_600">#6C40C9</color>
     <color name="purple_300">#8F6DD6</color>
     <color name="gray">#F1F1F1</color>
+    <color name="gray_600">#D1D1D1</color>
+    <color name="red">#EB4335</color>
 </resources>

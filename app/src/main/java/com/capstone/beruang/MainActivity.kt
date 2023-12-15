@@ -1,8 +1,6 @@
 package com.capstone.beruang
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,14 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.beruang.databinding.ActivityMainBinding
-import com.capstone.beruang.ui.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseUser: FirebaseUser
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,21 +17,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Atur toolbar sebagai ActionBar
         setSupportActionBar(binding.toolbar)
 
-        // Sembunyikan toolbar
         supportActionBar?.hide()
-
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        if (firebaseAuth.currentUser != null) {
-            firebaseUser = firebaseAuth.currentUser!!
-        } else {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-            return
-        }
 
         val navView: BottomNavigationView = binding.navView
 
@@ -51,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
 
     }
 }

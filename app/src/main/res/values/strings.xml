@@ -54,10 +54,17 @@
     </string>
 
 
-<!--    Home-->
+    <!--    Home-->
     <string name="hello">Hello,</string>
     <string name="username">Bae Suzy</string>
     <string name="categoryhomeallocation">Pembagian Pengeluaran Saat ini</string>
+    <string name="recentarticle">Artikel Terkini</string>
+
+    <!--   Profile-->
+    <string name="profile">Profil Saya</string>
+    <string name="emailuser">baesuzy@gmail.com</string>
+    <string name="account">Akun</string>
+    <string name="lastseen">Terakhir Dilihat</string>
 
     <string name="allocation">Alokasi</string>
     <string name="report">Report</string>
@@ -92,5 +99,13 @@
     <string name="email_cannot_empty">Email Cannot be Empty</string>
     <string name="logout">Logout</string>
     <string name="password_less">Your Password is Less than 8 Characters</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="accountsetting">Pengaturan Akun</string>
+    <string name="logout_description">Apakah Kamu Yakin Ingin Log Out?</string>
+    <string name="logout_cancel">cancel</string>
+    <string name="yes">Ya</string>
+    <string name="managemoney">Manage Your Money!</string>
+    <string name="Ber">Ber</string>
+    <string name="Uang">Uang</string>
 
 </resources>

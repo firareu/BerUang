@@ -127,4 +127,8 @@ class DetailAllocationActivity : AppCompatActivity() {
         }
 
     }
+
+    companion object {
+        const val KEY_CONTENT = "content"
+    }
 }

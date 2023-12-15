@@ -1,24 +1,131 @@
 package com.capstone.beruang.ui.management.allocation.edit
 
-import android.content.ContentValues
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.EditText
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Allocation
-import com.capstone.beruang.data.DatabaseContract
-import com.capstone.beruang.data.DatabaseHelper
+import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.retrofit.ApiService
+import com.capstone.beruang.data.retrofit.ApiServiceFactory
+//import com.capstone.beruang.data.retrofit.ApiServiceFactory
 import com.capstone.beruang.databinding.ActivityEditBinding
-import com.capstone.beruang.ui.management.allocation.AllocationFragment
+import com.capstone.beruang.ui.management.allocation.AllocationAdapter
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
+    private lateinit var binding: ActivityEditBinding
+    private lateinit var viewModel: AllocationViewModel
+    private lateinit var apiService: ApiService
+    private lateinit var adapter: EditAdapter
+    private val allocationAdapter: AllocationAdapter = AllocationAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        apiService = ApiServiceFactory.createApiService()
+
+        adapter = EditAdapter(apiService)
+        binding.rvAllocation.layoutManager = LinearLayoutManager(this)
+        binding.rvAllocation.setHasFixedSize(true)
+        binding.rvAllocation.adapter = adapter
+
+        setUpRecyclerView()
+        loadDataFromApi()
+        setFakeData()
+        setupAction()
+    }
+
+    private fun setFakeData() {
+        adapter.setFakeAllocations()
+    }
+
+    private fun deleteAllocationFromApi(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                apiService.deleteAllocation(id)
+                // Lakukan sesuatu setelah penghapusan berhasil
+            } catch (e: Exception) {
+                // Tangani kesalahan jika gagal menghapus
+                Log.e("EditActivity", "Failed to delete allocation: ${e.message}")
+            }
+        }
+    }
+
+    private fun loadDataFromApi() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = apiService.getAllAllocations()
+                if (!response.error) {
+                    val allocations = response.listAllocation
+                    runOnUiThread {
+                        adapter.submitList(allocations)
+                    }
+                } else {
+                    Log.e("EditActivity", "Error fetching allocations: ${response.message}")
+                }
+            } catch (e: Exception) {
+                Log.e("EditActivity", "Error: ${e.message}")
+            }
+        }
+    }
+
+    private fun setUpRecyclerView() {
+        adapter = EditAdapter(apiService)
+        val recyclerView: RecyclerView = findViewById(R.id.rv_Allocation)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.setOnItemClickCallback(this)
+    }
+
+    private fun setupAction() {
+        binding.tvAdd.setOnClickListener {
+            Log.d("EditActivity", "Button Add Clicked!")
+//            addNewAllocation()
+        }
+        binding.btnSubmit.setOnClickListener {
+            Log.d("EditActivity", "Button Submit Clicked!")
+//            saveAllocationData()
+//            navigateToAllocationFragment()
+            finish()
+        }
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.edtSalary.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val salary = binding.edtSalary.text.toString().toFloatOrNull() ?: 0f
+//                adapter.updateSalary(salary)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Not needed
+            }
+        })
+    }
+
+    override fun onItemClicked(data: ListAllocationItem) {
+        val id = data.id
+        deleteAllocationFromApi(id)
+    }
+}
+
+
+
+/*
 class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     private lateinit var binding: ActivityEditBinding
     private lateinit var editViewModel: EditViewModel
@@ -175,4 +282,6 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             }
         })
     }
-}
+}*/
+
+

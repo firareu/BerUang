@@ -1,14 +1,68 @@
 package com.capstone.beruang.ui.management.allocation
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.beruang.data.Allocation
-import com.capstone.beruang.data.DatabaseContract
-import com.capstone.beruang.data.DatabaseHelper
+import androidx.lifecycle.viewModelScope
+import com.capstone.beruang.data.fakedata.FakeDataGenerator
+import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.repository.AllocationRepository
+import com.capstone.beruang.data.response.AllocationResponse
+import kotlinx.coroutines.launch
 
-class AllocationViewModel : ViewModel() {
+class AllocationViewModel(private val repository: AllocationRepository) : ViewModel() {
+
+    private val _dataFetchError = MutableLiveData<Boolean>()
+    val dataFetchError: LiveData<Boolean>
+        get() = _dataFetchError
+
+
+    val allocations: LiveData<AllocationResponse> = repository.getAllAllocations()
+
+    fun getFakeAllocations(): List<ListAllocationItem> {
+        return FakeDataGenerator.generateFakeAllocations()
+    }
+
+    fun addAllocation(allocation: ListAllocationItem) {
+        viewModelScope.launch {
+            try {
+                repository.addAllocation(allocation)
+                // Handle response if necessary
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle error when adding allocation
+            }
+        }
+    }
+
+    fun updateAllocation(id: Int, allocation: ListAllocationItem) {
+        viewModelScope.launch {
+            try {
+                repository.updateAllocation(id, allocation)
+                // Handle response if necessary
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle error when updating allocation
+            }
+        }
+    }
+
+    fun deleteAllocation(id: Int) {
+        viewModelScope.launch {
+            try {
+                repository.deleteAllocation(id)
+                // Handle response if necessary
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle error when deleting allocation
+            }
+        }
+    }
+}
+
+
+
+/*class AllocationViewModel : ViewModel() {
 
     private val _allocations = MutableLiveData<List<Allocation>>()
     val allocations: LiveData<List<Allocation>> get() = _allocations
@@ -51,4 +105,4 @@ class AllocationViewModel : ViewModel() {
 
         _allocations.postValue(allocations)
     }
-}
+}*/
