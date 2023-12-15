@@ -1,4 +1,5 @@
-const { createUser: createUserModel, 
+const { createUser: createUserModel,
+        getUser: getUserModel,
         getUserById: getUserByIdModel, 
         updateUser: updateUserModel, 
         deleteUser: deleteUserModel } = require('../models/user');
@@ -17,12 +18,39 @@ const createUser = async (req, res) => {
   }
 };
 
+// GET ALL
+const getUser = async (req, res) => {
+  try {
+    const user = await getUserModel();
+    // console.log(user.length)
+    if (user.length > 0) {
+      res.status(200).json({ user });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 // GET
 const getUserById = async (req, res) => {
   try {
+    console.log(req.params)
+    console.log(req.query)
     const userId = req.params.userId;
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is missing in the request' });
+    }
+
     const user = await getUserByIdModel(userId);
-    res.status(200).json({ user });
+    console.log(user)
+    if (user) {
+      res.status(200).json({ user });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -33,16 +61,15 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const userId = req.params.userId;
-    // Assuming req.body contains the updated user data
     await updateUserModel(userId, req.body);
     res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
+    
   }
 };
 
-// DELETE
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -54,4 +81,8 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUserById, updateUser, deleteUser };
+module.exports = { createUser, 
+                   getUser, 
+                   getUserById, 
+                   updateUser, 
+                   deleteUser };

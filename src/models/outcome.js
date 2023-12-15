@@ -9,7 +9,7 @@ const createOutcome = async (outcomeData, userId) => {
     amount: outcomeData.amount,
     description: outcomeData.description || null,
     category: outcomeData.category || null,
-    userId: userId,  // Reference to User document (one-to-many)
+    userId: userId,
   });
   return outcomeRef.id;
 };

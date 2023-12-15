@@ -2,8 +2,7 @@ const {
   createOutcome,
   getOutcomeById: getOutcomeByIdModel,
   updateOutcome: updateOutcomeModel,
-  deleteOutcome: deleteOutcomeModel
-} = require('../models/outcome');
+  deleteOutcome: deleteOutcomeModel} = require('../models/outcome');
 
 // POST
 const addOutcome = async (req, res) => {
