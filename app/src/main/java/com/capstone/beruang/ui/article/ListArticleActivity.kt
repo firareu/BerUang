@@ -23,5 +23,12 @@ class ListArticleActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        setupAction()
+    }
+
+    private fun setupAction() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }

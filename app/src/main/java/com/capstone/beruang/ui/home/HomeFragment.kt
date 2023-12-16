@@ -40,12 +40,6 @@ class HomeFragment : Fragment() {
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = homeAdapter
 
-        val imgItemPhoto = view?.findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.img_item_photo)
-        imgItemPhoto?.setImageResource(R.drawable.profile)
-
-        /*val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.visibility = View.GONE*/
-
         (activity as AppCompatActivity?)?.supportActionBar?.hide()
         setMoneyData()
         return root

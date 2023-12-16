@@ -9,18 +9,18 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_article"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="10sp"
-        android:icon="@drawable/ic_article"
-        android:title="@string/title_article" />
-
-    <item
         android:id="@+id/navigation_management"
         android:fontFamily="@font/poppins_medium"
         android:textSize="10sp"
         android:icon="@drawable/ic_management"
         android:title="@string/title_management" />
+
+    <item
+        android:id="@+id/navigation_article"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="10sp"
+        android:icon="@drawable/ic_article"
+        android:title="@string/title_article" />
 
     <item
         android:id="@+id/navigation_profile"

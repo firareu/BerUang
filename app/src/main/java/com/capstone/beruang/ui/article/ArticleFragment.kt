@@ -2,6 +2,9 @@ package com.capstone.beruang.ui.article
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +37,7 @@ class ArticleFragment: Fragment() {
         val adapter = RowAdapter(dataArticle)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
 
         val dataTag = TagData.tagList
         val tagAdapter = TagAdapter(requireContext(), dataTag)

@@ -43,6 +43,8 @@
             android:layout_toEndOf="@id/tv_percent"
             android:fontFamily="@font/poppins_medium"
             android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/black_200"
             card_view:layout_constraintStart_toEndOf="@+id/tv_percent"
             card_view:layout_constraintTop_toTopOf="@+id/tv_percent"
             tools:text="@string/allocation" />
@@ -55,6 +57,7 @@
             android:layout_toEndOf="@id/tv_percent"
             android:fontFamily="@font/poppins_medium"
             android:textSize="12sp"
+            android:textColor="@color/black_200"
             card_view:layout_constraintBottom_toBottomOf="@+id/tv_allocationtype"
             card_view:layout_constraintEnd_toEndOf="@id/tv_bar"
             card_view:layout_constraintTop_toTopOf="@+id/tv_allocationtype"

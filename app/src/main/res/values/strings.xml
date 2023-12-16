@@ -59,6 +59,7 @@
     <string name="username">Bae Suzy</string>
     <string name="categoryhomeallocation">Pembagian Pengeluaran Saat ini</string>
     <string name="recentarticle">Artikel Terkini</string>
+    <string name="seemore">Lainnya</string>
 
     <!--   Profile-->
     <string name="profile">Profil Saya</string>
@@ -79,6 +80,8 @@
     <string name="temukanMinat">Temukan Minatmu</string>
     <string name="image_article">Article image</string>
     <string name="bookmark">Bookmark</string>
+    <string name="tag">tag</string>
+
 
     <string name="allocation">Alokasi</string>
     <string name="report">Report</string>
