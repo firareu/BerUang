@@ -21,14 +21,11 @@ class DetailArticleActivity : AppCompatActivity() {
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Retrieve article data from intent
         val article = intent.getParcelableExtra<Article>(ARTICLE_KEY)
 
-        // Use article data to populate the UI (title, image, content, etc.)
         if (article != null) {
             binding.articleTitle.text = article.title
 
-            // Assuming you have an ImageView in your layout with id "imageView"
             Glide.with(this)
                 .load(article.image)
                 .into(binding.imageArticle)
