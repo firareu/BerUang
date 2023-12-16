@@ -1,5 +1,6 @@
 package com.capstone.beruang.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,10 +36,15 @@ class ArticleFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val dataTag = TagData.tagList
-        val tagAdapter = TagAdapter(dataTag)
+        val tagAdapter = TagAdapter(requireContext(), dataTag)
         val rvForTag = binding.rvTag
         rvForTag.adapter = tagAdapter
         rvForTag.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        tagAdapter.setOnItemClickListener {
+            val intent = Intent(requireContext(), ListArticleActivity::class.java)
+            startActivity(intent)
+        }
 
         return view
     }
