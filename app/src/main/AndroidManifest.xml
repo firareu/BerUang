@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BerUang"
         tools:targetApi="31">
         <activity
+            android:name=".ui.article.detail.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.article.ListArticleActivity"
             android:exported="false" />
         <activity
