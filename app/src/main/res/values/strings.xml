@@ -117,4 +117,5 @@
     <string name="logout">Logout</string>
     <string name="password_less">Your Password is Less than 8 Characters</string>
     <string name="article_content">articel content</string>
+    <string name="article_page">Article</string>
 </resources>
