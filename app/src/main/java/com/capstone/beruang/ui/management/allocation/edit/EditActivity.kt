@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
@@ -30,7 +32,23 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
+        lifecycleScope.launch {
+            try {
+                val salaryResponse = editViewModel.apiService.getSalary()
+                val allocations = salaryResponse.salary
+                Log.e("salary", salaryResponse.toString())
+                Log.e("salary", allocations.toString())
+                binding.edtSalary.setText(allocations.toString())
+
+                // Set data gaji ke ViewModel jika diperlukan
+                editViewModel.setFakeSalary(allocations ?: 0f)
+            } catch (e: Exception) {
+                // Tangani kesalahan jika gagal mendapatkan data gaji
+                Log.e("salary", "Error getting salary: ${e.message}")
+            }
+        }
         apiService = ApiServiceFactory.createApiService()
 
         adapter = EditAdapter(apiService)
@@ -38,6 +56,9 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = adapter
 
+
+
+//        getAndSetSalary()
         setUpRecyclerView()
         loadDataFromApi()
         setFakeData()
@@ -56,6 +77,21 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             } catch (e: Exception) {
                 // Tangani kesalahan jika gagal menghapus
                 Log.e("EditActivity", "Failed to delete allocation: ${e.message}")
+            }
+        }
+    }
+
+    private fun getAndSetSalary() {
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val salary = apiService.getSalary()
+                val allocations = salary.salary
+                Log.e("salary", salary.toString())
+                Log.e("salary", allocations.toString())
+                binding.edtSalary.setText(allocations.toString())
+            } catch (e: Exception) {
+                Log.e("salary", "Error getting salary: ${e.message}")
             }
         }
     }

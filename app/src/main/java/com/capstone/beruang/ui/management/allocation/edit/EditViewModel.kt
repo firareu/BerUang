@@ -4,14 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.capstone.beruang.data.Allocation
+import com.capstone.beruang.data.retrofit.ApiService
 
 class EditViewModel : ViewModel() {
+    lateinit var apiService: ApiService
 
     private val alokasiList: MutableList<Allocation> = mutableListOf()
 
     private val _totalAllocation = MutableLiveData<Float>()
     val totalAllocation: LiveData<Float>
         get() = _totalAllocation
+
+
+    suspend fun prepareFakeSalary() {
+        try {
+            val salaryResponse = apiService.getSalary()
+            val fakeSalary = salaryResponse.salary ?: 0f
+            setFakeSalary(fakeSalary)
+        } catch (e: Exception) {
+            // Tangani kesalahan jika gagal mendapatkan data gaji
+            // ...
+        }
+    }
+
+    // Fungsi untuk menyiapkan data gaji palsu
+    fun setFakeSalary(fakeSalary: Float) {
+        var salary: Float = 0f
+        salary = fakeSalary
+        // Lakukan pembaruan total alokasi di sini jika diperlukan
+    }
+
 
     fun addData(allocation: Allocation) {
         alokasiList.add(allocation)

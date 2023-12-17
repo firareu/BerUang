@@ -17,7 +17,7 @@ class AllocationViewModel(private val repository: AllocationRepository) : ViewMo
         get() = _dataFetchError
 
 
-    val allocations: LiveData<AllocationResponse> = repository.getAllAllocations()
+    fun allocations() = repository.getAllAllocations()
 
     fun getFakeAllocations(): List<ListAllocationItem> {
         return FakeDataGenerator.generateFakeAllocations()

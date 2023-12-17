@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.capstone.beruang.data.Result
 
 class AllocationFragment : Fragment() {
 
@@ -64,7 +66,38 @@ class AllocationFragment : Fragment() {
 
         viewModel.getFakeAllocations()
 
-        viewModel.allocations.observe(viewLifecycleOwner, { allocationResponse ->
+        viewModel.allocations().observe(requireActivity()){ allocationResponse ->
+            Log.d("check", allocationResponse.toString())
+            when (allocationResponse) {
+                is Result.Loading -> {
+//                    showLoading(true)
+                    Log.d("loading", allocationResponse.toString())
+                }
+                is Result.Success -> {
+                    Log.d("sukses1", allocationResponse.toString())
+                    allocationResponse.data?.let { response ->
+                        Log.d("sukses2", response.toString())
+                        val allocations = response.listAllocation
+                        Log.d("hmmm", allocations.toString())
+                        if (allocations.isEmpty()) {
+                            allocationAdapter.submitList(emptyList())
+                            Log.d("coba fakedatae1", allocations.toString())
+                        } else {
+                            setFragmentData(ArrayList(allocations))
+                            Log.d("coba fakedatae2", allocations.toString())
+                        }
+                    }
+                }
+                is Result.Error -> {
+                    Log.d("error", allocationResponse.toString())
+//                    showLoading(false)
+                    // Tindakan ketika terjadi kesalahan
+                }
+            }
+
+        }
+
+        /*viewModel.allocations.observe(viewLifecycleOwner, { allocationResponse ->
             Log.d("hmmm?", allocationResponse.toString())
             allocationResponse?.let { response ->
                 val allocations = response.listAllocation
@@ -77,7 +110,7 @@ class AllocationFragment : Fragment() {
                     Log.d("coba fakedatae2", allocations.toString())
                 }
             }
-        })
+        })*/
     }
 
     private fun setUserData() {
@@ -123,7 +156,7 @@ class AllocationFragment : Fragment() {
     fun setFragmentData(allocations: ArrayList<ListAllocationItem>) {
         piechart(allocations)
         setMoneyData()
-        viewModel.allocations.observe(viewLifecycleOwner) { allocation ->
+        viewModel.allocations().observe(viewLifecycleOwner) { allocation ->
             if (allocation != null) {
                 allocationAdapter.submitList(allocations)
                 allocationAdapter.notifyDataSetChanged()
