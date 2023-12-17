@@ -22,6 +22,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.article.detail.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.article.ListArticleActivity"
             android:exported="false" />
         <activity
