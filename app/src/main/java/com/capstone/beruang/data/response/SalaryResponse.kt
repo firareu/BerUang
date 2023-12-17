@@ -13,5 +13,5 @@ data class SalaryResponse (
     var salary: Float?,
 
     @field:SerializedName("date")
-    var date: String?,
+    var date: String?
 ): Parcelable

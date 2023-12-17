@@ -30,7 +30,7 @@ interface ApiService {
     @DELETE("allocations/{id}")
     suspend fun deleteAllocation(@Path("id") id: Int): Unit
 
-    // Mendapatkan data gaji
+    /*// Mendapatkan data gaji
     @GET("salaries")
     suspend fun getSalary(): SalaryResponse
 
@@ -43,7 +43,12 @@ interface ApiService {
     suspend fun updateSalaryByDate(
         @Path("date") date: String,
         @Body updatedSalary: SalaryResponse
-    ): SalaryResponse
+    ): SalaryResponse*/
+
+    @GET("salaries")
+    suspend fun getSalary(): SalaryResponse {
+        return FakeDataGenerator.generateFakeSalary()
+    }
 
     // Mendapatkan data kategori
     @GET("categories")
