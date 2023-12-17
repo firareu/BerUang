@@ -62,13 +62,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        val dataArticle = ArticleData.articleList
+        val dataArticle = ArticleData.articleList.take(5)
         val recyclerView = binding.rvArticlelist
         val adapter = ArticleListAdapter(dataArticle)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
     }
+
 
 
     override fun onDestroyView() {
