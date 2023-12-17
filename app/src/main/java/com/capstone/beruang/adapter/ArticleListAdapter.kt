@@ -43,4 +43,3 @@ class ArticleListAdapter(private val articleList: List<Article>) :
         return articleList.size
     }
 }
-

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.appcompat.widget.Toolbar // Mengubah impor Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
+import com.capstone.beruang.adapter.ArticleListAdapter
+import com.capstone.beruang.data.ArticleData
 import com.capstone.beruang.databinding.FragmentHomeBinding
 import com.capstone.beruang.ui.login.LoginActivity
 import com.capstone.beruang.ui.management.allocation.AllocationAdapter
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
 
         (activity as AppCompatActivity?)?.supportActionBar?.hide()
         setMoneyData()
+        setupAdapter()
         return root
     }
 
@@ -57,6 +60,16 @@ class HomeFragment : Fragment() {
         binding.tvSpendingmoney.text = SpendingMoney
 
     }
+
+    private fun setupAdapter() {
+        val dataArticle = ArticleData.articleList
+        val recyclerView = binding.rvArticlelist
+        val adapter = ArticleListAdapter(dataArticle)
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
