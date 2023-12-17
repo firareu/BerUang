@@ -24,8 +24,7 @@
                 android:layout_height="match_parent"
                 app:menu="@menu/article_menu"
                 app:title="@string/article_page"
-                app:titleCentered="true"
-                app:titleTextAppearance="@style/titleToolBar" />
+                app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <TextView
