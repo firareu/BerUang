@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Article
+import com.capstone.beruang.data.response.article.ArticlesItem
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
-class RowAdapter(private val articleList: List<Article>) :
+class RowAdapter(private val articleList: List<ArticlesItem>) :
     RecyclerView.Adapter<RowAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,11 +31,10 @@ class RowAdapter(private val articleList: List<Article>) :
 
         holder.titleTextView.text = currentArticle.title
         Glide.with(holder.itemView.context)
-            .load(currentArticle.image)
+            .load(currentArticle.urlToImage)
             .into(holder.imageView)
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, DetailArticleActivity::class.java)
-            intent.putExtra(DetailArticleActivity.ARTICLE_KEY, currentArticle)
             it.context.startActivity(intent)
         }
     }

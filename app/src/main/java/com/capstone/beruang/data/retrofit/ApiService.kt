@@ -5,6 +5,8 @@ import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.response.SalaryResponse
+import com.capstone.beruang.data.response.article.ArticleResponse
+import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
@@ -15,6 +17,7 @@ interface ApiService {
     suspend fun getAllAllocations(): AllocationResponse {
         return FakeDataGenerator.generateFakeAllocationResponse()
     }
+
     // Menambahkan data alokasi
     @POST("allocations")
     suspend fun addAllocation(@Body allocation: ListAllocationItem): AllocationResponse
@@ -72,4 +75,9 @@ interface ApiService {
     // Menghapus data kategori berdasarkan ID
     @DELETE("categories/{id}")
     suspend fun deleteCategoryById(@Path("id") id: Int): Unit
+
+    //Article
+    @GET("/v2/top-headlines")
+    fun getTopHeadlines(@QueryMap params: Map<String, String>): Call<ArticleResponse>
+
 }
