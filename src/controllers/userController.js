@@ -37,15 +37,13 @@ const getUser = async (req, res) => {
 // GET
 const getUserById = async (req, res) => {
   try {
-    console.log(req.params)
-    console.log(req.query)
     const userId = req.params.userId;
     if (!userId) {
       return res.status(400).json({ error: 'User ID is missing in the request' });
     }
 
     const user = await getUserByIdModel(userId);
-    console.log(user)
+    console.log("this is user", user)
     if (user) {
       res.status(200).json({ user });
     } else {
@@ -66,7 +64,6 @@ const updateUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
-    
   }
 };
 

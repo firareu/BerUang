@@ -1,12 +1,12 @@
 const admin = require('firebase-admin');
 const { getFirestore } = require('firebase-admin/firestore');
 
-const serviceAccount = require('../../config/app-test-beruang-firebase-adminsdk-5bkf7-46597f5aa6.json');
+const serviceAccount = require('../../config/serviceAccountKey.json');
 
 if (!admin.apps.length) {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      databaseURL: 'https://app-test-beruang.firebaseio.com',
+      databaseURL: 'https://app-beruang-CH2-PS111.firebaseio.com',
     });
   }
 
@@ -18,13 +18,10 @@ const createUser = async (userData) => {
     profilePicture: userData.profilePicture || null,
     name: userData.name,
     dob: userData.dob,
-    username: userData.username,
     email: userData.email,
     password: userData.password,
     premiumStatus: userData.premiumStatus || false,
-    contact: userData.contact || null,
     gender: userData.gender || null,
-    incomeId: userData.incomeId || null,
   });
   return userRef.id;
 };
@@ -60,15 +57,11 @@ const updateUser = async (userId, updatedUserData) => {
     profilePicture: updatedUserData.profilePicture || null,
     name: updatedUserData.name,
     dob: updatedUserData.dob,
-    username: updatedUserData.username,
     email: updatedUserData.email,
     password: updatedUserData.password,
     premiumStatus: updatedUserData.premiumStatus || false,
-    contact: updatedUserData.contact || null,
     gender: updatedUserData.gender || null,
-    incomeId: updatedUserData.incomeId || null,
   });
-
   console.log('User updated successfully');
 };
 
