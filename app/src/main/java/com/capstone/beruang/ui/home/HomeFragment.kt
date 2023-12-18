@@ -1,6 +1,5 @@
 package com.capstone.beruang.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,22 +7,21 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.appcompat.widget.Toolbar // Mengubah impor Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
 import com.capstone.beruang.adapter.ArticleListAdapter
 import com.capstone.beruang.data.ArticleData
+import com.capstone.beruang.data.ArticleRepository
 import com.capstone.beruang.databinding.FragmentHomeBinding
-import com.capstone.beruang.ui.login.LoginActivity
-import com.capstone.beruang.ui.management.allocation.AllocationAdapter
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.capstone.beruang.ui.article.ArticleViewModel
+import com.capstone.beruang.ui.article.ArticleViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeAdapter: HomeAdapter = HomeAdapter()
+    private lateinit var viewModel: ArticleViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +39,10 @@ class HomeFragment : Fragment() {
         binding.rvAllocation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = homeAdapter
+        
+        val repository = ArticleRepository()
+        val viewModelFactory = ArticleViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
 
         (activity as AppCompatActivity?)?.supportActionBar?.hide()
         setMoneyData()
@@ -63,12 +65,14 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         val dataArticle = ArticleData.articleList.take(5)
-        val recyclerView = binding.rvArticlelist
-        val adapter = ArticleListAdapter(dataArticle)
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
+        viewModel.articleList.observe(viewLifecycleOwner) { articles ->
+            // Update the RecyclerView adapter with the new list of articles
+            val adapter = ArticleListAdapter(articles)
+            binding.rvArticlelist.adapter = adapter
+            binding.rvArticlelist.layoutManager =
+                LinearLayoutManager(requireContext())
+        }
+//        recyclerView.setHasFixedSize(true)
     }
 
 

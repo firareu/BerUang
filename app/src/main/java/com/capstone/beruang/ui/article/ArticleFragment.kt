@@ -32,7 +32,7 @@ class ArticleFragment : Fragment() {
         // Inside onCreateView or onCreate method in your fragment or activity
         val repository = ArticleRepository()
         val viewModelFactory = ArticleViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ArticleViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
         setupAdapters()
         return view
     }

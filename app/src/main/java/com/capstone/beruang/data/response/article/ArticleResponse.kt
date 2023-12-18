@@ -1,7 +1,11 @@
 package com.capstone.beruang.data.response.article
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class ArticleResponse(
 
 	@field:SerializedName("totalResults")
@@ -12,8 +16,9 @@ data class ArticleResponse(
 
 	@field:SerializedName("status")
 	val status: String
-)
+): Parcelable
 
+@Parcelize
 data class ArticlesItem(
 
 	@field:SerializedName("publishedAt")
@@ -39,13 +44,14 @@ data class ArticlesItem(
 
 	@field:SerializedName("content")
 	val content: String
-)
+): Parcelable
 
+@Parcelize
 data class Source(
 
 	@field:SerializedName("name")
 	val name: String,
 
 	@field:SerializedName("id")
-	val id: Any
-)
+	val id: @RawValue Any?
+): Parcelable

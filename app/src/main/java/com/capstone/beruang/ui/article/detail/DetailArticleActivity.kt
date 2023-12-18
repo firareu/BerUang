@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Article
+import com.capstone.beruang.data.response.article.ArticlesItem
 import com.capstone.beruang.databinding.ActivityDetailArticleBinding
 
 class DetailArticleActivity : AppCompatActivity() {
@@ -25,14 +25,17 @@ class DetailArticleActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        detailArticle()
+    }
 
-        val article = intent.getParcelableExtra<Article>(ARTICLE_KEY)
+    @Suppress("DEPRECATION")
+    private fun detailArticle() {
+        val article = intent.getParcelableExtra<ArticlesItem>(ARTICLE_KEY)
 
         if (article != null) {
             binding.articleTitle.text = article.title
-
             Glide.with(this)
-                .load(article.image)
+                .load(article.urlToImage)
                 .into(binding.imageArticle)
 
             binding.articleContent.text = article.content
@@ -53,7 +56,6 @@ class DetailArticleActivity : AppCompatActivity() {
                 // Handle bookmark button click here
                 true
             }
-            // Handle other menu item clicks if needed
             else -> super.onOptionsItemSelected(item)
         }
     }
