@@ -17,12 +17,12 @@ class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<Edi
     private val allocationList = ArrayList<ListAllocationItem>()
 
 
-    fun setFakeAllocations() {
+    /*fun setFakeAllocations() {
         val fakeAllocations = FakeDataGenerator.generateFakeAllocations()
         allocationList.clear()
         allocationList.addAll(fakeAllocations)
         notifyDataSetChanged()
-    }
+    }*/
 
     fun submitList(allocations: List<ListAllocationItem>) {
         allocationList.clear()
@@ -64,7 +64,7 @@ class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<Edi
 
                         CoroutineScope(Dispatchers.IO).launch {
                             try {
-                                apiService.deleteAllocation(deletedItem.id)
+//                                apiService.deleteAllocation(deletedItem.id)
                                 // Jika penghapusan berhasil, tidak perlu tindakan tambahan
                             } catch (e: Exception) {
                                 // Tangani kesalahan jika gagal menghapus
@@ -81,9 +81,9 @@ class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<Edi
         }
 
         fun bind(item: ListAllocationItem) {
-            binding.edtNameallocation.setText(item.allocation_name)
-            binding.edtPercent.setText(item.percent?.toString() ?: "")
-            val totalText = itemView.context.getString(R.string.totalallocation, item.total ?: "0")
+            binding.edtNameallocation.setText(item.category)
+            binding.edtPercent.setText(item.percentage?.toString() ?: "")
+            val totalText = itemView.context.getString(R.string.totalallocation, item.amount ?: "0")
             binding.tvTotal.text = totalText
         }
     }
@@ -101,7 +101,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Allocation
+import com.capstone.beruang.data.dataclass.Allocation
 import com.capstone.beruang.data.DatabaseHelper
 import com.capstone.beruang.databinding.ItemCategoryAllocationBinding
 

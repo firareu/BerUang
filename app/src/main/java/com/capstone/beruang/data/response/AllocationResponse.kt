@@ -7,29 +7,28 @@ import kotlinx.parcelize.Parcelize
 
 data class AllocationResponse(
 
-    @field:SerializedName("listAllocation")
-    val listAllocation: List<ListAllocationItem>,
+    @field:SerializedName("allocation")
+    val allocation: List<ListAllocationItem?>? = null,
 
     @field:SerializedName("error")
-    val error: Boolean,
+    val error: Boolean? = null,
 
     @field:SerializedName("message")
-    val message: String,
-
-    @field:SerializedName("allocation")
-    val allocation: ListAllocationItem
+    val message: String? = null
 )
+
 @Parcelize
-data class ListAllocationItem (
+data class ListAllocationItem(
+
+    @field:SerializedName("amount")
+    val amount: Float? = null,
+
+    @field:SerializedName("percentage")
+    val percentage: Float? = null,
+
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
 
-    @field:SerializedName("allocation_name")
-    var allocation_name: String,
-
-    @field:SerializedName("percent")
-    var percent: Float?,
-
-    @field:SerializedName("total")
-    var total: Float?
-): Parcelable
+    @field:SerializedName("category")
+    val category: String? = null
+):Parcelable

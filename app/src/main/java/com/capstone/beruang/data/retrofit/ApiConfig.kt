@@ -23,11 +23,14 @@ class ApiConfig {
                 .addInterceptor(loggingInterceptor)
 //                .addInterceptor(authInterceptor)
                 .build()
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://example.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
+            val retrofit: Retrofit by lazy {
+                Retrofit.Builder()
+                    .baseUrl("https://a7bdbd3b-b91f-4885-919a-656c8f7956aa.mock.pstmn.io")
+//                    .baseUrl("https://beruang-406309.et.r.appspot.com")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build()
+            }
             return retrofit.create(ApiService::class.java)
         }
     }

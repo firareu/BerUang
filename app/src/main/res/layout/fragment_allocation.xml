@@ -118,13 +118,11 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+        <!--<androidx.cardview.widget.CardView
             android:id="@+id/card_money"
             android:layout_width="match_parent"
             android:layout_height="108dp"
             android:orientation="vertical"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             app:cardBackgroundColor="@color/blue_500"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
@@ -213,7 +211,7 @@
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>-->
 
         <TextView
             android:id="@+id/tv_detail"
@@ -226,20 +224,20 @@
             android:textSize="12sp"
             android:transitionName="description"
             android:paddingStart="12dp"
-            app:layout_constraintStart_toStartOf="@id/card_money"
-            app:layout_constraintTop_toBottomOf="@id/card_money"
+            app:layout_constraintStart_toStartOf="@id/card_allocation"
+            app:layout_constraintTop_toBottomOf="@id/card_allocation"
             tools:ignore="MissingConstraints,RtlSymmetry" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Allocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="140dp"
-            android:overScrollMode="never"
-            android:scrollbarSize="0dp"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="8dp"
+            android:overScrollMode="never"
+            android:paddingBottom="140dp"
+            android:scrollbarSize="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail"
             app:layout_constraintTop_toBottomOf="@id/tv_detail"
             tools:listitem="@layout/item_allocation" />

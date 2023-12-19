@@ -5,7 +5,7 @@ import com.capstone.beruang.data.Result
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
 
-/*class AllocationRepository constructor(
+class Repository constructor(
     val apiService: ApiService
 ) {
 
@@ -49,11 +49,11 @@ import com.capstone.beruang.data.retrofit.ApiService
 
     companion object {
         @Volatile
-        private var instance: AllocationRepository? = null
+        private var instance: Repository? = null
 
-        fun getInstance(apiService: ApiService): AllocationRepository =
+        fun getInstance(apiService: ApiService): Repository =
             instance ?: synchronized(this) {
-                instance ?: AllocationRepository(apiService)
+                instance ?: Repository(apiService)
             }.also { instance = it }
     }
-}*/
+}

@@ -3,11 +3,56 @@ package com.capstone.beruang.ui.management.allocation.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.beruang.data.Allocation
+import androidx.lifecycle.viewModelScope
+import com.capstone.beruang.data.dataclass.Allocation
+import com.capstone.beruang.data.repository.Repository
 import com.capstone.beruang.data.retrofit.ApiService
+import kotlinx.coroutines.launch
 
 class EditViewModel : ViewModel() {
     lateinit var apiService: ApiService
+
+    private val alokasiList: MutableList<Allocation> = mutableListOf()
+
+    private val _totalAllocation = MutableLiveData<Float>()
+    val totalAllocation: LiveData<Float>
+        get() = _totalAllocation
+
+    private val _salary = MutableLiveData<Float>()
+    val salary: LiveData<Float>
+        get() = _salary
+
+    private val _allocationList = MutableLiveData<List<Allocation>>()
+   val allocationList: LiveData<List<Allocation>>
+        get() = _allocationList
+
+    suspend fun getSalaryFromApi(date: String) {
+        viewModelScope.launch {
+            try {
+                val salaryResponse = apiService.getSalary(date)
+                val salary = salaryResponse.incomes?.salary ?: 0f
+                _salary.value = salary
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+    private fun calculateAllocations(salary: Float) {
+        // Lakukan perhitungan alokasi di sini berdasarkan nilai gaji
+        // Contoh sederhana, bagi gaji dengan jumlah alokasi dalam list
+        val total = alokasiList.sumByDouble { (it.percent ?: 0f).toDouble() }.toFloat() * salary / 100f
+        _totalAllocation.value = total
+    }
+
+    // Fungsi untuk menambahkan data alokasi ke dalam list
+    fun addData(allocation: Allocation) {
+        alokasiList.add(allocation)
+        // Saat data alokasi ditambahkan, hitung kembali alokasi dengan gaji yang tersedia
+        _salary.value?.let { calculateAllocations(it) }
+    }
+
+
+    /*lateinit var apiService: ApiService
 
     private val alokasiList: MutableList<Allocation> = mutableListOf()
 
@@ -65,7 +110,7 @@ class EditViewModel : ViewModel() {
         }
 
         _totalAllocation.value = totalAllocation
-    }
+    }*/
 
     /*private val _needsAllocation = MutableLiveData<Float>()
     val needsAllocation: LiveData<Float>

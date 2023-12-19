@@ -80,13 +80,16 @@
     <string name="temukanMinat">Temukan Minatmu</string>
     <string name="image_article">Article image</string>
     <string name="bookmark">Bookmark</string>
-    <string name="tag">tag</string>
-
+    <string name="tag">Tag</string>
+    <string name="tagarticle">Tag:</string>
+    <string name="article_content">articel content</string>
+    <string name="recomendation">Rekomendasi</string>
 
     <string name="allocation">Alokasi</string>
     <string name="report">Report</string>
     <string name="date">tanggal</string>
     <string name="rupiah">Rp%d</string>
+    <string name="rupiah2">Rp%f</string>
     <string name="percent">%d%</string>
     <string name="percenttext">Persen</string>
     <string name="income">Pemasukkan</string>
@@ -116,5 +119,5 @@
     <string name="email_cannot_empty">Email Cannot be Empty</string>
     <string name="logout">Logout</string>
     <string name="password_less">Your Password is Less than 8 Characters</string>
-    <string name="article_content">articel content</string>
+
 </resources>

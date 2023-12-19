@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.adapter.ArticleListAdapter
-import com.capstone.beruang.data.ArticleData
+import com.capstone.beruang.data.dataclass.ArticleData
 import com.capstone.beruang.databinding.ActivityListArticleBinding
 
 class ListArticleActivity : AppCompatActivity() {

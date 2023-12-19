@@ -1,4 +1,4 @@
-package com.capstone.beruang.data
+package com.capstone.beruang.data.dataclass
 
 import com.capstone.beruang.R
 

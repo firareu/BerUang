@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Article
+import com.capstone.beruang.data.dataclass.Article
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
 class RowAdapter(private val articleList: List<Article>) :

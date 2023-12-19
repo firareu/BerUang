@@ -3,11 +3,11 @@ package com.capstone.beruang.ui.management.allocation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.beruang.data.repository.AllocationRepository
+import com.capstone.beruang.data.repository.Repository
 import com.capstone.beruang.di.Injection
 
 
-class AllocationViewModelFactory(private val repository: AllocationRepository) : ViewModelProvider.Factory {
+class AllocationViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {

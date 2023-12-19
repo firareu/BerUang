@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
 import com.capstone.beruang.data.response.ListAllocationItem
@@ -25,6 +27,12 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.capstone.beruang.data.Result
+import com.example.submission.data.retrofit.ApiConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.Calendar
 
 class AllocationFragment : Fragment() {
 
@@ -48,8 +56,6 @@ class AllocationFragment : Fragment() {
         pieChart.setUsePercentValues(true)
         pieChart.setDrawEntryLabels(false)
 
-        // Set fake allocations ke adapter
-        allocationAdapter.setFakeAllocations()
 
         binding.rvAllocation.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAllocation.setHasFixedSize(true)
@@ -59,12 +65,37 @@ class AllocationFragment : Fragment() {
         return root
     }
 
+    private fun setSalary() {
+        lifecycleScope.launch {
+            try {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val currentDateString = "$year-$month"
+
+                viewModel.getSalaryFromApi(currentDateString)
+
+                viewModel.salary.observe(viewLifecycleOwner) { salary ->
+                    salary?.let {
+                        Log.e("salary1", salary.toString())
+
+                        val TVMoney = getString(R.string.rupiah, salary.toInt())
+                        Log.e("salary2", TVMoney)
+
+                        binding.tvMoney.text = TVMoney
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("salary", "Error getting salary: ${e.message}")
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(requireActivity(), AllocationViewModelFactory.getInstance(requireActivity()))[AllocationViewModel::class.java]
         Log.d("hahhh", viewModel.toString())
-
-        viewModel.getFakeAllocations()
 
         viewModel.allocations().observe(requireActivity()){ allocationResponse ->
             Log.d("check", allocationResponse.toString())
@@ -77,13 +108,14 @@ class AllocationFragment : Fragment() {
                     Log.d("sukses1", allocationResponse.toString())
                     allocationResponse.data?.let { response ->
                         Log.d("sukses2", response.toString())
-                        val allocations = response.listAllocation
+                        val allocations = response.allocation
                         Log.d("hmmm", allocations.toString())
-                        if (allocations.isEmpty()) {
+                        if (allocations?.isEmpty()!!) {
                             allocationAdapter.submitList(emptyList())
                             Log.d("coba fakedatae1", allocations.toString())
                         } else {
-                            setFragmentData(ArrayList(allocations))
+                            setFragmentData(allocations as ArrayList<ListAllocationItem>)
+                            setSalary()
                             Log.d("coba fakedatae2", allocations.toString())
                         }
                     }
@@ -91,26 +123,13 @@ class AllocationFragment : Fragment() {
                 is Result.Error -> {
                     Log.d("error", allocationResponse.toString())
 //                    showLoading(false)
-                    // Tindakan ketika terjadi kesalahan
                 }
             }
 
         }
 
-        /*viewModel.allocations.observe(viewLifecycleOwner, { allocationResponse ->
-            Log.d("hmmm?", allocationResponse.toString())
-            allocationResponse?.let { response ->
-                val allocations = response.listAllocation
-                Log.d("hmmm", allocations.toString())
-                if (allocations.isEmpty()) {
-                    allocationAdapter.submitList(emptyList())
-                    Log.d("coba fakedatae1", allocations.toString())
-                } else {
-                    setFragmentData(ArrayList(allocations))
-                    Log.d("coba fakedatae2", allocations.toString())
-                }
-            }
-        })*/
+        val apiService = ApiConfig.getApiService()
+        viewModel.apiService = apiService
     }
 
     private fun setUserData() {
@@ -143,12 +162,12 @@ class AllocationFragment : Fragment() {
         binding.tvMoney.text = TVMoney
 
         //sisa keuangan
-        val RestMoney = getString(R.string.rupiah, num ?: 0)
+        /*val RestMoney = getString(R.string.rupiah, num ?: 0)
         binding.tvRestmoney.text = RestMoney
 
         //pengeluaran saat ini
         val SpendingMoney = getString(R.string.rupiah, num ?: 0)
-        binding.tvSpendingmoney.text = SpendingMoney
+        binding.tvSpendingmoney.text = SpendingMoney*/
 
     }
 
@@ -168,8 +187,8 @@ class AllocationFragment : Fragment() {
         val list: ArrayList<PieEntry> = ArrayList()
 
         for (allocation in allocations) {
-            allocation.percent?.let {
-                list.add(PieEntry(it, allocation.allocation_name))
+            allocation.percentage?.let {
+                list.add(PieEntry(it, allocation.category))
             }
         }
 
@@ -233,7 +252,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
-import com.capstone.beruang.data.Allocation
+import com.capstone.beruang.data.dataclass.Allocation
 import com.capstone.beruang.databinding.FragmentAllocationBinding
 import com.capstone.beruang.ui.management.allocation.edit.EditActivity
 import com.github.mikephil.charting.charts.PieChart

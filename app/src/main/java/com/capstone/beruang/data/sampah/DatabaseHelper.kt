@@ -1,4 +1,4 @@
-package com.capstone.beruang.data
+package com.capstone.beruang.data.sampah
 
 /*import android.content.ContentValues
 import android.content.Context

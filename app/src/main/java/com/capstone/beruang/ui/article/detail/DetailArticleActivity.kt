@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
+import com.capstone.beruang.adapter.ArticleListAdapter
 import com.capstone.beruang.databinding.ActivityDetailArticleBinding
-import com.capstone.beruang.data.Article
+import com.capstone.beruang.data.dataclass.Article
+import com.capstone.beruang.data.dataclass.ArticleData
 
 class DetailArticleActivity : AppCompatActivity() {
 
@@ -36,10 +39,21 @@ class DetailArticleActivity : AppCompatActivity() {
 
             binding.articleContent.text = article.content
         }
+        setupAdapter()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.article_menu, menu)
         return true
+    }
+
+    private fun setupAdapter() {
+        val dataArticle = ArticleData.articleList.take(5)
+        val recyclerView = binding.rvArticlelist
+        val adapter = ArticleListAdapter(dataArticle)
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

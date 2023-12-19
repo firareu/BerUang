@@ -6,22 +6,39 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
-import com.capstone.beruang.data.repository.AllocationRepository
+import com.capstone.beruang.data.repository.Repository
 import com.capstone.beruang.data.response.AllocationResponse
+import com.capstone.beruang.data.retrofit.ApiService
 import kotlinx.coroutines.launch
 
-class AllocationViewModel(private val repository: AllocationRepository) : ViewModel() {
+class AllocationViewModel(private val repository: Repository) : ViewModel() {
 
+    lateinit var apiService: ApiService
     private val _dataFetchError = MutableLiveData<Boolean>()
     val dataFetchError: LiveData<Boolean>
         get() = _dataFetchError
 
-
     fun allocations() = repository.getAllAllocations()
 
-    fun getFakeAllocations(): List<ListAllocationItem> {
-        return FakeDataGenerator.generateFakeAllocations()
+    private val _salary = MutableLiveData<Float>()
+    val salary: LiveData<Float>
+        get() = _salary
+
+    suspend fun getSalaryFromApi(date: String) {
+        viewModelScope.launch {
+            try {
+                val salaryResponse = apiService.getSalary(date)
+                val salary = salaryResponse.incomes?.salary ?: 0f
+                _salary.value = salary
+            } catch (e: Exception) {
+
+            }
+        }
     }
+
+//    fun getFakeAllocations(): List<ListAllocationItem> {
+//        return FakeDataGenerator.generateFakeAllocations()
+//    }
 
     fun addAllocation(allocation: ListAllocationItem) {
         viewModelScope.launch {

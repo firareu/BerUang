@@ -1,4 +1,4 @@
-package com.capstone.beruang.data
+package com.capstone.beruang.data.dataclass
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

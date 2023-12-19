@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.beruang.data.Article
+import com.capstone.beruang.data.dataclass.Article
 import com.capstone.beruang.databinding.ArticleViewBinding
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 

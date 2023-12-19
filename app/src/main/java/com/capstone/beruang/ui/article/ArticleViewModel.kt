@@ -3,7 +3,7 @@ package com.capstone.beruang.ui.article
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.beruang.data.ArticleRepository
+import com.capstone.beruang.data.dataclass.ArticleRepository
 
 class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() {
 

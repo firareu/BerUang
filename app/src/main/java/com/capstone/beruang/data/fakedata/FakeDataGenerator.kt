@@ -1,6 +1,5 @@
 package com.capstone.beruang.data.fakedata
 
-import com.capstone.beruang.data.Salary
 import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.response.SalaryResponse
@@ -8,14 +7,14 @@ import com.capstone.beruang.data.response.SalaryResponse
 object FakeDataGenerator {
     val fakeAllocations = mutableListOf<ListAllocationItem>()
 
-    fun generateFakeSalary(): SalaryResponse {
+    /*fun generateFakeSalary(): SalaryResponse {
         val fakeList = generateFakeAllocations()
         val salary = SalaryResponse(1, 1000000f, "2023-12-01")
         salary.salary = fakeList.sumByDouble { it.total?.toDouble() ?: 0.0 }.toFloat()
         return salary
-    }
+    }*/
 
-    fun generateFakeAllocationResponse(): AllocationResponse {
+   /* fun generateFakeAllocationResponse(): AllocationResponse {
         val fakeList = generateFakeAllocations()
         val fakeAllocation = ListAllocationItem(1, "Fake Allocation", 50f, 1000f)
 
@@ -30,7 +29,7 @@ object FakeDataGenerator {
             fakeAllocations.add(ListAllocationItem(3, "Goals", 20f, 200000f))
         }
         return fakeAllocations
-    }
+    }*/
 
 //    // Fungsi untuk membuat data palsu (Create)
 //    fun addFakeAllocation(allocation: ListAllocationItem) {

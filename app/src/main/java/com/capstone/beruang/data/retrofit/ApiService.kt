@@ -5,16 +5,20 @@ import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.response.SalaryResponse
+import com.capstone.beruang.data.response.TagResponse
 import retrofit2.http.*
 
 interface ApiService {
+    @GET("tag")
+    suspend fun getTags(): List<TagResponse>
+
     //mengambil seluruh data alokasi
-    /*@GET("allocations")
-    suspend fun getAllAllocations(): AllocationResponse*/
     @GET("allocations")
+    suspend fun getAllAllocations(): AllocationResponse
+    /*@GET("allocations")
     suspend fun getAllAllocations(): AllocationResponse {
         return FakeDataGenerator.generateFakeAllocationResponse()
-    }
+    }*/
     // Menambahkan data alokasi
     @POST("allocations")
     suspend fun addAllocation(@Body allocation: ListAllocationItem): AllocationResponse
@@ -30,9 +34,9 @@ interface ApiService {
     @DELETE("allocations/{id}")
     suspend fun deleteAllocation(@Path("id") id: Int): Unit
 
-    /*// Mendapatkan data gaji
-    @GET("salaries")
-    suspend fun getSalary(): SalaryResponse
+    // Mendapatkan data gaji
+    @GET("incomes")
+    suspend fun getSalary(@Query("date") date: String): SalaryResponse
 
     // Membuat data baru dengan informasi id, salary, dan date (bulan)
     @POST("salaries/create")
@@ -43,12 +47,12 @@ interface ApiService {
     suspend fun updateSalaryByDate(
         @Path("date") date: String,
         @Body updatedSalary: SalaryResponse
-    ): SalaryResponse*/
+    ): SalaryResponse
 
-    @GET("salaries")
-    suspend fun getSalary(): SalaryResponse {
-        return FakeDataGenerator.generateFakeSalary()
-    }
+//    @GET("salaries")
+//    suspend fun getSalary(): SalaryResponse {
+//        return FakeDataGenerator.generateFakeSalary()
+//    }
 
     // Mendapatkan data kategori
     @GET("categories")

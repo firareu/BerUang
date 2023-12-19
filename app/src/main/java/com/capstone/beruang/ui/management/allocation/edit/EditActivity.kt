@@ -12,18 +12,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
-import com.capstone.beruang.data.retrofit.ApiServiceFactory
 //import com.capstone.beruang.data.retrofit.ApiServiceFactory
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.allocation.AllocationAdapter
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
+import com.example.submission.data.retrofit.ApiConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     private lateinit var binding: ActivityEditBinding
     private lateinit var viewModel: AllocationViewModel
+    private lateinit var editViewModel: EditViewModel
     private lateinit var apiService: ApiService
     private lateinit var adapter: EditAdapter
     private val allocationAdapter: AllocationAdapter = AllocationAdapter()
@@ -32,41 +34,27 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
-        lifecycleScope.launch {
-            try {
-                val salaryResponse = editViewModel.apiService.getSalary()
-                val allocations = salaryResponse.salary
-                Log.e("salary", salaryResponse.toString())
-                Log.e("salary", allocations.toString())
-                binding.edtSalary.setText(allocations.toString())
+        editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
-                // Set data gaji ke ViewModel jika diperlukan
-                editViewModel.setFakeSalary(allocations ?: 0f)
-            } catch (e: Exception) {
-                // Tangani kesalahan jika gagal mendapatkan data gaji
-                Log.e("salary", "Error getting salary: ${e.message}")
-            }
-        }
-        apiService = ApiServiceFactory.createApiService()
+        val apiService = ApiConfig.getApiService()
+        editViewModel.apiService = apiService
 
+//        apiService = ApiServiceFactory.createApiService()
         adapter = EditAdapter(apiService)
         binding.rvAllocation.layoutManager = LinearLayoutManager(this)
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = adapter
 
-
-
-//        getAndSetSalary()
-        setUpRecyclerView()
-        loadDataFromApi()
-        setFakeData()
+        getAndSetSalary()
+//        setUpRecyclerView()
+//        loadDataFromApi()
+//        setFakeData()
         setupAction()
     }
 
     private fun setFakeData() {
-        adapter.setFakeAllocations()
+//        adapter.setFakeAllocations()
     }
 
     private fun deleteAllocationFromApi(id: Int) {
@@ -80,16 +68,27 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             }
         }
     }
-
     private fun getAndSetSalary() {
-
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             try {
-                val salary = apiService.getSalary()
-                val allocations = salary.salary
-                Log.e("salary", salary.toString())
-                Log.e("salary", allocations.toString())
-                binding.edtSalary.setText(allocations.toString())
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val currentDateString = "$year-$month"
+
+                editViewModel.getSalaryFromApi(currentDateString)
+
+                // Dapatkan nilai gaji dari LiveData _salary
+                editViewModel.salary.observe(this@EditActivity) { salary ->
+                    salary?.let {
+                        Log.e("salary1", salary.toString())
+
+                        val TVMoney = getString(R.string.rupiah, salary.toInt())
+                        Log.e("salary2", TVMoney)
+
+                        binding.edtSalary.setText(TVMoney)
+                    }
+                }
             } catch (e: Exception) {
                 Log.e("salary", "Error getting salary: ${e.message}")
             }
@@ -97,11 +96,12 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     }
 
     private fun loadDataFromApi() {
-        CoroutineScope(Dispatchers.IO).launch {
+        /*CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = apiService.getAllAllocations()
-                if (!response.error) {
-                    val allocations = response.listAllocation
+                if (!response.error!!) {
+                    val allocations = response.allocation ?: emptyList() // Pastikan untuk menangani nilai null
+
                     runOnUiThread {
                         adapter.submitList(allocations)
                     }
@@ -111,8 +111,9 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             } catch (e: Exception) {
                 Log.e("EditActivity", "Error: ${e.message}")
             }
-        }
+        }*/
     }
+
 
     private fun setUpRecyclerView() {
         adapter = EditAdapter(apiService)
@@ -155,7 +156,7 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
 
     override fun onItemClicked(data: ListAllocationItem) {
         val id = data.id
-        deleteAllocationFromApi(id)
+//        deleteAllocationFromApi(id)
     }
 }
 
