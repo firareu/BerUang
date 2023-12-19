@@ -16,14 +16,15 @@ const addIncome = async (incomeData) => {
     const incomesCollection = db.collection('incomes')
     const incomeRef = await incomesCollection.add({
       salary: incomeData.salary,
-      date: incomeData.date
+      date: incomeData.date,
+      userId: incomeData.userId
     });
     return incomeRef.id;
 };
 
-const getIncome = async () => {
-  const incomeDoc = await db.collection('incomes').get()
-  if (incomeDoc) {
+const getIncome = async (userId) => {
+  const incomeDoc = await db.collection('incomes').where('userId', '==', userId).get()
+  if (incomeDoc.size > 0) {
     let incomeData = []
     incomeDoc.forEach(doc => {
       incomeData.push(doc.data())
@@ -36,7 +37,8 @@ const getIncome = async () => {
 
 const getIncomeById = async (incomeId) => {
   const incomeDoc = await db.collection('incomes').doc(incomeId).get()
-  if (incomeDoc.exist) {
+  console.log("incomeDoc", incomeDoc)
+  if (incomeDoc.exists) {
     const incomeData = incomeDoc.data();
     return incomeData
   } else {

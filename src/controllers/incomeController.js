@@ -8,6 +8,7 @@ const { addIncome: addIncomeModel,
 const addIncome = async (req, res) => {
   try {
     const incomeId = await addIncomeModel(req.body);
+    console.log('Income added successfully:', incomeId);
     res.status(201).json({incomeId});
   } catch (error) {
     console.error('Error creating adding income.', error);
@@ -18,8 +19,8 @@ const addIncome = async (req, res) => {
 // GET ALL
 const getIncome = async (req, res) => {
   try {
-    const income = await getIncomeModel();
-    console.log("this is income get all", income)
+    const userId = req.body.userId
+    const income = await getIncomeModel(userId);
     if (income.length > 0) {
       res.status(200).json({ income });
     } else {

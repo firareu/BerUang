@@ -5,14 +5,15 @@ const incomeController = require('../controllers/incomeController');
 // POST
 router.post('/add', incomeController.addIncome);
 
-//GET
+//GET ALL Income by userId
 router.get('/', incomeController.getIncome);
+// GET Income by incomeId
 router.get('/:incomeId', incomeController.getIncomeById);
 
 // PUT
 router.put('/:incomeId', incomeController.updateIncome);
 
-// DELETE 
+// DELETE
 router.delete('/:incomeId', incomeController.deleteIncome);
 
 module.exports = router;

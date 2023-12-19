@@ -22,7 +22,6 @@ const createUser = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const user = await getUserModel();
-    // console.log(user.length)
     if (user.length > 0) {
       res.status(200).json({ user });
     } else {

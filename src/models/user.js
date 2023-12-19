@@ -12,6 +12,7 @@ if (!admin.apps.length) {
 
 const db = getFirestore();
 
+
 const createUser = async (userData) => {
   const usersCollection = db.collection('users');
   const userRef = await usersCollection.add({
@@ -31,7 +32,6 @@ const getUser = async () => {
   if (userDoc) {
     let userData = []
     userDoc.forEach(doc => {
-      // console.log("doc data", doc.data())
       userData.push(doc.data())
     })
     return userData

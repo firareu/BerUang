@@ -12,7 +12,37 @@ admin.initializeApp({
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Other configurations and middleware
+app.post('/register', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Create user with email and password
+    const userRecord = await admin.auth().createUser({
+      email,
+      password,
+    });
+
+    res.status(200).json({ uid: userRecord.uid });
+  } catch (error) {
+    console.error('Error creating user:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Sign in user with email and password
+    const userRecord = await admin.auth().getUserByEmail(email);
+    await admin.auth().signInWithEmailAndPassword(email, password);
+
+    res.status(200).json({ uid: userRecord.uid });
+  } catch (error) {
+    console.error('Error signing in:', error.message);
+    res.status(401).json({ error: 'Invalid credentials' });
+  }
+});
 
 // Routes and controllers
 const userRoutes = require('./src/routes/userRoutes');
@@ -22,6 +52,7 @@ const incomeRoutes = require('./src/routes/incomeRoutes');
 app.use(bodyParser.json());
 
 // Routes
+// app.use('/api/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/incomes', incomeRoutes);
 // app.use('/outcomes', outcomeRoutes);
@@ -29,5 +60,3 @@ app.use('/incomes', incomeRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// console.log("")
