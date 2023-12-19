@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
-@Parcelize
-data class ArticleResponse(
 
+data class ArticleResponse(
 	@field:SerializedName("totalResults")
 	val totalResults: Int,
 
@@ -16,7 +15,7 @@ data class ArticleResponse(
 
 	@field:SerializedName("status")
 	val status: String
-): Parcelable
+)
 
 @Parcelize
 data class ArticlesItem(

@@ -1,19 +1,21 @@
 package com.capstone.beruang.ui.article
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.beruang.R
+import com.capstone.beruang.adapter.ArticleListAdapter
 import com.capstone.beruang.adapter.RowAdapter
-import com.capstone.beruang.adapter.TagAdapter
 import com.capstone.beruang.data.ArticleRepository
-import com.capstone.beruang.data.TagData
 import com.capstone.beruang.databinding.FragmentArticleBinding
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class ArticleFragment : Fragment() {
 
@@ -34,6 +36,42 @@ class ArticleFragment : Fragment() {
         val viewModelFactory = ArticleViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
         setupAdapters()
+        val chipGroup = view.findViewById<ChipGroup>(R.id.chipGroup)
+
+        // Example: Create and add 5 Chip buttons
+        val chipTexts = listOf("Chip 1", "Chip 2", "Chip 3", "Chip 4", "Chip 5", "asssssssassssssssaaaaaaaa", "dasda")
+
+        for (chipText in chipTexts) {
+            val chip = Chip(requireContext())
+            chip.text = chipText
+            chip.isClickable = true
+            chip.isCheckable = true
+
+            val paddingStartEnd = resources.getDimensionPixelSize(R.dimen.chipStartEnd)
+            val paddingTopBottom = resources.getDimensionPixelSize(R.dimen.chipTopBottom)
+            chip.setPadding(paddingStartEnd, paddingTopBottom, paddingStartEnd, paddingTopBottom)
+
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            val marginStart = resources.getDimensionPixelSize(R.dimen.zoro)
+            val marginStartEnd = resources.getDimensionPixelSize(R.dimen.chipStartEnd)
+            val marginTopBottom = resources.getDimensionPixelSize(R.dimen.chipTopBottom)
+
+
+            layoutParams.setMargins(marginStart, marginTopBottom, marginStartEnd, marginTopBottom)
+            chip.layoutParams = layoutParams
+
+            chipGroup.addView(chip)
+
+            chip.setOnCheckedChangeListener { buttonView, isChecked ->
+                // Handle chip selection/deselection here
+                Log.d("ChipSelection", "Selected chip text: ${chip.text}, isChecked: $isChecked")
+            }
+        }
+
         return view
     }
 
@@ -54,14 +92,21 @@ class ArticleFragment : Fragment() {
         binding.rvRow.setHasFixedSize(true)
 
         // Setup TagAdapter
-        val dataTag = TagData.tagList
-        val tagAdapter = TagAdapter(requireContext(), dataTag)
-        binding.rvTag.adapter = tagAdapter
-        binding.rvTag.layoutManager = GridLayoutManager(requireContext(), 2)
-
-        tagAdapter.setOnItemClickListener {
-            val intent = Intent(requireContext(), ListArticleActivity::class.java)
-            startActivity(intent)
+//        val dataTag = TagData.tagList
+//        val tagAdapter = TagAdapter(requireContext(), dataTag)
+//        binding.rvTag.adapter = tagAdapter
+//        binding.rvTag.layoutManager = GridLayoutManager(requireContext(), 2)
+//
+//        tagAdapter.setOnItemClickListener {
+//            val intent = Intent(requireContext(), ListArticleActivity::class.java)
+//            startActivity(intent)
+//        }
+        viewModel.articleList.observe(viewLifecycleOwner) { articles ->
+            // Update the RecyclerView adapter with the new list of articles
+            val adapter = ArticleListAdapter(articles)
+            binding.rvArticle.adapter = adapter
+            binding.rvArticle.layoutManager =
+                LinearLayoutManager(requireContext())
         }
     }
 

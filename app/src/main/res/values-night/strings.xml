@@ -18,4 +18,14 @@
     <string name="bookmark">Bookmark</string>
     <string name="article_content">articel content</string>
     <string name="article_page">Article</string>
+    <string name="but_next">Lanjut</string>
+    <string name="image_welcome">Welcome</string>
+    <string name="for_welcome">Kendalikan finansialmu di mana saja dengan aplikasi kami.</string>
+    <string name="kata_mutiara">ini adalah manajer uang berukuran saku untukmu! Ingat ya, kita nggak bisa bantu kamu cariin kaos kaki yang hilang di mesin cuci.</string>
+    <string name="text_third">Pantau keuanganmu sambil senyum-senyum dengan aplikasi kami</string>
+    <string name="text_third_detail">Ingat, meskipun kami hebat, kita tetap belum punya kemampuan menemukan kunci yang hilang di bawah sofa.</string>
+    <string name="text_second">Uang jajanmu, aplikasi kami.</string>
+    <string name="text_second_detail">Mengatur finansial jadi gampang dan lucu! Kami hanya bisa manajemen uangmu, bukan membantu mencari kaus kaki yang hilang di bawah tempat tidur.</string>
+    <string name="text_first">Kendalikan finansialmu di mana saja dengan aplikasi kami.</string>
+    <string name="text_first_detail">" ini adalah manajer uang berukuran saku untukmu! Ingat ya, kita nggak bisa bantu kamu cariin kaos kaki yang hilang di mesin cuci."</string>
 </resources>

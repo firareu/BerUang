@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-      <dimen name="fab_margin">200dp</dimen>
     <dimen name="chipStartEnd">8dp</dimen>
     <dimen name="chipTopBottom">4dp</dimen>
     <dimen name="zoro">0dp</dimen>
