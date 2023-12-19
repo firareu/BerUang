@@ -66,7 +66,7 @@
             <FrameLayout
                 android:id="@+id/frame_allocation"
                 android:layout_width="match_parent"
-                android:layout_height="380dp"
+                android:layout_height="400dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/squarehome"
                 app:layout_constraintTop_toBottomOf="@+id/tv_username"
@@ -157,7 +157,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
-                        android:paddingBottom="100dp"
+                        android:paddingBottom="140dp"
                         app:layout_constraintStart_toStartOf="@id/btn_mmhome"
                         app:layout_constraintTop_toBottomOf="@id/tv_history"
                         tools:listitem="@layout/item_type_allocation" />
