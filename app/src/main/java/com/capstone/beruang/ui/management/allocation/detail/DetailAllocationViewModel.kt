@@ -1,4 +1,4 @@
-package com.capstone.beruang.ui.home
+package com.capstone.beruang.ui.management.allocation.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.capstone.beruang.data.response.AllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class DetailAllocationViewModel : ViewModel() {
     lateinit var apiService: ApiService
 
     private val _outcomeData = MutableLiveData<List<AllocationItem>>()
@@ -19,14 +19,14 @@ class HomeViewModel : ViewModel() {
     val errorState: LiveData<String>
         get() = _errorState
 
-    fun fetchOutcomeData() {
+    fun fetchOutcomeData(dataCategory: String) {
         viewModelScope.launch {
             try {
                 val response = apiService.getOutcome()
                 if (!response.error!!) {
                     val allocationList = response.allocation.orEmpty()
                         .filterNotNull()
-//                        .filter { it.category == dataCategory }
+                        .filter { it.category == dataCategory }
 
                     _outcomeData.value = allocationList
                 } else {
@@ -38,3 +38,4 @@ class HomeViewModel : ViewModel() {
         }
     }
 }
+

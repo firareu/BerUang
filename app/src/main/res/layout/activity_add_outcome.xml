@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.management.allocation.add.AddOutcomeActivity">
+    <!-- FrameLayout -->
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints">
+
+        <!-- ImageButton for back -->
+        <!-- Corrected layout constraints -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_back" />
+
+        <!-- TextView for title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/editallocation"
+            android:textColor="@color/black_200"
+            android:textSize="14sp" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

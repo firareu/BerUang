@@ -5,31 +5,101 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
+import com.capstone.beruang.data.response.AllocationItem
+import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ActivityDetailAllocationBinding
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.CalendarDateModel
+import com.capstone.beruang.ui.management.allocation.AllocationViewModel
+import com.capstone.beruang.ui.management.allocation.edit.EditAdapter
+import com.example.submission.data.retrofit.ApiConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class DetailAllocationActivity : AppCompatActivity() {
+class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.OnItemClickCallback {
     private lateinit var binding: ActivityDetailAllocationBinding
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     private val cal = Calendar.getInstance(Locale.ENGLISH)
     private val currentDate = Calendar.getInstance(Locale.ENGLISH)
     private val dates = ArrayList<Date>()
+    private lateinit var apiService: ApiService
+    private lateinit var viewModel: DetailAllocationViewModel
+    private lateinit var adapter: DetailAllocationAdapter
     /*private lateinit var adapter: CalendarAdapter*/
     private val calendarList2 = ArrayList<CalendarDateModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailAllocationBinding.inflate(layoutInflater)
+
+        apiService = ApiConfig.getApiService() // Assuming ApiConfig.getApiService() is your way of getting ApiService instance
+        viewModel = ViewModelProvider(this).get(DetailAllocationViewModel::class.java)
+        viewModel.apiService = apiService // Set the apiService here
+
+        val data: ListAllocationItem? = intent.getParcelableExtra(KEY_CONTENT)
+        if (data != null) {
+            val formattedPercent = String.format("%d %%", data.percentage?.toInt() ?: 0)
+            binding.tvPercent.text = formattedPercent
+            binding.tvAllocationtype.text = data.category
+
+            val TVAmount = getString(R.string.rupiah, data.amount?.toInt() ?: 0)
+            binding.tvRpallocationtype.text = TVAmount
+            Log.d("DetailAllocationActivity", "Received data: $data")
+
+            viewModel.fetchOutcomeData(data.category ?: "")
+            Log.d("DetailAllocationActivity", "Received data: $data.category")
+        }
+
+        adapter = DetailAllocationAdapter()
+        binding.rvAllocation.layoutManager = LinearLayoutManager(this)
+        binding.rvAllocation.setHasFixedSize(true)
+        binding.rvAllocation.adapter = adapter
+
         setContentView(binding.root)
         setupAction()
         setUpClickListener()
         setUpCalendar()
         renderLineChart()
+
+        setUpRecyclerView()
+        loadDataFromApi()
+        viewModel.outcomeData.observe(this, { outcomeList ->
+            adapter.submitList(outcomeList)
+        })
+
+    }
+
+    private fun loadDataFromApi() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = apiService.getOutcome()
+                if (!response.error!!) {
+                    val allocations = response.allocation.orEmpty().filterNotNull() // Menghapus nilai null dari list
+                    // Hapus pemanggilan adapter.submitList(allocations) dari sini
+                } else {
+                    Log.e("EditActivity", "Error fetching allocations: ${response.message}")
+                }
+            } catch (e: Exception) {
+                Log.e("EditActivity", "Error: ${e.message}")
+            }
+        }
+    }
+
+    private fun setUpRecyclerView() {
+        adapter = DetailAllocationAdapter()
+        val recyclerView: RecyclerView = findViewById(R.id.rv_Allocation)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.setOnItemClickCallback(this)
     }
 
     private fun setUpCalendar() {
@@ -130,5 +200,10 @@ class DetailAllocationActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_CONTENT = "content"
+    }
+
+    override fun onItemClicked(data: AllocationItem) {
+        val id = data.id
+//        deleteAllocationFromApi(id)
     }
 }

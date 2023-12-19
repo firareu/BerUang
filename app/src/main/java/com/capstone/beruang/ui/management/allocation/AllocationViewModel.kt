@@ -36,9 +36,6 @@ class AllocationViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-//    fun getFakeAllocations(): List<ListAllocationItem> {
-//        return FakeDataGenerator.generateFakeAllocations()
-//    }
 
     fun addAllocation(allocation: ListAllocationItem) {
         viewModelScope.launch {

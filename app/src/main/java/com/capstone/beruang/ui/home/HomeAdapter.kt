@@ -7,16 +7,19 @@ import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.databinding.ItemHomeAllocationBinding
 
+/*
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
     private val allocationList = ArrayList<ListAllocationItem>()
 
-    /*fun setFakeAllocations() {
+    */
+/*fun setFakeAllocations() {
         val fakeAllocations = FakeDataGenerator.generateFakeAllocations()
         allocationList.clear()
         allocationList.addAll(fakeAllocations)
         notifyDataSetChanged()
-    }*/
+    }*//*
+
 
     fun submitList(allocations: List<ListAllocationItem>) {
         allocationList.clear()
@@ -57,4 +60,4 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     interface OnItemClickCallback {
         fun onItemClicked(data: ListAllocationItem)
     }
-}
+}*/

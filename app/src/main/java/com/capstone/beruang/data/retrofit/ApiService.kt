@@ -4,6 +4,7 @@ import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.OutcomeResponse
 import com.capstone.beruang.data.response.SalaryResponse
 import com.capstone.beruang.data.response.TagResponse
 import retrofit2.http.*
@@ -15,10 +16,7 @@ interface ApiService {
     //mengambil seluruh data alokasi
     @GET("allocations")
     suspend fun getAllAllocations(): AllocationResponse
-    /*@GET("allocations")
-    suspend fun getAllAllocations(): AllocationResponse {
-        return FakeDataGenerator.generateFakeAllocationResponse()
-    }*/
+
     // Menambahkan data alokasi
     @POST("allocations")
     suspend fun addAllocation(@Body allocation: ListAllocationItem): AllocationResponse
@@ -39,41 +37,37 @@ interface ApiService {
     suspend fun getSalary(@Query("date") date: String): SalaryResponse
 
     // Membuat data baru dengan informasi id, salary, dan date (bulan)
-    @POST("salaries/create")
+    @POST("incomes/create")
     suspend fun createOrUpdateSalary(@Body updatedSalary: SalaryResponse): SalaryResponse
 
     // Memperbarui data berdasarkan tanggal (bulan)
-    @PUT("salaries/update/{date}")
+    @PUT("incomes/update/{date}")
     suspend fun updateSalaryByDate(
         @Path("date") date: String,
         @Body updatedSalary: SalaryResponse
     ): SalaryResponse
 
-//    @GET("salaries")
-//    suspend fun getSalary(): SalaryResponse {
-//        return FakeDataGenerator.generateFakeSalary()
-//    }
-
     // Mendapatkan data kategori
-    @GET("categories")
-    suspend fun getCategories(): List<CategoryResponse>
+    @GET("outcomes")
+    suspend fun getOutcome(): OutcomeResponse
 
-    // Membuat data kategori baru
-    @POST("categories")
-    suspend fun createCategory(@Body category: CategoryResponse): CategoryResponse
+    // Membuat data outcomes baru
+    @POST("outcomes")
+    suspend fun createOutcome(@Body outcomes: OutcomeResponse): OutcomeResponse
 
-    // Mendapatkan data kategori berdasarkan ID
-    @GET("categories/{id}")
-    suspend fun getCategoryById(@Path("id") id: Int): CategoryResponse
+    // Mendapatkan data outcomes berdasarkan ID
+    @GET("outcomes/{id}")
+    suspend fun getOutcomeById(@Path("id") id: Int): OutcomeResponse
 
-    // Memperbarui data kategori berdasarkan ID
-    @PUT("categories/{id}")
-    suspend fun updateCategoryById(
+    // Memperbarui data outcomes berdasarkan ID
+    @PUT("outcomes/{id}")
+    suspend fun updateOutcomeById(
         @Path("id") id: Int,
-        @Body updatedCategory: CategoryResponse
-    ): CategoryResponse
+        @Body updatedOutcome: OutcomeResponse
+    ): OutcomeResponse
 
-    // Menghapus data kategori berdasarkan ID
-    @DELETE("categories/{id}")
-    suspend fun deleteCategoryById(@Path("id") id: Int): Unit
+    // Menghapus data outcomes berdasarkan ID
+    @DELETE("outcomes/{id}")
+    suspend fun deleteOutcomeById(@Path("id") id: Int): Unit
+
 }

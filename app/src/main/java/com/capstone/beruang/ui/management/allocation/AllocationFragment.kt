@@ -56,7 +56,6 @@ class AllocationFragment : Fragment() {
         pieChart.setUsePercentValues(true)
         pieChart.setDrawEntryLabels(false)
 
-
         binding.rvAllocation.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = allocationAdapter

@@ -37,24 +37,19 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
 
         editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
-        val apiService = ApiConfig.getApiService()
+
+        apiService = ApiConfig.getApiService()
         editViewModel.apiService = apiService
 
-//        apiService = ApiServiceFactory.createApiService()
         adapter = EditAdapter(apiService)
         binding.rvAllocation.layoutManager = LinearLayoutManager(this)
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = adapter
 
         getAndSetSalary()
-//        setUpRecyclerView()
-//        loadDataFromApi()
-//        setFakeData()
+        setUpRecyclerView()
+        loadDataFromApi()
         setupAction()
-    }
-
-    private fun setFakeData() {
-//        adapter.setFakeAllocations()
     }
 
     private fun deleteAllocationFromApi(id: Int) {
@@ -96,11 +91,11 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     }
 
     private fun loadDataFromApi() {
-        /*CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = apiService.getAllAllocations()
                 if (!response.error!!) {
-                    val allocations = response.allocation ?: emptyList() // Pastikan untuk menangani nilai null
+                    val allocations = response.allocation.orEmpty().filterNotNull() // Menghapus nilai null dari list
 
                     runOnUiThread {
                         adapter.submitList(allocations)
@@ -111,8 +106,9 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             } catch (e: Exception) {
                 Log.e("EditActivity", "Error: ${e.message}")
             }
-        }*/
+        }
     }
+
 
 
     private fun setUpRecyclerView() {
