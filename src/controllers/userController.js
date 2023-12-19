@@ -3,7 +3,6 @@ const { createUser: createUserModel,
         getUserById: getUserByIdModel, 
         updateUser: updateUserModel, 
         deleteUser: deleteUserModel } = require('../models/user');
-
         
 // POST
 const createUser = async (req, res) => {
@@ -66,6 +65,7 @@ const updateUser = async (req, res) => {
   }
 };
 
+// DELETE
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.userId;
