@@ -4,9 +4,13 @@ import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.RegisterResponse
 import com.capstone.beruang.data.response.SalaryResponse
+import com.capstone.beruang.data.response.UserResponse
 import com.capstone.beruang.data.response.article.ArticleResponse
+import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
@@ -79,5 +83,11 @@ interface ApiService {
     //Article
     @GET("/v2/top-headlines")
     fun getTopHeadlines(@QueryMap params: Map<String, String>): Call<ArticleResponse>
+
+    @POST("users")
+    suspend fun loginUser(@Body requestBody: RequestBody): Response<UserResponse>
+
+    @POST("auth/register")
+    suspend fun registerUser(@Body requestBody: RequestBody): Response<RegisterResponse>
 
 }

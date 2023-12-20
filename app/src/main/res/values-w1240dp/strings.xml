@@ -28,4 +28,7 @@
     <string name="text_second_detail">Mengatur finansial jadi gampang dan lucu! Kami hanya bisa manajemen uangmu, bukan membantu mencari kaus kaki yang hilang di bawah tempat tidur.</string>
     <string name="text_first">Kendalikan finansialmu di mana saja dengan aplikasi kami.</string>
     <string name="text_first_detail">" ini adalah manajer uang berukuran saku untukmu! Ingat ya, kita nggak bisa bantu kamu cariin kaos kaki yang hilang di mesin cuci."</string>
+    <string name="gender">Gender</string>
+    <string name="date_of_birth_hint">Input your birthday</string>
+    <string name="date_of_birth">Birthday</string>
 </resources>

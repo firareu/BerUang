@@ -1,13 +1,13 @@
 package com.capstone.beruang.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.capstone.beruang.MainActivity
 import com.capstone.beruang.databinding.ActivityLoginBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.capstone.beruang.ui.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
