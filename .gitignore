@@ -1,12 +1,5 @@
-# Dependency directories
 node_modules
-
-# Environment configuration
-.env
-
 config
-# Firebase private key
-# serviceAccountKey.json
 
 # Logs
 logs

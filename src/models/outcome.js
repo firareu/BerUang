@@ -39,7 +39,6 @@ const getOutcome = async (userId) => {
 
 const getOutcomeById = async (outcomeId) => {
   const outcomeDoc = await db.collection("outcomes").doc(outcomeId).get();
-  console.log("outcomeDoc", outcomeDoc);
   if (outcomeDoc.exists) {
     const outcomeData = outcomeDoc.data();
     return outcomeData;

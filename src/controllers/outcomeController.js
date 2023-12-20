@@ -41,7 +41,6 @@ if (!outcomeId) {
 }
 
 const outcome = await getOutcomeByIdModel(outcomeId);
-console.log("this shud be outcome get by id", outcome)
 if (outcome) {
   res.status(200).json({ outcome });
 } else {
