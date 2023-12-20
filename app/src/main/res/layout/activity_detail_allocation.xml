@@ -27,11 +27,12 @@
 
         <!-- TextView for title -->
         <TextView
+            android:id="@+id/tv_allocationtype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
-            android:text="@string/editallocation"
+            android:text="@string/allocation"
             android:textColor="@color/black_200"
             android:textSize="14sp" />
     </FrameLayout>
@@ -60,16 +61,17 @@
                 tools:text="@string/percent" />
 
             <TextView
-                android:id="@+id/tv_allocationtype"
+                android:id="@+id/tv_allocationmoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@id/tv_percent"
                 android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black_200"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/tv_percent"
                 app:layout_constraintTop_toTopOf="@+id/tv_percent"
-                tools:text="@string/dc_alocation" />
+                android:text="@string/dc_alocation" />
             <TextView
                 android:id="@+id/tv_rpallocationtype"
                 android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/tv_percent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_allocationtype"
+                app:layout_constraintTop_toBottomOf="@+id/tv_allocationmoney"
                 tools:text="@string/rupiah" />
             <ImageView
                 android:id="@+id/iv_calendar_previous"

@@ -146,6 +146,5 @@
             app:layout_constraintStart_toStartOf="@id/tv_detail"
             app:layout_constraintTop_toBottomOf="@id/tv_detail"
             tools:listitem="@layout/item_allocation" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

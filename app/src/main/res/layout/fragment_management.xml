@@ -3,18 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.management.ManagementFragment"
+    android:background="@color/white"
     android:orientation="horizontal">
-    <!--<androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/black_200"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="16sp"/>-->
     <FrameLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -53,4 +45,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
+    <FrameLayout
+        android:id="@+id/error_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-52dp"
+            android:layout_gravity="center">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/error_screen_management"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="-40dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/not_found"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:layout_marginTop="-20dp"
+                android:text="@string/error"
+                android:textColor="@color/blue_700"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/error_screen_management" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/loading_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_screen_management"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-40dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_screen"
+            tools:ignore="MissingConstraints" />
+    </FrameLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

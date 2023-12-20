@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.beruang.R
@@ -29,6 +30,7 @@ class ManagementFragment : Fragment() {
 
     private var _binding: FragmentManagementBinding? = null
     private val binding get() = _binding!!
+    private lateinit var managementViewModel: ManagementViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +41,7 @@ class ManagementFragment : Fragment() {
         val root: View = binding.root
 
         val viewPager: ViewPager2 = root.findViewById(R.id.view_pager)
+
         val tabs: TabLayout = root.findViewById(R.id.tabs)
         val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity())
         viewPager.adapter = sectionsPagerAdapter
@@ -47,6 +50,19 @@ class ManagementFragment : Fragment() {
         }.attach()
 
         return root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        managementViewModel = ViewModelProvider(requireActivity()).get(ManagementViewModel::class.java)
+        managementViewModel.loadingVisibility.observe(viewLifecycleOwner) { visibility ->
+            // Sesuaikan visibilitas loadingFrame di ManagementFragment
+            binding.loadingFrame.visibility = visibility
+            binding.errorFrame.visibility = visibility
+        }
+        managementViewModel.errorVisibility.observe(viewLifecycleOwner) { visibility ->
+            // Sesuaikan visibilitas loadingFrame di ManagementFragment
+            binding.errorFrame.visibility = visibility
+        }
     }
 
     override fun onDestroyView() {
