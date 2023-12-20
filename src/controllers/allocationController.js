@@ -26,7 +26,7 @@ const {
       if (allocation.length > 0) {
         res.status(200).json({ allocation });
       } else {
-        res.status(404).json({ error: "allocation not found" });
+        res.status(404).json({ error: "Allocation not found" });
       }
     } catch (error) {
       console.error(error);
