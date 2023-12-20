@@ -22,9 +22,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="@color/black_200"
             android:fontFamily="@font/poppins_bold"
+            android:visibility="gone"
             android:textSize="16sp"/>
-
-        <!-- View untuk menampilkan efek stroke -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -36,7 +35,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="88dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
@@ -45,6 +44,7 @@
         android:background="@color/white"
         android:fontFamily="@font/poppins_medium"
         android:textSize="10sp"
+        app:itemRippleColor="@color/purple_600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
