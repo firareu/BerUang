@@ -17,14 +17,16 @@ const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const incomeRoutes = require("./src/routes/incomeRoutes");
 const outcomeRoutes = require('./src/routes/outcomeRoutes');
+const allocationRoutes = require('./src/routes/allocationRoutes');
 
 app.use(bodyParser.json());
 
 // Routes
-app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/incomes", incomeRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/incomes', incomeRoutes);
 app.use('/outcomes', outcomeRoutes);
+app.use('/allocations', allocationRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
