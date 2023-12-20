@@ -71,7 +71,7 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="accountsetting">Pengaturan Akun</string>
     <string name="logout_description">Apakah Kamu Yakin Ingin Log Out?</string>
-    <string name="logout_cancel">cancel</string>
+    <string name="logout_cancel">Batal</string>
     <string name="yes">Ya</string>
     <string name="managemoney">Manage Your Money!</string>
     <string name="Ber">Ber</string>
@@ -97,6 +97,7 @@
     <string name="salarynow">Saldo terkini</string>
     <string name="spendingnow">Jumlah pengeluaran</string>
     <string name="editallocation">edit alokasi</string>
+    <string name="outcome">outcome</string>
     <string name="historyallocation">Riwayat Alokasi</string>
     <string name="detailallocation">Detail Alokasi</string>
     <string name="categoryallocation">Kategori Alokasi</string>
@@ -106,6 +107,11 @@
     <string name="add">Tambah+</string>
     <string name="cd_previous">Previous</string>
     <string name="cd_next">Next</string>
+    <string name="description">Deskripsi</string>
+    <string name="salary">Saldo</string>
+    <string name="cancel">Batal</string>
+    <string name="save">Simpan</string>
+    <string name="allocationexpand">Terdapat %d%  pengeluaran menggunakan dana Alokasi</string>
 
     <!--   Login n Regis-->
     <string name="login">Login</string>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.management.allocation.AllocationFragment"
     android:paddingStart="12dp"
     android:paddingEnd="12dp">
@@ -32,15 +33,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_outcomenow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/spendingnow"
+        android:textColor="@color/black_200"
+        android:layout_marginTop="8dp"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/linechart"
+        app:layout_constraintStart_toStartOf="@+id/linechart"
+        app:layout_constraintTop_toBottomOf="@+id/iv_calendar_previous"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/tv_rpoutcomenow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/rupiah"
+        android:textColor="@color/black_200"
+        android:textSize="12sp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_outcomenow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_outcomenow" />
+
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        app:layout_constraintTop_toBottomOf="@id/iv_calendar_next"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_outcomenow"/>
     <!--<io.github.farshidroohi.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
@@ -59,100 +91,25 @@
         android:layout_marginBottom="12dp"
         app:layout_constraintTop_toBottomOf="@id/iv_calendar_next"/>
 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_money"
+    <ImageView
+        android:id="@+id/iv_status"
         android:layout_width="match_parent"
-        android:layout_height="108dp"
-        android:orientation="vertical"
-        app:cardBackgroundColor="@color/blue_500"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:cardMaxElevation="4dp"
-        app:cardUseCompatPadding="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/linechart"
-        tools:layout_editor_absoluteX="16dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-            <View
-                android:id="@+id/line_money"
-                android:layout_width="2dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <LinearLayout
-                android:id="@+id/linear_layout2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:paddingTop="20dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/line_money">
-
-                <TextView
-                    android:id="@+id/tv_income2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/spendingnow"
-                    android:textColor="@color/white"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/tv_spendingmoney"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/rupiah"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:transitionName="description" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="20dp"
-                android:orientation="vertical"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/tv_income3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/salarynow"
-                    android:textColor="@color/white"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/tv_restmoney"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/rupiah"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:transitionName="description" />
-
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        android:background="@color/white"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/iv_textstatus"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/iv_status"
+        app:layout_constraintBottom_toBottomOf="@id/iv_status"
+        android:background="@color/blue_700"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_date_month"
@@ -172,22 +129,24 @@
         android:fontFamily="@font/poppins_bold"
         android:text="@string/detailallocation"
         android:textColor="@color/black_200"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="12sp"
         android:transitionName="description"
         android:paddingStart="12dp"
-        app:layout_constraintStart_toStartOf="@id/card_money"
-        app:layout_constraintTop_toBottomOf="@id/card_money"
+        app:layout_constraintStart_toStartOf="@id/linechart"
+        app:layout_constraintTop_toBottomOf="@id/iv_status"
         tools:ignore="MissingConstraints,RtlSymmetry" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_Allocation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:overScrollMode="never"
         android:scrollbarSize="0dp"
         app:layout_constraintStart_toStartOf="@id/tv_detail"
         app:layout_constraintTop_toBottomOf="@id/tv_detail"
-        tools:listitem="@layout/item_allocation" />
+        tools:listitem="@layout/item_expand_allocation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

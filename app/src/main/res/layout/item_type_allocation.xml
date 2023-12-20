@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="92dp"
+    android:layout_height="120dp"
     android:layout_gravity="center"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
@@ -17,10 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
-
         <TextView
-            android:id="@+id/tv_allocationtype"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_description"
+            android:layout_width="200dp"
+            android:maxLines="2"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
@@ -29,6 +29,17 @@
             android:textColor="@color/black_200"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/description" />
+        <TextView
+            android:id="@+id/tv_allocationtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="12sp"
+            android:textColor="@color/black_200"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/tv_description"
             tools:text="@string/allocation" />
 
         <TextView
@@ -52,9 +63,9 @@
             android:fontFamily="@font/poppins_medium"
             android:textSize="12sp"
             android:textColor="@color/black_200"
-            card_view:layout_constraintBottom_toBottomOf="@+id/tv_allocationtype"
+            card_view:layout_constraintBottom_toBottomOf="@+id/tv_description"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_allocationtype"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_description"
             tools:ignore="MissingConstraints"
             tools:text="@string/rupiah" />
 
