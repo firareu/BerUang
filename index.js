@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const incomeRoutes = require("./src/routes/incomeRoutes");
-// const outcomeRoutes = require('./src/routes/outcomeRoutes');
+const outcomeRoutes = require('./src/routes/outcomeRoutes');
 
 app.use(bodyParser.json());
 
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/incomes", incomeRoutes);
-// app.use('/outcomes', outcomeRoutes);
+app.use('/outcomes', outcomeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
