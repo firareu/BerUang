@@ -4,9 +4,9 @@ import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.response.CategoryResponse
 import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.LoginResponse
 import com.capstone.beruang.data.response.RegisterResponse
 import com.capstone.beruang.data.response.SalaryResponse
-import com.capstone.beruang.data.response.UserResponse
 import com.capstone.beruang.data.response.article.ArticleResponse
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -83,9 +83,8 @@ interface ApiService {
     //Article
     @GET("/v2/top-headlines")
     fun getTopHeadlines(@QueryMap params: Map<String, String>): Call<ArticleResponse>
-
-    @POST("users")
-    suspend fun loginUser(@Body requestBody: RequestBody): Response<UserResponse>
+    @POST("auth/login") // Adjust the endpoint accordingly
+    suspend fun loginUser(@Body requestBody: RequestBody): Response<LoginResponse>
 
     @POST("auth/register")
     suspend fun registerUser(@Body requestBody: RequestBody): Response<RegisterResponse>

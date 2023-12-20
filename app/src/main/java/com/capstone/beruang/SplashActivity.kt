@@ -4,18 +4,21 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.capstone.beruang.data.repository.PreferenceManager
+import com.capstone.beruang.data.repository.UserRepository
 import com.capstone.beruang.databinding.ActivitySplashBinding
 import com.capstone.beruang.ui.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
+    private val userRepository: UserRepository by lazy {
+        UserRepository(PreferenceManager.getInstance(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +30,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setUpUI() {
-
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val isLoggedIn = firebaseAuth.currentUser != null
+        val isLoggedIn = userRepository.isUserLoggedIn()
         val intent = if (isLoggedIn) {
             playAnimation()
             Intent(this, MainActivity::class.java)

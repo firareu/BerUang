@@ -5,22 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.beruang.R
-import com.capstone.beruang.databinding.FragmentHomeBinding
+import com.capstone.beruang.data.repository.PreferenceManager
+import com.capstone.beruang.data.repository.UserRepository
 import com.capstone.beruang.databinding.FragmentProfileBinding
-import com.capstone.beruang.ui.home.HomeViewModel
 import com.capstone.beruang.ui.login.LoginActivity
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
+    private val userRepository: UserRepository by lazy {
+        UserRepository(PreferenceManager.getInstance(requireContext()))
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -58,7 +57,7 @@ class ProfileFragment : Fragment() {
                 alert.cancel()
             }
             .setNegativeButton(getString(R.string.yes)) { _, _ ->
-                Firebase.auth.signOut()
+                userRepository.logoutUser()
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 startActivity(intent)
             }
