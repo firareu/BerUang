@@ -80,5 +80,9 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
+    //viewPager
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
 
 }

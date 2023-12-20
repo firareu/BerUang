@@ -26,7 +26,6 @@ class HomeViewModel : ViewModel() {
                 if (!response.error!!) {
                     val allocationList = response.allocation.orEmpty()
                         .filterNotNull()
-//                        .filter { it.category == dataCategory }
 
                     _outcomeData.value = allocationList
                 } else {

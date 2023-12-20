@@ -1,12 +1,5 @@
 package com.capstone.beruang.ui.home
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.capstone.beruang.data.fakedata.FakeDataGenerator
-import com.capstone.beruang.data.response.ListAllocationItem
-import com.capstone.beruang.databinding.ItemHomeAllocationBinding
-
 /*
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null

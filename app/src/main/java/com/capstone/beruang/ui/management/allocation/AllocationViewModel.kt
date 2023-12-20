@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.repository.Repository
-import com.capstone.beruang.data.response.AllocationResponse
 import com.capstone.beruang.data.retrofit.ApiService
 import kotlinx.coroutines.launch
 
@@ -24,12 +22,12 @@ class AllocationViewModel(private val repository: Repository) : ViewModel() {
     val salary: LiveData<Float>
         get() = _salary
 
-    suspend fun getSalaryFromApi(date: String) {
+    suspend fun getSalaryFromApi(date: String, userId: String) {
         viewModelScope.launch {
             try {
-                val salaryResponse = apiService.getSalary(date)
-                val salary = salaryResponse.incomes?.salary ?: 0f
-                _salary.value = salary
+                val incomeResponse = apiService.getSalary(date, userId)
+                val salary = incomeResponse.data?.amount ?: 0f
+                _salary.value = salary.toFloat()
             } catch (e: Exception) {
 
             }

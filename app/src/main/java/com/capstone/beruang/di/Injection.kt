@@ -2,7 +2,7 @@ package com.capstone.beruang.di
 
 import android.content.Context
 import com.capstone.beruang.data.repository.Repository
-import com.example.submission.data.retrofit.ApiConfig
+import com.capstone.beruang.data.retrofit.ApiConfig
 
 object Injection {
     fun provideRepository(context: Context): Repository {

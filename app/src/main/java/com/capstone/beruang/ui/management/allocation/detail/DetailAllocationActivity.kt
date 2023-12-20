@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
 import com.capstone.beruang.data.response.AllocationItem
 import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ActivityDetailAllocationBinding
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.CalendarDateModel
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
 import com.capstone.beruang.ui.management.allocation.edit.EditAdapter
-import com.example.submission.data.retrofit.ApiConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

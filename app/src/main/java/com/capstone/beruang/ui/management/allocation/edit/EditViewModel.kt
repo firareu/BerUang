@@ -29,9 +29,9 @@ class EditViewModel : ViewModel() {
     suspend fun getSalaryFromApi(date: String) {
         viewModelScope.launch {
             try {
-                val salaryResponse = apiService.getSalary(date)
+                /*val salaryResponse = apiService.getSalary(date)
                 val salary = salaryResponse.incomes?.salary ?: 0f
-                _salary.value = salary
+                _salary.value = salary*/
             } catch (e: Exception) {
 
             }

@@ -3,7 +3,6 @@ package com.capstone.beruang.ui.management.allocation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.databinding.ItemAllocationBinding
 

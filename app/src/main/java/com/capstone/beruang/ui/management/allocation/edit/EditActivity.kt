@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
 import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.data.retrofit.ApiService
 //import com.capstone.beruang.data.retrofit.ApiServiceFactory
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.allocation.AllocationAdapter
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
-import com.example.submission.data.retrofit.ApiConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -316,5 +316,4 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         })
     }
 }*/
-
 

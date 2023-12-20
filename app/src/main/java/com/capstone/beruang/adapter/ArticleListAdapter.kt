@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.beruang.data.dataclass.Article
+import com.capstone.beruang.data.response.article.ArticlesItem
 import com.capstone.beruang.databinding.ArticleViewBinding
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
-class ArticleListAdapter(private val articleList: List<Article>) :
+class ArticleListAdapter(private val articleList: List<ArticlesItem>) :
     RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(binding: ArticleViewBinding) :
@@ -29,7 +29,7 @@ class ArticleListAdapter(private val articleList: List<Article>) :
 
         holder.titleTextView.text = currentArticle.title
         Glide.with(holder.itemView.context)
-            .load(currentArticle.image)
+            .load(currentArticle.urlToImage)
             .into(holder.imageView)
         holder.content.text = currentArticle.content
         holder.itemView.setOnClickListener {

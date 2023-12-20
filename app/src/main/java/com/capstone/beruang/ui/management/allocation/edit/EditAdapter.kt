@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.fakedata.FakeDataGenerator
 import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ItemCategoryAllocationBinding
@@ -16,13 +15,6 @@ class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<Edi
     private var onItemClickCallback: OnItemClickCallback? = null
     private val allocationList = ArrayList<ListAllocationItem>()
 
-
-    /*fun setFakeAllocations() {
-        val fakeAllocations = FakeDataGenerator.generateFakeAllocations()
-        allocationList.clear()
-        allocationList.addAll(fakeAllocations)
-        notifyDataSetChanged()
-    }*/
 
     fun submitList(allocations: List<ListAllocationItem>) {
         allocationList.clear()

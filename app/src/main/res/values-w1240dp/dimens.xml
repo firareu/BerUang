@@ -1,3 +1,6 @@
 <resources>
       <dimen name="fab_margin">200dp</dimen>
-   </resources>
+    <dimen name="chipStartEnd">8dp</dimen>
+    <dimen name="chipTopBottom">4dp</dimen>
+    <dimen name="zoro">0dp</dimen>
+</resources>

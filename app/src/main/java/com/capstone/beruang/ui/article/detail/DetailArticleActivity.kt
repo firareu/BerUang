@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
-import com.capstone.beruang.adapter.ArticleListAdapter
+import com.capstone.beruang.data.response.article.ArticlesItem
 import com.capstone.beruang.databinding.ActivityDetailArticleBinding
-import com.capstone.beruang.data.dataclass.Article
-import com.capstone.beruang.data.dataclass.ArticleData
 
 class DetailArticleActivity : AppCompatActivity() {
 
@@ -26,34 +23,27 @@ class DetailArticleActivity : AppCompatActivity() {
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        detailArticle()
+    }
 
-        val article = intent.getParcelableExtra<Article>(ARTICLE_KEY)
+    @Suppress("DEPRECATION")
+    private fun detailArticle() {
+        val article = intent.getParcelableExtra<ArticlesItem>(ARTICLE_KEY)
 
         if (article != null) {
             binding.articleTitle.text = article.title
-
             Glide.with(this)
-                .load(article.image)
+                .load(article.urlToImage)
                 .into(binding.imageArticle)
 
             binding.articleContent.text = article.content
         }
-        setupAdapter()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.article_menu, menu)
         return true
-    }
-
-    private fun setupAdapter() {
-        val dataArticle = ArticleData.articleList.take(5)
-        val recyclerView = binding.rvArticlelist
-        val adapter = ArticleListAdapter(dataArticle)
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -66,7 +56,6 @@ class DetailArticleActivity : AppCompatActivity() {
                 // Handle bookmark button click here
                 true
             }
-            // Handle other menu item clicks if needed
             else -> super.onOptionsItemSelected(item)
         }
     }
