@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.article.ArticlesItem
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.databinding.ActivityDetailArticleBinding
 
 class DetailArticleActivity : AppCompatActivity() {
@@ -30,12 +30,12 @@ class DetailArticleActivity : AppCompatActivity() {
 
     @Suppress("DEPRECATION")
     private fun detailArticle() {
-        val article = intent.getParcelableExtra<ArticlesItem>(ARTICLE_KEY)
+        val article = intent.getParcelableExtra<NewsResponseItem>(ARTICLE_KEY)
 
         if (article != null) {
-            binding.articleTitle.text = article.title
+            binding.articleTitle.text = article.headline
             Glide.with(this)
-                .load(article.urlToImage)
+                .load(article.image)
                 .into(binding.imageArticle)
 
             binding.articleContent.text = article.content

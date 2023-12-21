@@ -9,6 +9,7 @@ import com.capstone.beruang.data.response.UserResponse
 import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.data.response.article.ArticleResponse
 import com.capstone.beruang.data.response.income.IncomeResponse
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -91,5 +92,7 @@ interface ApiService {
     @GET("users/{userId}")
     suspend fun getUserData(@Path("userId") userId: String): UserResponse
 
+    @GET("recommend")
+    suspend fun getNews(): Response<List<NewsResponseItem>>
 
 }

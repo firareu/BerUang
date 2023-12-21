@@ -34,7 +34,7 @@ class ApiConfig {
     }
 }
 object ApiConfig2 {
-    private const val BASE_URL = "https://newsapi.org/"
+    private const val BASE_URL = "https://beruang-api-artikel-kn57gj6moa-et.a.run.app/"
 
     fun getApiService(): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

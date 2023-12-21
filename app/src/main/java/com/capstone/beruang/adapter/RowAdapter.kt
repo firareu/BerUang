@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.beruang.data.response.article.ArticlesItem
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.databinding.RowArticleBinding
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
-class RowAdapter(private val articleList: List<ArticlesItem>) :
+class RowAdapter(private val articleList: List<NewsResponseItem>) :
     RecyclerView.Adapter<RowAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(binding: RowArticleBinding) :
@@ -30,9 +30,9 @@ class RowAdapter(private val articleList: List<ArticlesItem>) :
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val currentArticle = articleList[position]
 
-        holder.titleTextView.text = currentArticle.title
+        holder.titleTextView.text = currentArticle.headline
         Glide.with(holder.itemView.context)
-            .load(currentArticle.urlToImage)
+            .load(currentArticle.image)
             .into(holder.imageView)
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, DetailArticleActivity::class.java)

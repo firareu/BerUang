@@ -1,41 +1,29 @@
 package com.capstone.beruang.data.dataclass
 
-import com.capstone.beruang.data.response.article.ArticleResponse
-import com.capstone.beruang.data.response.article.ArticlesItem
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.data.retrofit.ApiConfig2
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ArticleRepository {
 
-    // Use Retrofit to get the API service
     private val apiService = ApiConfig2.getApiService()
 
-    // Fetch articles from the API
-    fun getArticles(callback: (List<ArticlesItem>?, String?) -> Unit) {
-        val queryParams = mapOf(
-            "country" to "us",
-            "apiKey" to "80ba54addaa34c59b51b7690c556f49e"
-        )
-
-        apiService.getTopHeadlines(queryParams).enqueue(object : Callback<ArticleResponse> {
-            override fun onResponse(
-                call: Call<ArticleResponse>,
-                response: Response<ArticleResponse>
-            ) {
+    suspend fun getArticles(): Pair<List<NewsResponseItem>?, String?> {
+        return try {
+            withContext(Dispatchers.IO) {
+                val response = apiService.getNews()
                 if (response.isSuccessful) {
-                    val articleResponse = response.body()
-                    val articles = articleResponse?.articles ?: emptyList()
-                    callback(articles, null)
+                    val articles = response.body()
+                    articles to null
                 } else {
-                    callback(null, "Error: ${response.message()}")
+                    emptyList<NewsResponseItem>() to "Error: ${response.message()}"
                 }
-            }
 
-            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
-                callback(null, "Failure: ${t.message}")
             }
-        })
+        } catch (t: Throwable) {
+            emptyList<NewsResponseItem>() to "Failure: ${t.message}"
+        }
     }
+
 }

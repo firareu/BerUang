@@ -7,54 +7,42 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.capstone.beruang.data.dataclass.ArticleRepository
 import com.capstone.beruang.data.response.article.ArticlesItem
+import com.capstone.beruang.data.ArticleRepository
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import kotlinx.coroutines.launch
 
 class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() {
 
-    // LiveData for the list of articles
-    private val _articleList = MutableLiveData<List<ArticlesItem>>()
-    val articleList: LiveData<List<ArticlesItem>> = _articleList
+    private val _articleList = MutableLiveData<List<NewsResponseItem>>()
+    val articleList: LiveData<List<NewsResponseItem>> = _articleList
 
-    // LiveData for loading state
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    // LiveData for error state
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
     init {
-        // Load articles when the ViewModel is created
         loadArticles()
     }
 
     private fun loadArticles() {
-        // Show loading state
         _isLoading.value = true
 
-        // Use viewModelScope to launch a coroutine
         viewModelScope.launch {
             try {
-                // Fetch articles from the repository
-                repository.getArticles { articles, error ->
-                    if (articles != null) {
-                        // Update the LiveData with the list of articles
-                        _articleList.postValue(articles)
-                    } else {
-                        // Handle the error
-                        _error.postValue(error ?: "Unknown error")
-                    }
-                    // Hide loading state
-                    _isLoading.postValue(false)
-                }
+                val (articles, error) = repository.getArticles()
+                _articleList.value = articles
+                _error.value = error
             } catch (e: Exception) {
-                // Handle the error
-                _isLoading.postValue(false)
-                _error.postValue("Error fetching articles: ${e.message}")
+                _error.value = "Error fetching articles: ${e.message}"
+            } finally {
+                _isLoading.value = false
             }
         }
     }
 }
+
 
 class ArticleViewModelFactory(private val repository: ArticleRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

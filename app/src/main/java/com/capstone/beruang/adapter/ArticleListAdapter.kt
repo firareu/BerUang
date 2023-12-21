@@ -1,15 +1,16 @@
 package com.capstone.beruang.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.beruang.data.response.article.ArticlesItem
+import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.databinding.ArticleViewBinding
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
-class ArticleListAdapter(private val articleList: List<ArticlesItem>) :
+class ArticleListAdapter(private val articleList: List<NewsResponseItem>) :
     RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
     class ArticleViewHolder(binding: ArticleViewBinding) :
@@ -27,9 +28,9 @@ class ArticleListAdapter(private val articleList: List<ArticlesItem>) :
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val currentArticle = articleList[position]
 
-        holder.titleTextView.text = currentArticle.title
+        holder.titleTextView.text = currentArticle.headline
         Glide.with(holder.itemView.context)
-            .load(currentArticle.urlToImage)
+            .load(currentArticle.image)
             .into(holder.imageView)
         holder.content.text = currentArticle.content
         holder.itemView.setOnClickListener {
@@ -37,6 +38,7 @@ class ArticleListAdapter(private val articleList: List<ArticlesItem>) :
             intent.putExtra(DetailArticleActivity.ARTICLE_KEY, currentArticle)
             it.context.startActivity(intent)
         }
+        Log.d("tess", currentArticle.toString())
     }
 
     override fun getItemCount(): Int {
