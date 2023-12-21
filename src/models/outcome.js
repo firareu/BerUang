@@ -20,6 +20,7 @@ const addOutcome = async (outcomeData) => {
     category: outcomeData.category,
     description: outcomeData.description,
     userId: outcomeData.userId,
+    allocationId: outcomeData.allocationId
   });
   return outcomeRef.id;
 };
