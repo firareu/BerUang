@@ -35,7 +35,7 @@ class ListArticleActivity : AppCompatActivity() {
     private fun setupAdapter() {
         viewModel.articleList.observe(this) { articles ->
             // Update the RecyclerView adapter with the new list of articles
-            val adapter = ArticleListAdapter(articles)
+            val adapter = ArticleListAdapter()
             binding.rvArticle.adapter = adapter
             binding.rvArticle.layoutManager =
                 LinearLayoutManager(this)

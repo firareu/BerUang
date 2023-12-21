@@ -8,6 +8,7 @@ import com.capstone.beruang.data.response.LoginResponse
 import com.capstone.beruang.data.response.RegisterResponse
 import com.capstone.beruang.data.response.SalaryResponse
 import com.capstone.beruang.data.response.article.ArticleResponse
+import com.capstone.beruang.data.response.article.NewsResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -88,5 +89,8 @@ interface ApiService {
 
     @POST("auth/register")
     suspend fun registerUser(@Body requestBody: RequestBody): Response<RegisterResponse>
+
+    @GET("recommend")
+    suspend fun getNews(): Response<NewsResponse>
 
 }

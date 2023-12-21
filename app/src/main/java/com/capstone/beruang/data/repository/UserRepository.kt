@@ -6,19 +6,29 @@ import com.capstone.beruang.data.retrofit.ApiConfig3
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 
-class UserRepository (private val preferenceManager: PreferenceManager) {
+class UserRepository(
+
+    private val preferenceManager: PreferenceManager
+) {
 
     private val apiService = ApiConfig3.getApiService()
 
     fun isUserLoggedIn(): Boolean {
         return preferenceManager.getBoolean(PreferenceManager.KEY_IS_USER_LOGGED_IN, false)
     }
+
     fun logoutUser() {
         preferenceManager.putBoolean(PreferenceManager.KEY_IS_USER_LOGGED_IN, false)
     }
 
 
-    suspend fun registerUser(name: String, email: String, password: String, dob: String, gender: String): RegisterResponse? {
+    suspend fun registerUser(
+        name: String,
+        email: String,
+        password: String,
+        dob: String,
+        gender: String
+    ): RegisterResponse? {
         val requestBody = RequestBody.create(
             "application/json".toMediaTypeOrNull(),
             """
@@ -47,6 +57,7 @@ class UserRepository (private val preferenceManager: PreferenceManager) {
             null
         }
     }
+
     suspend fun loginUser(email: String, password: String): LoginResponse? {
         val requestBody = RequestBody.create(
             "application/json".toMediaTypeOrNull(),
@@ -70,4 +81,17 @@ class UserRepository (private val preferenceManager: PreferenceManager) {
         }
     }
 
+    companion object {
+        @Volatile
+        private var instance: UserRepository? = null
+        fun getInstance(preferenceManager: PreferenceManager): UserRepository =
+            instance ?: synchronized(this) {
+                instance ?: UserRepository(preferenceManager)
+            }.also { instance = it }
+
+        fun refreshRepository() {
+            instance = null
+        }
+
+    }
 }
