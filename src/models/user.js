@@ -30,7 +30,10 @@ const getUser = async () => {
   if (userDoc) {
     let userData = [];
     userDoc.forEach((doc) => {
-      userData.push(doc.data());
+      userData.push({
+        userId: doc.id,
+        ...doc.data(),
+      });
     });
     return userData;
   } else {

@@ -29,7 +29,10 @@ const getOutcome = async (userId) => {
   if (outcomeDoc.size > 0) {
     let outcomeData = [];
     outcomeDoc.forEach((doc) => {
-      outcomeData.push(doc.data());
+      outcomeData.push({
+        outcomeId: doc.id,
+        ...doc.data(),
+      });
     });
     return outcomeData;
   } else {

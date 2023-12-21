@@ -28,7 +28,10 @@ const getAllocation = async (userId) => {
   if (allocationDoc.size > 0) {
     let allocationData = [];
     allocationDoc.forEach((doc) => {
-      allocationData.push(doc.data());
+      allocationData.push({
+        allocationId: doc.id,
+        ...doc.data(),
+      });
     });
     return allocationData;
   } else {

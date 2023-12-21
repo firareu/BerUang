@@ -39,9 +39,7 @@ const getIncomeById = async (req, res) => {
     if (!incomeId) {
       return res.status(400).json({ error: 'Income ID is missing in the request' });
     }
-    
     const income = await getIncomeByIdModel(incomeId);
-    console.log("this shud be income get by id", income)
     if (income) {
       res.status(200).json({ income });
     } else {

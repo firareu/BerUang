@@ -27,11 +27,15 @@ const getIncome = async (userId) => {
   if (incomeDoc.size > 0) {
     let incomeData = [];
     incomeDoc.forEach((doc) => {
-      incomeData.push(doc.data());
+      incomeData.push({
+        incomeId: doc.id,
+        ...doc.data(),
+      });
     });
     return incomeData;
   } else {
     console.log("Income not found");
+    return [];
   }
 };
 
