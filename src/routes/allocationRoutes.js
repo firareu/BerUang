@@ -6,7 +6,7 @@ const allocationController = require('../controllers/allocationController');
 router.post('/add', allocationController.addAllocation);
 
 //GET ALL Allocation by userId
-router.get('/', allocationController.getAllocation);
+router.get('/:userId', allocationController.getAllocation);
 // GET Allocation by allocationId
 router.get('/:allocationId', allocationController.getAllocationById);
 

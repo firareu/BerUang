@@ -20,7 +20,7 @@ const outcomeRoutes = require('./src/routes/outcomeRoutes');
 const allocationRoutes = require('./src/routes/allocationRoutes');
 
 app.use(bodyParser.json());
-app.use(express.json());
+// app.use(express.json());
 
 // Routes
 app.use('/auth', authRoutes);

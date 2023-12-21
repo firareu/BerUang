@@ -19,7 +19,7 @@ const addIncome = async (req, res) => {
 // GET ALL
 const getIncome = async (req, res) => {
   try {
-    const userId = req.body.userId
+    const userId = req.params.userId
     const income = await getIncomeModel(userId);
     if (income.length > 0) {
       res.status(200).json({ income });

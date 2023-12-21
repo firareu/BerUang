@@ -6,7 +6,7 @@ const outcomeController = require('../controllers/outcomeController');
 router.post('/add', outcomeController.addOutcome);
 
 //GET ALL Outcome by userId
-router.get('/', outcomeController.getOutcome);
+router.get('/:userId', outcomeController.getOutcome);
 // GET Outcome by outcomeId
 router.get('/:outcomeId', outcomeController.getOutcomeById);
 

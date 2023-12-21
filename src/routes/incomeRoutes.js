@@ -6,7 +6,7 @@ const incomeController = require('../controllers/incomeController');
 router.post('/add', incomeController.addIncome);
 
 //GET ALL Income by userId
-router.get('/', incomeController.getIncome);
+router.get('/:userId', incomeController.getIncome);
 // GET Income by incomeId
 router.get('/:incomeId', incomeController.getIncomeById);
 

@@ -21,7 +21,7 @@ const addOutcome = async (req, res) => {
 // GET ALL
 const getOutcome = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const outcome = await getOutcomeModel(userId);
     if (outcome.length > 0) {
       res.status(200).json({ outcome });

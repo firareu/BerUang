@@ -17,7 +17,7 @@ const addIncome = async (incomeData) => {
   const incomeRef = await incomesCollection.add({
     salary: incomeData.salary,
     date: incomeData.date,
-    userId: incomeData.userId,
+    userId: incomeData.userId
   });
   return incomeRef.id;
 };
@@ -37,7 +37,6 @@ const getIncome = async (userId) => {
 
 const getIncomeById = async (incomeId) => {
   const incomeDoc = await db.collection("incomes").doc(incomeId).get();
-  // console.log("incomeDoc", incomeDoc);
   if (incomeDoc.exists) {
     const incomeData = incomeDoc.data();
     return incomeData;

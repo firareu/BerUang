@@ -6,7 +6,7 @@ const userController = require('../controllers/userController');
 router.post('/create', userController.createUser);
 
 // GET
-router.get('/', userController.getUser)
+router.get('/:userId', userController.getUser)
 router.get('/:userId', userController.getUserById);
 
 // PUT

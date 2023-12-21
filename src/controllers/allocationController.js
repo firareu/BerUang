@@ -21,7 +21,7 @@ const {
   // GET ALL
   const getAllocation = async (req, res) => {
     try {
-      const userId = req.body.userId;
+      const userId = req.params.userId;
       const allocation = await getAllocationModel(userId);
       if (allocation.length > 0) {
         res.status(200).json({ allocation });
