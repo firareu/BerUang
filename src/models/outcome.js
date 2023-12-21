@@ -32,6 +32,7 @@ const getOutcome = async (userId) => {
     outcomeDoc.forEach((doc) => {
       outcomeData.push({
         outcomeId: doc.id,
+        allocationId: doc.data().allocationId,
         ...doc.data(),
       });
     });
@@ -44,7 +45,11 @@ const getOutcome = async (userId) => {
 const getOutcomeById = async (outcomeId) => {
   const outcomeDoc = await db.collection("outcomes").doc(outcomeId).get();
   if (outcomeDoc.exists) {
-    const outcomeData = outcomeDoc.data();
+    const outcomeData = {
+      outcomeId: outcomeDoc.id,
+      allocationId: outcomeDoc.data().allocationId,
+      ...outcomeDoc.data(), 
+    };
     return outcomeData;
   } else {
     console.log("Oucome not found");
