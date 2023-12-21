@@ -63,8 +63,6 @@ class HomeFragment : Fragment() {
             try {
                 val response = apiService.getUserData(userId)
                 val user = response.user
-                Log.d("userwoe", response.toString())
-                Log.d("userwoe", user.toString())
                 val tvUsername = view.findViewById<TextView>(R.id.tv_username)
                 tvUsername.text = user.name
                 context?.let {

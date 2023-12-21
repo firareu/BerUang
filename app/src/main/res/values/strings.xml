@@ -154,5 +154,7 @@
     <string name="gender">Gender</string>
     <string name="date_of_birth_hint">Input your birthday</string>
     <string name="date_of_birth">Birthday</string>
+    <string name="status">Status</string>
+    <string name="statusdetail">Selamat! Pengeluaran Anda saat ini berada dalam batas yang aman. Tetap pertahankan pengelolaan keuangan yang baik.</string>
 
 </resources>

@@ -99,18 +99,37 @@
         android:layout_marginEnd="8dp"
         android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/linechart"
-        android:background="@color/white"
+        android:background="@drawable/squarestroke"
         tools:ignore="MissingConstraints" />
-    <ImageView
+    <TextView
         android:id="@+id/iv_textstatus"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="12dp"
+        android:text="@string/status"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_medium"
+        android:textStyle="bold"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/iv_status"
         app:layout_constraintBottom_toBottomOf="@id/iv_status"
         android:background="@color/blue_700"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/tv_status"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="10sp"
+        android:maxLines="3"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_status"
+        app:layout_constraintStart_toEndOf="@+id/iv_textstatus"
+        app:layout_constraintTop_toTopOf="@+id/iv_status"
+        android:text="@string/statusdetail"/>
     <TextView
         android:id="@+id/tv_date_month"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
@@ -132,7 +151,6 @@
         android:layout_marginTop="16dp"
         android:textSize="12sp"
         android:transitionName="description"
-        android:paddingStart="12dp"
         app:layout_constraintStart_toStartOf="@id/linechart"
         app:layout_constraintTop_toBottomOf="@id/iv_status"
         tools:ignore="MissingConstraints,RtlSymmetry" />
