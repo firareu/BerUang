@@ -39,11 +39,8 @@ const getOutcomeById = async (req, res) => {
   try {
     const outcomeId = req.params.outcomeId;
     if (!outcomeId) {
-      return res
-        .status(400)
-        .json({ error: "Outcome ID is missing in the request" });
+      return res.status(400).json({ error: "Outcome ID is missing in the request" });
     }
-
     const outcome = await getOutcomeByIdModel(outcomeId);
     if (outcome) {
       res.status(200).json({ outcome });
