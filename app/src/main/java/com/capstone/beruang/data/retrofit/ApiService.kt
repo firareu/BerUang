@@ -1,12 +1,12 @@
 package com.capstone.beruang.data.retrofit
 
-import com.capstone.beruang.data.response.AllocationResponse
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.allocation.AllocationResponse
 import com.capstone.beruang.data.response.LoginResponse
-import com.capstone.beruang.data.response.OutcomeResponse
+import com.capstone.beruang.data.response.outcome.OutcomeResponse
 import com.capstone.beruang.data.response.RegisterResponse
-import com.capstone.beruang.data.response.SalaryResponse
 import com.capstone.beruang.data.response.TagResponse
+import com.capstone.beruang.data.response.UserResponse
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.data.response.article.ArticleResponse
 import com.capstone.beruang.data.response.income.IncomeResponse
 import okhttp3.RequestBody
@@ -19,18 +19,18 @@ interface ApiService {
     suspend fun getTags(): List<TagResponse>
 
     //mengambil seluruh data alokasi
-    @GET("allocations")
-    suspend fun getAllAllocations(): AllocationResponse
+    @GET("allocations/user/{userId}")
+    suspend fun getAllAllocations(@Path("userId") userId: String): AllocationResponse
 
     // Menambahkan data alokasi
     @POST("allocations")
-    suspend fun addAllocation(@Body allocation: ListAllocationItem): AllocationResponse
+    suspend fun addAllocation(@Body allocation: AllocationItem): AllocationResponse
 
     // Memperbarui data alokasi berdasarkan ID
     @PUT("allocations/{id}")
     suspend fun updateAllocation(
         @Path("id") id: Int,
-        @Body allocation: ListAllocationItem
+        @Body allocation: AllocationItem
     ): AllocationResponse
 
     // Menghapus data alokasi berdasarkan ID
@@ -42,23 +42,24 @@ interface ApiService {
     suspend fun getSalary(@Query("date") date: String, @Query("userId") userId: String): IncomeResponse
 
 */
-    @GET("incomes")
-    suspend fun getSalary(@Query("userId") userId: String): IncomeResponse
+    @GET("incomes/user/{userId}")
+    suspend fun getSalary(@Path("userId") userId: String): IncomeResponse
+
 
     // Membuat data baru dengan informasi id, salary, dan date (bulan)
     @POST("incomes/create")
-    suspend fun createOrUpdateSalary(@Body updatedSalary: SalaryResponse): SalaryResponse
+    suspend fun createOrUpdateSalary(@Body updatedSalary: IncomeResponse):  IncomeResponse
 
     // Memperbarui data berdasarkan tanggal (bulan)
     @PUT("incomes/update/{date}")
     suspend fun updateSalaryByDate(
         @Path("date") date: String,
-        @Body updatedSalary: SalaryResponse
-    ): SalaryResponse
+        @Body updatedSalary:  IncomeResponse
+    ):  IncomeResponse
 
     // Mendapatkan data kategori
-    @GET("outcomes")
-    suspend fun getOutcome(): OutcomeResponse
+    @GET("outcomes/user/{userId}")
+    suspend fun getOutcome(@Path("userId") userId: String): OutcomeResponse
 
     // Membuat data outcomes baru
     @POST("outcomes")
@@ -86,5 +87,9 @@ interface ApiService {
 
     @POST("auth/register")
     suspend fun registerUser(@Body requestBody: RequestBody): Response<RegisterResponse>
+
+    @GET("users/{userId}")
+    suspend fun getUserData(@Path("userId") userId: String): UserResponse
+
 
 }

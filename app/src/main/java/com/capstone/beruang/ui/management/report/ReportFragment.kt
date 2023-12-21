@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.capstone.beruang.R
 import com.capstone.beruang.databinding.FragmentReportBinding
 import com.capstone.beruang.ui.management.CalendarDateModel
 import java.text.SimpleDateFormat
@@ -32,8 +33,8 @@ class ReportFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        /*super.onViewCreated(view, savedInstanceState)
-        val firstChartEntity = ChartEntity(Color.WHITE, graph1)
+        super.onViewCreated(view, savedInstanceState)
+        /*val firstChartEntity = ChartEntity(Color.WHITE, graph1)
         val secondChartEntity = ChartEntity(Color.YELLOW, graph2)
 
         val list = ArrayList<ChartEntity>().apply {
@@ -44,7 +45,7 @@ class ReportFragment : Fragment() {
         val lineChart = root.findViewById<LineChart>(R.id.lineChart)
         lineChart.setLegend(legendArr)
         lineChart.setList(list)*/
-
+        setMoneyData()
         setUpAdapter()
         setUpClickListener()
         setUpCalendar()
@@ -156,6 +157,15 @@ class ReportFragment : Fragment() {
         //linechart.setViewPortOffsets(0f, 0f, 0f, 0f) //remove padding
         linechart.invalidate()
         linechart.animateXY(300, 300)*/
+    }
+
+    private fun setMoneyData() {
+        val num: Int? = null
+        //outcome
+        val TVMoney = getString(R.string.rupiah, num ?: 0)
+        binding.tvRpoutcomenow.text = TVMoney
+
+
     }
 
     override fun onDestroyView() {

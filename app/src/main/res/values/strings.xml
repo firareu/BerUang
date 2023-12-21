@@ -65,7 +65,11 @@
     <string name="profile">Profil Saya</string>
     <string name="emailuser">baesuzy@gmail.com</string>
     <string name="account">Akun</string>
+    <string name="editprofile">Edit Profile</string>
     <string name="lastseen">Terakhir Dilihat</string>
+    <string name="change">Ubah</string>
+    <string name="requirement">Gambar Profile Anda sebaiknya memiliki rasio 1:1 dan berukuran tidak lebih dari 10MB.</string>
+
 
     <!--   Article-->
     <string name="bookmarks">Bookmarks</string>
@@ -91,6 +95,7 @@
     <string name="date">tanggal</string>
     <string name="rupiah">Rp%d</string>
     <string name="rupiah2">Rp%f</string>
+    <string name="rupiah3">Rp%s</string>
     <string name="percent">%d%</string>
     <string name="percenttext">Persen</string>
     <string name="income">Pemasukkan</string>
@@ -130,7 +135,7 @@
     <string name="password_less">Your Password is Less than 8 Characters</string>
 
 
-<!--    Error-->
+    <!--    Error-->
     <string name="error">404 Not Found</string>
 
     <string name="article_page">Article</string>

@@ -1,17 +1,16 @@
 package com.capstone.beruang.data.response.income
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class IncomeResponse(
 
-	@field:SerializedName("data")
-	val data: List<Data?>? = null,
-
-	@field:SerializedName("status")
-	val status: String? = null
+	@field:SerializedName("income")
+	val income: List<IncomeItem?>? = null
 )
-
-data class Data(
+@Parcelize
+data class IncomeItem(
 
 	@field:SerializedName("date")
 	val date: String? = null,
@@ -24,4 +23,4 @@ data class Data(
 
 	@field:SerializedName("userId")
 	val userId: String? = null
-)
+): Parcelable

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ItemCategoryAllocationBinding
 import kotlinx.coroutines.CoroutineScope
@@ -13,10 +13,10 @@ import kotlinx.coroutines.launch
 
 class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<EditAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
-    private val allocationList = ArrayList<ListAllocationItem>()
+    private val allocationList = ArrayList<AllocationItem>()
 
 
-    fun submitList(allocations: List<ListAllocationItem>) {
+    fun submitList(allocations: List<AllocationItem>) {
         allocationList.clear()
         allocationList.addAll(allocations)
         notifyDataSetChanged()
@@ -72,16 +72,16 @@ class EditAdapter(private val apiService: ApiService) : RecyclerView.Adapter<Edi
             }
         }
 
-        fun bind(item: ListAllocationItem) {
+        fun bind(item: AllocationItem) {
             binding.edtNameallocation.setText(item.category)
-            binding.edtPercent.setText(item.percentage?.toString() ?: "")
+            binding.edtPercent.setText(item.precentage?.toString() ?: "")
             val totalText = itemView.context.getString(R.string.totalallocation, item.amount ?: "0")
             binding.tvTotal.text = totalText
         }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: ListAllocationItem)
+        fun onItemClicked(data: AllocationItem)
     }
 }
 

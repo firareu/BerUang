@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.AllocationItem
+import com.capstone.beruang.data.response.outcome.OutcomeItem
 import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ItemTypeAllocationBinding
 
 class DetailAllocationAdapter:
     RecyclerView.Adapter<DetailAllocationAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
-    private val allocationList = ArrayList<AllocationItem>()
+    private val allocationList = ArrayList<OutcomeItem>()
 
-    fun submitList(allocations: List<AllocationItem>) {
+    fun submitList(allocations: List<OutcomeItem>) {
         allocationList.clear()
         allocationList.addAll(allocations)
         notifyDataSetChanged()
@@ -43,15 +43,16 @@ class DetailAllocationAdapter:
     inner class ViewHolder(private val binding: ItemTypeAllocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: AllocationItem) {
+        fun bind(item: OutcomeItem) {
+            binding.tvDescription.setText(item.description)
             binding.tvAllocationtype.setText(item.category)
             binding.tvDate.setText(item.date)
-            val totalText = itemView.context.getString(R.string.totalallocation, item.amount ?: "0")
+            val totalText = itemView.context.getString(R.string.rupiah3, item.amount ?: "0")
             binding.tvRp.text = totalText
         }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: AllocationItem)
+        fun onItemClicked(data: OutcomeItem)
     }
 }

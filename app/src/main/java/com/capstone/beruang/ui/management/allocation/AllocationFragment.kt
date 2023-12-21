@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.ListAllocationItem
 import com.capstone.beruang.databinding.FragmentAllocationBinding
 import com.capstone.beruang.ui.management.allocation.detail.DetailAllocationActivity
 import com.capstone.beruang.ui.management.allocation.edit.EditActivity
@@ -30,6 +29,7 @@ import com.capstone.beruang.data.repository.UserRepository
 import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.ui.management.ManagementViewModel
 import com.capstone.beruang.data.repository.PreferenceManager
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -69,16 +69,54 @@ class AllocationFragment : Fragment() {
         setMoneyData()
         return root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        managementViewModel = ViewModelProvider(requireActivity()).get(ManagementViewModel::class.java)
+
+        viewModel = ViewModelProvider(requireActivity(), AllocationViewModelFactory.getInstance(requireActivity()))[AllocationViewModel::class.java]
+        viewModel.apiService = ApiConfig.getApiService()
+        // Set userId dan panggil method setSalary
+        userId = userRepository.getUserId().toString()
+        Log.d("AllocationFragment", userId)
+        managementViewModel.setErrorVisibility(View.GONE)
+        managementViewModel.setLoadingVisibility(View.GONE)
+        viewModel.allocations(userId).observe(viewLifecycleOwner) { allocationResponse ->
+            Log.d("check", allocationResponse.toString())
+            when (allocationResponse) {
+                is Result.Loading -> {
+                    Log.d("loading", allocationResponse.toString())
+                }
+                is Result.Success -> {
+                    Log.d("check2", allocationResponse.toString())
+                    allocationResponse.data?.allocation?.let { response ->
+                        if (!response.isEmpty()) {
+                            allocationAdapter.submitList(emptyList())
+                            setSalary(userId)
+                            setFragmentData(response as ArrayList<AllocationItem>)
+                        } else {
+//                            setSalary()
+                            /*managementViewModel.setErrorVisibility(View.GONE)
+                            managementViewModel.setLoadingVisibility(View.GONE)*/
+                        }
+                    }
+                }
+                is Result.Error -> {
+//                    managementViewModel.setErrorVisibility(View.VISIBLE)
+                    Log.d("error", allocationResponse.toString())
+                }
+            }
+        }
+    }
 
     private fun setSalary(userId: String) {
         lifecycleScope.launch {
-            try {
+            try{
                 val calendar = Calendar.getInstance()
                 val year = calendar.get(Calendar.YEAR)
                 val month = calendar.get(Calendar.MONTH) + 1
                 val currentDateString = "$year-$month"
 
-                viewModel.getSalaryFromApi(currentDateString, userId)
+                viewModel.getSalaryFromApi(userId, currentDateString)
 
                 viewModel.salary.observe(viewLifecycleOwner) { salary ->
                     salary?.let {
@@ -101,50 +139,6 @@ class AllocationFragment : Fragment() {
         }
     }
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        managementViewModel = ViewModelProvider(requireActivity()).get(ManagementViewModel::class.java)
-
-        viewModel = ViewModelProvider(requireActivity(), AllocationViewModelFactory.getInstance(requireActivity()))[AllocationViewModel::class.java]
-        viewModel.apiService = ApiConfig.getApiService()
-        managementViewModel.setLoadingVisibility(View.GONE)
-        // Set userId dan panggil method setSalary
-        userId = userRepository.getUserId().toString()
-        Log.d("AllocationFragment", userId)
-        setSalary(userId)
-
-        /*viewModel.allocations().observe(requireActivity()){ allocationResponse ->
-            Log.d("check", allocationResponse.toString())
-            when (allocationResponse) {
-                is Result.Loading -> {
-                    managementViewModel.setErrorVisibility(View.GONE)
-                    managementViewModel.setLoadingVisibility(View.VISIBLE)
-                    Log.d("loading", allocationResponse.toString())
-                }
-                is Result.Success -> {
-                    allocationResponse.data?.let { response ->
-                        val allocations = response.allocation
-                        if (allocations?.isEmpty()!!) {
-                            allocationAdapter.submitList(emptyList())
-                        } else {
-                            setSalary()
-                            setFragmentData(allocations as ArrayList<ListAllocationItem>)
-                            managementViewModel.setErrorVisibility(View.GONE)
-                            managementViewModel.setLoadingVisibility(View.GONE)
-                        }
-                    }
-                }
-                is Result.Error -> {
-                    managementViewModel.setErrorVisibility(View.VISIBLE)
-                    Log.d("error", allocationResponse.toString())
-                }
-            }
-
-        }*/
-    }
-
     private fun setUserData() {
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -152,7 +146,7 @@ class AllocationFragment : Fragment() {
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = allocationAdapter
         allocationAdapter.setOnItemClickCallback(object : AllocationAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: ListAllocationItem) {
+            override fun onItemClicked(data: AllocationItem) {
                 val intent = Intent(requireContext(), DetailAllocationActivity::class.java)
                 intent.putExtra(DetailAllocationActivity.KEY_CONTENT, data)
                 startActivity(intent)
@@ -174,21 +168,14 @@ class AllocationFragment : Fragment() {
         val TVMoney = getString(R.string.rupiah, num ?: 0)
         binding.tvMoney.text = TVMoney
 
-        //sisa keuangan
-        /*val RestMoney = getString(R.string.rupiah, num ?: 0)
-        binding.tvRestmoney.text = RestMoney
-
-        //pengeluaran saat ini
-        val SpendingMoney = getString(R.string.rupiah, num ?: 0)
-        binding.tvSpendingmoney.text = SpendingMoney*/
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setFragmentData(allocations: ArrayList<ListAllocationItem>) {
+    fun setFragmentData(allocations: ArrayList<AllocationItem>) {
         piechart(allocations)
         setMoneyData()
-        viewModel.allocations().observe(viewLifecycleOwner) { allocation ->
+        viewModel.allocations(userId).observe(viewLifecycleOwner) { allocation ->
             if (allocation != null) {
                 allocationAdapter.submitList(allocations)
                 allocationAdapter.notifyDataSetChanged()
@@ -196,11 +183,11 @@ class AllocationFragment : Fragment() {
         }
     }
 
-    private fun piechart(allocations: ArrayList<ListAllocationItem>) {
+    private fun piechart(allocations: ArrayList<AllocationItem>) {
         val list: ArrayList<PieEntry> = ArrayList()
-
+        Log.d("piechart", list.toString())
         for (allocation in allocations) {
-            allocation.percentage?.let {
+            allocation.precentage?.let {
                 list.add(PieEntry(it, allocation.category))
             }
         }

@@ -10,10 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.repository.PreferenceManager
+import com.capstone.beruang.data.repository.UserRepository
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.data.retrofit.ApiService
-//import com.capstone.beruang.data.retrofit.ApiServiceFactory
 import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.allocation.AllocationAdapter
 import com.capstone.beruang.ui.management.allocation.AllocationViewModel
@@ -28,16 +29,19 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     private lateinit var editViewModel: EditViewModel
     private lateinit var apiService: ApiService
     private lateinit var adapter: EditAdapter
-    private val allocationAdapter: AllocationAdapter = AllocationAdapter()
+//    private val allocationAdapter: AllocationAdapter = AllocationAdapter()
+    private val userRepository: UserRepository by lazy {
+        UserRepository(PreferenceManager.getInstance(this))
+    }
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
-
+//        userId = intent.getStringExtra("USER_ID") ?: ""
         apiService = ApiConfig.getApiService()
         editViewModel.apiService = apiService
 
@@ -45,8 +49,9 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         binding.rvAllocation.layoutManager = LinearLayoutManager(this)
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = adapter
-
-        getAndSetSalary()
+        editViewModel.apiService = ApiConfig.getApiService()
+        userId = userRepository.getUserId().toString()
+        getAndSetSalary(userId)
         setUpRecyclerView()
         loadDataFromApi()
         setupAction()
@@ -63,7 +68,7 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
             }
         }
     }
-    private fun getAndSetSalary() {
+    private fun getAndSetSalary(userId: String) {
         lifecycleScope.launch {
             try {
                 val calendar = Calendar.getInstance()
@@ -71,7 +76,7 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
                 val month = calendar.get(Calendar.MONTH) + 1
                 val currentDateString = "$year-$month"
 
-                editViewModel.getSalaryFromApi(currentDateString)
+                editViewModel.getSalaryFromApi(userId, currentDateString)
 
                 // Dapatkan nilai gaji dari LiveData _salary
                 editViewModel.salary.observe(this@EditActivity) { salary ->
@@ -93,15 +98,12 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
     private fun loadDataFromApi() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = apiService.getAllAllocations()
-                if (!response.error!!) {
-                    val allocations = response.allocation.orEmpty().filterNotNull() // Menghapus nilai null dari list
+                userId = userRepository.getUserId().toString()
+                val response = apiService.getAllAllocations(userId)
+                val allocations = response.allocation.orEmpty().filterNotNull() // Menghapus nilai null dari list
 
-                    runOnUiThread {
-                        adapter.submitList(allocations)
-                    }
-                } else {
-                    Log.e("EditActivity", "Error fetching allocations: ${response.message}")
+                runOnUiThread {
+                    adapter.submitList(allocations)
                 }
             } catch (e: Exception) {
                 Log.e("EditActivity", "Error: ${e.message}")
@@ -150,170 +152,8 @@ class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
         })
     }
 
-    override fun onItemClicked(data: ListAllocationItem) {
-        val id = data.id
+    override fun onItemClicked(data: AllocationItem) {
+        val id = data.allocationId
 //        deleteAllocationFromApi(id)
     }
 }
-
-
-
-/*
-class EditActivity : AppCompatActivity(), EditAdapter.OnItemClickCallback {
-    private lateinit var binding: ActivityEditBinding
-    private lateinit var editViewModel: EditViewModel
-    private lateinit var adapter: EditAdapter
-    private lateinit var viewModel: AllocationViewModel
-    private lateinit var databaseHelper: DatabaseHelper
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityEditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
-        viewModel = ViewModelProvider(this).get(AllocationViewModel::class.java)
-        databaseHelper = DatabaseHelper(this)
-
-        setUpRecyclerView()
-        loadDataFromDatabase()
-        setupAction()
-    }
-    private fun addNewAllocation() {
-        val allocation = Allocation(
-            allocation_name = "",
-            percent = null,
-            total = null
-        )
-
-        // Menambahkan alokasi baru ke daftar yang ditampilkan oleh adapter
-        adapter.addAllocation(allocation)
-        adapter.notifyItemInserted(adapter.itemCount - 1)
-    }
-
-    private fun saveAllocationData() {
-        val edtNameAlokasi = findViewById<EditText>(R.id.edt_nameallocation)
-        val edtPersentase = findViewById<EditText>(R.id.edt_percent)
-
-        val namaAlokasi = edtNameAlokasi.text.toString()
-        val persentase = edtPersentase.text.toString()
-
-        val allocation = Allocation(
-            allocation_name = namaAlokasi,
-            percent = persentase.toFloatOrNull(),
-            total = null // Atur total ke null jika belum dihitung
-        )
-
-        val existingAllocations = viewModel.allocations.value
-
-        if (existingAllocations.isNullOrEmpty()) {
-            removeAllDataFromDatabaseAndSave(allocation)
-        } else {
-            val allocationsList = existingAllocations.toMutableList()
-            allocationsList.add(allocation)
-
-            saveAllocationToDatabase(allocationsList)
-        }
-    }
-    private fun navigateToAllocationFragment() {
-        val intentfav = Intent(this, AllocationFragment::class.java)
-        startActivity(intentfav)
-    }
-
-    private fun saveAllocationToDatabase(allocations: List<Allocation>) {
-        val db = databaseHelper.writableDatabase
-        db.beginTransaction()
-
-        try {
-            for (allocation in allocations) {
-                val values = ContentValues().apply {
-                    put(DatabaseContract.AllocationEntry.COLUMN_NAME, allocation.allocation_name)
-                    put(DatabaseContract.AllocationEntry.COLUMN_PERCENT, allocation.percent)
-                    put(DatabaseContract.AllocationEntry.COLUMN_TOTAL, allocation.total)
-                }
-
-                val newRowId = db.insert(DatabaseContract.AllocationEntry.TABLE_NAME, null, values)
-                Log.d("EditActivity", "New Row ID: $newRowId")
-            }
-            db.setTransactionSuccessful()
-        } catch (e: Exception) {
-            Log.e("EditActivity", "Error saving allocations to database: ${e.message}")
-        } finally {
-            db.endTransaction()
-        }
-    }
-
-    private fun removeAllDataFromDatabaseAndSave(allocation: Allocation) {
-        val db = databaseHelper.writableDatabase
-
-        db.delete(DatabaseContract.AllocationEntry.TABLE_NAME, null, null)
-
-        val values = ContentValues().apply {
-            put(DatabaseContract.AllocationEntry.COLUMN_NAME, allocation.allocation_name)
-            put(DatabaseContract.AllocationEntry.COLUMN_PERCENT, allocation.percent)
-            put(DatabaseContract.AllocationEntry.COLUMN_TOTAL, allocation.total)
-        }
-
-        val newRowId = db.insert(DatabaseContract.AllocationEntry.TABLE_NAME, null, values)
-        Log.d("EditActivity", "New Row ID: $newRowId")
-    }
-
-    private fun loadDataFromDatabase() {
-        viewModel.loadAllocationsFromDatabase(this)
-        viewModel.allocations.observe(this, { allocations ->
-            adapter.submitList(ArrayList(allocations))
-        })
-    }
-
-    private fun setUpRecyclerView() {
-        adapter = EditAdapter(databaseHelper)
-        val recyclerView: RecyclerView = findViewById(R.id.rv_Allocation)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter.setOnItemClickCallback(this)
-    }
-
-
-
-    override fun onItemClicked(data: Allocation) {
-        val id = data.id
-        val name = ""
-        val percent = ""
-
-        editViewModel.updateData(id, name, percent.toFloatOrNull() ?: 0f)
-        adapter.notifyDataSetChanged()
-
-    }
-
-    private fun setupAction() {
-        binding.tvAdd.setOnClickListener {
-            Log.d("EditActivity", "Button Add Clicked!")
-            addNewAllocation()
-        }
-        binding.btnSubmit.setOnClickListener {
-            Log.d("EditActivity", "Button Submit Clicked!")
-            saveAllocationData()
-//            navigateToAllocationFragment()
-            finish()
-        }
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
-
-        binding.edtSalary.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not needed
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val salary = binding.edtSalary.text.toString().toFloatOrNull() ?: 0f
-                adapter.updateSalary(salary)
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Not needed
-            }
-        })
-    }
-}*/
-

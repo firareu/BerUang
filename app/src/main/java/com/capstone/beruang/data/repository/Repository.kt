@@ -2,24 +2,24 @@ package com.capstone.beruang.data.repository
 
 import androidx.lifecycle.liveData
 import com.capstone.beruang.data.Result
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.data.retrofit.ApiService
 
 class Repository constructor(
     val apiService: ApiService
 ) {
 
-    fun getAllAllocations() = liveData {
+    fun getAllAllocations(userId: String) = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.getAllAllocations()
+            val response = apiService.getAllAllocations(userId)
             emit(Result.Success(response))
         } catch (e: Exception) {
             // Handle exceptions if necessary
         }
     }
 
-    fun addAllocation(allocation: ListAllocationItem) = liveData {
+    fun addAllocation(allocation: AllocationItem) = liveData {
         try {
             val response = apiService.addAllocation(allocation)
             emit(response)
@@ -28,7 +28,7 @@ class Repository constructor(
         }
     }
 
-    fun updateAllocation(id: Int, allocation: ListAllocationItem) = liveData {
+    fun updateAllocation(id: Int, allocation: AllocationItem) = liveData {
         try {
             val response = apiService.updateAllocation(id, allocation)
             emit(response)
@@ -46,6 +46,7 @@ class Repository constructor(
             // Handle exceptions if necessary
         }
     }
+
 
     companion object {
         @Volatile

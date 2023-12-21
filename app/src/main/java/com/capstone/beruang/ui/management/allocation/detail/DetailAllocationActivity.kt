@@ -1,23 +1,22 @@
 package com.capstone.beruang.ui.management.allocation.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.beruang.R
-import com.capstone.beruang.data.response.AllocationItem
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.repository.PreferenceManager
+import com.capstone.beruang.data.repository.UserRepository
+import com.capstone.beruang.data.response.allocation.AllocationItem
+import com.capstone.beruang.data.response.outcome.OutcomeItem
 import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.data.retrofit.ApiService
 import com.capstone.beruang.databinding.ActivityDetailAllocationBinding
-import com.capstone.beruang.databinding.ActivityEditBinding
 import com.capstone.beruang.ui.management.CalendarDateModel
-import com.capstone.beruang.ui.management.allocation.AllocationViewModel
-import com.capstone.beruang.ui.management.allocation.edit.EditAdapter
+import com.capstone.beruang.ui.management.allocation.add.AddOutcomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,17 +36,22 @@ class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.On
     private lateinit var adapter: DetailAllocationAdapter
     /*private lateinit var adapter: CalendarAdapter*/
     private val calendarList2 = ArrayList<CalendarDateModel>()
+    private val userRepository: UserRepository by lazy {
+        UserRepository(PreferenceManager.getInstance(this))
+    }
+    private lateinit var userId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailAllocationBinding.inflate(layoutInflater)
-
+        userId = userRepository.getUserId().toString()
         apiService = ApiConfig.getApiService() // Assuming ApiConfig.getApiService() is your way of getting ApiService instance
         viewModel = ViewModelProvider(this).get(DetailAllocationViewModel::class.java)
         viewModel.apiService = apiService // Set the apiService here
 
-        val data: ListAllocationItem? = intent.getParcelableExtra(KEY_CONTENT)
+        val data: AllocationItem? = intent.getParcelableExtra(KEY_CONTENT)
         if (data != null) {
-            val formattedPercent = String.format("%d %%", data.percentage?.toInt() ?: 0)
+            val formattedPercent = String.format("%d %%", data.precentage?.toInt() ?: 0)
             binding.tvPercent.text = formattedPercent
             binding.tvAllocationtype.text = data.category
 
@@ -55,8 +59,14 @@ class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.On
             binding.tvRpallocationtype.text = TVAmount
             Log.d("DetailAllocationActivity", "Received data: $data")
 
-            viewModel.fetchOutcomeData(data.category ?: "")
+            viewModel.fetchOutcomeData(data.category ?: "", userId)
+            val totaldata = viewModel.fetchTotalOutcomeData(data.category ?: "", userId)
             Log.d("DetailAllocationActivity", "Received data: $data.category")
+
+            viewModel.totalOutcomeData.observe(this, { totalOutcome ->
+                val TVMoney = getString(R.string.rupiah, totalOutcome ?: 0)
+                binding.tvRpoutcomenow.text = TVMoney
+            })
         }
 
         adapter = DetailAllocationAdapter()
@@ -71,27 +81,34 @@ class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.On
         renderLineChart()
 
         setUpRecyclerView()
-        loadDataFromApi()
+        loadDataFromApi(userId)
         viewModel.outcomeData.observe(this, { outcomeList ->
             adapter.submitList(outcomeList)
         })
+        setMoneyData()
 
     }
 
-    private fun loadDataFromApi() {
+    private fun loadDataFromApi(userId: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = apiService.getOutcome()
-                if (!response.error!!) {
-                    val allocations = response.allocation.orEmpty().filterNotNull() // Menghapus nilai null dari list
+                val response = apiService.getOutcome(userId)
+                val allocations = response.outcome.orEmpty().filterNotNull() // Menghapus nilai null dari list
                     // Hapus pemanggilan adapter.submitList(allocations) dari sini
-                } else {
-                    Log.e("EditActivity", "Error fetching allocations: ${response.message}")
-                }
+
             } catch (e: Exception) {
                 Log.e("EditActivity", "Error: ${e.message}")
             }
         }
+    }
+
+    private fun setMoneyData() {
+        val num: Int? = null
+        //outcome
+        val TVMoney = getString(R.string.rupiah, num ?: 0)
+        binding.tvRpoutcomenow.text = TVMoney
+
+
     }
 
     private fun setUpRecyclerView() {
@@ -132,6 +149,7 @@ class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.On
                 setUpCalendar()
         }
     }
+
 
     fun renderLineChart() {
         /*val csvDataset = Dataset(context = applicationContext)
@@ -195,15 +213,18 @@ class DetailAllocationActivity : AppCompatActivity(), DetailAllocationAdapter.On
         binding.btnBack.setOnClickListener {
             finish()
         }
-
+        binding.tvAdd.setOnClickListener {
+            val intentEdit = Intent(this, AddOutcomeActivity::class.java)
+            startActivity(intentEdit)
+        }
     }
 
     companion object {
         const val KEY_CONTENT = "content"
     }
 
-    override fun onItemClicked(data: AllocationItem) {
-        val id = data.id
+    override fun onItemClicked(data: OutcomeItem) {
+        val id = data.userId
 //        deleteAllocationFromApi(id)
     }
 }

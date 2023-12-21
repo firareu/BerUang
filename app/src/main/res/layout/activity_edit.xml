@@ -116,19 +116,6 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/tv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/add"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:layout_marginBottom="12dp"
-            android:textSize="14sp" />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,4 +135,19 @@
         </ScrollView>
 
     </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tv_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:foregroundGravity="bottom"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white"
+        app:backgroundTint="@color/black_200" />
 </androidx.constraintlayout.widget.ConstraintLayout>

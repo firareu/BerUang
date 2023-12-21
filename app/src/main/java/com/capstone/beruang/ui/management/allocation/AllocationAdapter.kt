@@ -3,13 +3,13 @@ package com.capstone.beruang.ui.management.allocation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.beruang.data.response.ListAllocationItem
+import com.capstone.beruang.data.response.allocation.AllocationItem
 import com.capstone.beruang.databinding.ItemAllocationBinding
 
 class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
-    private val allocationList = ArrayList<ListAllocationItem>()
-    fun submitList(allocations: List<ListAllocationItem>) {
+    private val allocationList = ArrayList<AllocationItem>()
+    fun submitList(allocations: List<AllocationItem>) {
         allocationList.clear()
         allocationList.addAll(allocations)
         notifyDataSetChanged()
@@ -32,8 +32,8 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemAllocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(allocation: ListAllocationItem) {
-            val formattedPercent = String.format("%d %%", allocation.percentage?.toInt() ?: 0)
+        fun bind(allocation: AllocationItem) {
+            val formattedPercent = String.format("%d %%", allocation.precentage?.toInt() ?: 0)
             // Set teks pada TextView
             binding.tvPercent.text = formattedPercent
             binding.tvAllocationtype.text = allocation.category
@@ -47,6 +47,6 @@ class AllocationAdapter : RecyclerView.Adapter<AllocationAdapter.ViewHolder>() {
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: ListAllocationItem)
+        fun onItemClicked(data: AllocationItem)
     }
 }

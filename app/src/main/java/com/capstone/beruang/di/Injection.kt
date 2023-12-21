@@ -2,6 +2,7 @@ package com.capstone.beruang.di
 
 import android.content.Context
 import com.capstone.beruang.data.repository.Repository
+import com.capstone.beruang.data.repository.UserRepository
 import com.capstone.beruang.data.retrofit.ApiConfig
 
 object Injection {
