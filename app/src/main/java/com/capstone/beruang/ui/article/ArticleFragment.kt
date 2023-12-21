@@ -66,10 +66,10 @@ class ArticleFragment : Fragment() {
         binding.rvArticle.setHasFixedSize(true)
         viewModel.articleList.observe(viewLifecycleOwner) { articles ->
             val rowAdapter = RowAdapter(articles)
-            val articleListAdapter = ArticleListAdapter()
+            val articleListAdapter = ArticleListAdapter(articles)
             binding.rvRow.adapter = rowAdapter
             binding.rvArticle.adapter = articleListAdapter
-            articleListAdapter.addArticle(articles)
+//            articleListAdapter.addArticle(articles)
             Log.d("Testt", articleList.size.toString())
             Log.d("tess", rowAdapter.itemCount.toString())
             Log.d("tess", articleListAdapter.itemCount.toString())
@@ -120,13 +120,14 @@ class ArticleFragment : Fragment() {
             if (isChecked) {
                 // Filter articles based on the selected category
                 val filteredArticles = viewModel.articleList.value?.filter { it.category == chip.text.toString() }
-//                binding.rvArticle.adapter = ArticleListAdapter(filteredArticles.orEmpty())
+                binding.rvArticle.adapter = ArticleListAdapter(filteredArticles.orEmpty())
             } else {
                 // Reset the adapter to the original list when the chip is unchecked
-//                binding.rvArticle.adapter = ArticleListAdapter(viewModel.articleList.value.orEmpty())
+                binding.rvArticle.adapter = ArticleListAdapter(viewModel.articleList.value.orEmpty())
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

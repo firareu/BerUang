@@ -10,14 +10,9 @@ import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.databinding.ArticleViewBinding
 import com.capstone.beruang.ui.article.detail.DetailArticleActivity
 
-class ArticleListAdapter() :
+class ArticleListAdapter(private val articleList: List<NewsResponseItem>) :
     RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
-    private val articleList: MutableList<NewsResponseItem> = mutableListOf()
 
-    fun addArticle(article: List<NewsResponseItem>){
-        articleList.addAll(article)
-        notifyDataSetChanged()
-    }
     class ArticleViewHolder(binding: ArticleViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val titleTextView = binding.titleArticle

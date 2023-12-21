@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         val dataArticle = ArticleData.articleList.take(5)
         viewModel.articleList.observe(viewLifecycleOwner) { articles ->
             // Update the RecyclerView adapter with the new list of articles
-            val adapter = ArticleListAdapter()
+            val adapter = ArticleListAdapter(articles)
             binding.rvArticlelist.adapter = adapter
             binding.rvArticlelist.layoutManager =
                 LinearLayoutManager(requireContext())
