@@ -38,8 +38,12 @@ interface ApiService {
     suspend fun deleteAllocation(@Path("id") id: Int): Unit
 
     // Mendapatkan data gaji
-    @GET("incomes")
+    /*@GET("incomes")
     suspend fun getSalary(@Query("date") date: String, @Query("userId") userId: String): IncomeResponse
+
+*/
+    @GET("incomes")
+    suspend fun getSalary(@Query("userId") userId: String): IncomeResponse
 
     // Membuat data baru dengan informasi id, salary, dan date (bulan)
     @POST("incomes/create")

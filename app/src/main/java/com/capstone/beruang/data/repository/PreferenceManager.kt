@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 class PreferenceManager private constructor(context: Context) {
 
     companion object {
+        const val KEY_USER_ID = "user_id"
         private const val PREFS_NAME = "MyAppPrefs"
         const val KEY_IS_USER_LOGGED_IN = "isUserLoggedIn"
 
@@ -28,12 +29,35 @@ class PreferenceManager private constructor(context: Context) {
     fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         return sharedPreferences.getBoolean(key, defaultValue)
     }
+    /*fun setUserLoggedIn(isLoggedIn: Boolean) {
+        putBoolean(KEY_IS_USER_LOGGED_IN, isLoggedIn)
+    }
+    // Add more methods as needed
+    fun getString(key: String, defaultValue: String?): String? {
+        return sharedPreferences.getString(key, defaultValue)
+    }
+    *//*fun clearPreferences() {
+        sharedPreferences.edit().clear().apply()
+    }*/
+
     fun setUserLoggedIn(isLoggedIn: Boolean) {
         putBoolean(KEY_IS_USER_LOGGED_IN, isLoggedIn)
     }
     // Add more methods as needed
-
     fun clearPreferences() {
         sharedPreferences.edit().clear().apply()
     }
+
+    fun putString(key: String, value: String?) {
+        sharedPreferences.edit().putString(key, value).apply()
+    }
+
+    fun getUid(): String? {
+        return sharedPreferences.getString(KEY_USER_ID, null)
+    }
+
+    fun setUid(uid: String?) {
+        putString(KEY_USER_ID, uid)
+    }
+
 }

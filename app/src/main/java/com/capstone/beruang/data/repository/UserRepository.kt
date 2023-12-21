@@ -5,6 +5,7 @@ import com.capstone.beruang.data.response.RegisterResponse
 import com.capstone.beruang.data.retrofit.ApiConfig3
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import retrofit2.http.Body
 
 class UserRepository (private val preferenceManager: PreferenceManager) {
 
@@ -17,6 +18,9 @@ class UserRepository (private val preferenceManager: PreferenceManager) {
         preferenceManager.putBoolean(PreferenceManager.KEY_IS_USER_LOGGED_IN, false)
     }
 
+    fun getUserId(): String? {
+        return preferenceManager.getUid()
+    }
 
     suspend fun registerUser(name: String, email: String, password: String, dob: String, gender: String): RegisterResponse? {
         val requestBody = RequestBody.create(
@@ -52,13 +56,18 @@ class UserRepository (private val preferenceManager: PreferenceManager) {
             "application/json".toMediaTypeOrNull(),
             "{\"email\":\"$email\",\"password\":\"$password\"}"
         )
-
         return try {
             val response = apiService.loginUser(requestBody)
 
             if (response.isSuccessful) {
-                preferenceManager.setUserLoggedIn(true)
-                response.body()
+                /*preferenceManager.setUserLoggedIn(true)
+                response.body()*/
+                val loginResponse = response.body()
+                loginResponse?.userId?.let { uid ->
+                    preferenceManager.setUid(uid) // Simpan UID ke PreferenceManager
+                    preferenceManager.setUserLoggedIn(true)
+                }
+                loginResponse // Mengembalikan LoginResponse
             } else {
                 // Handle login error
                 null

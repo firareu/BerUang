@@ -1,5 +1,6 @@
 package com.capstone.beruang.ui.management.allocation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +23,7 @@ class AllocationViewModel(private val repository: Repository) : ViewModel() {
     val salary: LiveData<Float>
         get() = _salary
 
-    suspend fun getSalaryFromApi(date: String, userId: String) {
+    /*suspend fun getSalaryFromApi(date: String, userId: String) {
         viewModelScope.launch {
             try {
                 val incomeResponse = apiService.getSalary(date, userId)
@@ -32,7 +33,68 @@ class AllocationViewModel(private val repository: Repository) : ViewModel() {
 
             }
         }
+    }*/
+
+    /*suspend fun getSalaryFromApi(date: String, userId: String) {
+        viewModelScope.launch {
+            try {
+                // Pastikan apiService telah diinisialisasi sebelum penggunaan
+                val incomeResponse = apiService.getSalary(date, userId)
+                Log.d("SalaryResponse", "Response: $incomeResponse")
+
+                val salary = incomeResponse.data?.salary ?: 0f
+                _salary.value = salary.toFloat()
+            } catch (e: Exception) {
+                Log.e("SalaryResponse", "Error fetching salary: ${e.message}")
+            }
+        }
+    }*/
+
+    /*suspend fun getSalaryFromApi(date: String, userId: String) {
+        viewModelScope.launch {
+            try {
+                // Pastikan apiService telah diinisialisasi sebelum penggunaan
+                val incomeResponse = apiService.getSalary(userId)
+                Log.d("SalaryResponse", "Response: $incomeResponse")
+
+                // Mengambil List<Data?>? dari IncomeResponse
+                val dataList = incomeResponse.data
+
+                // Menghitung total salary dari setiap Data di dalam dataList
+                val totalSalary = dataList?.sumOf { it?.salary ?: 0 } ?: 0f
+
+                // Mengubah totalSalary ke tipe Float dan menetapkannya ke _salary
+                _salary.value = totalSalary.toFloat()
+            } catch (e: Exception) {
+                Log.e("SalaryResponse", "Error fetching salary: ${e.message}")
+            }
+        }
+    }*/
+    suspend fun getSalaryFromApi(userId: String, date: String) {
+        viewModelScope.launch {
+            try {
+                // Pastikan apiService telah diinisialisasi sebelum penggunaan
+                val incomeResponse = apiService.getSalary(userId)
+                Log.d("SalaryResponse", "Response: $incomeResponse")
+
+                // Mengambil List<Data?>? dari IncomeResponse
+                val dataList = incomeResponse.data
+
+                // Filter dataList berdasarkan date yang diberikan
+                val filteredList = dataList?.filter { it?.date == date }
+
+                // Menghitung total salary dari setiap Data di dalam filteredList
+                val totalSalary = filteredList?.sumOf { it?.salary ?: 0 } ?: 0f
+
+                // Mengubah totalSalary ke tipe Float dan menetapkannya ke _salary
+                _salary.value = totalSalary.toFloat()
+            } catch (e: Exception) {
+                Log.e("SalaryResponse", "Error fetching salary: ${e.message}")
+            }
+        }
     }
+
+
 
 
     fun addAllocation(allocation: ListAllocationItem) {

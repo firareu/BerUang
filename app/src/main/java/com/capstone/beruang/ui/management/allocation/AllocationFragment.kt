@@ -1,7 +1,6 @@
 package com.capstone.beruang.ui.management.allocation
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -27,12 +26,10 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.capstone.beruang.data.Result
-import com.capstone.beruang.data.repository.PreferenceManager
 import com.capstone.beruang.data.repository.UserRepository
-import com.capstone.beruang.data.response.UserResponse
 import com.capstone.beruang.data.retrofit.ApiConfig
 import com.capstone.beruang.ui.management.ManagementViewModel
-import com.google.gson.Gson
+import com.capstone.beruang.data.repository.PreferenceManager
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -45,10 +42,12 @@ class AllocationFragment : Fragment() {
 
     private val allocationAdapter: AllocationAdapter = AllocationAdapter()
     private lateinit var managementViewModel: ManagementViewModel
+
     private val userRepository: UserRepository by lazy {
         UserRepository(PreferenceManager.getInstance(requireContext()))
     }
     private lateinit var userId: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,24 +70,57 @@ class AllocationFragment : Fragment() {
         return root
     }
 
+    private fun setSalary(userId: String) {
+        lifecycleScope.launch {
+            try {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val currentDateString = "$year-$month"
+
+                viewModel.getSalaryFromApi(currentDateString, userId)
+
+                viewModel.salary.observe(viewLifecycleOwner) { salary ->
+                    salary?.let {
+                        Log.e("salary1", salary.toString())
+
+                        val TVMoney = getString(R.string.rupiah, salary.toInt())
+                        Log.e("salary2", TVMoney)
+
+                        binding.tvMoney.text = TVMoney
+                    } ?: run {
+                        // Handle case when salary is null (no data available)
+                        val TVMoney = getString(R.string.rupiah, 0)
+                        binding.tvMoney.text = TVMoney
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("salary", "Error getting salary: ${e.message}")
+                // Handle error fetching salary (maybe show error message)
+            }
+        }
+    }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         managementViewModel = ViewModelProvider(requireActivity()).get(ManagementViewModel::class.java)
+
         viewModel = ViewModelProvider(requireActivity(), AllocationViewModelFactory.getInstance(requireActivity()))[AllocationViewModel::class.java]
+        viewModel.apiService = ApiConfig.getApiService()
+        managementViewModel.setLoadingVisibility(View.GONE)
+        // Set userId dan panggil method setSalary
+        userId = userRepository.getUserId().toString()
+        Log.d("AllocationFragment", userId)
+        setSalary(userId)
 
-        // Mendapatkan UserId dari UserRepository
-//        val userId = userRepository.getUserId()
-
-        // Gunakan userId sesuai kebutuhan di dalam AllocationFragment
-        // Misalnya, mencetak UserId
-//        Log.d("AllocationFragment", userId)
-//        setSalary(userId)
-        viewModel.allocations().observe(requireActivity()){ allocationResponse ->
+        /*viewModel.allocations().observe(requireActivity()){ allocationResponse ->
             Log.d("check", allocationResponse.toString())
             when (allocationResponse) {
                 is Result.Loading -> {
                     managementViewModel.setErrorVisibility(View.GONE)
-                    managementViewModel.setLoadingVisibility(View.GONE)
+                    managementViewModel.setLoadingVisibility(View.VISIBLE)
                     Log.d("loading", allocationResponse.toString())
                 }
                 is Result.Success -> {
@@ -97,8 +129,8 @@ class AllocationFragment : Fragment() {
                         if (allocations?.isEmpty()!!) {
                             allocationAdapter.submitList(emptyList())
                         } else {
-//                            setSalary()
-//                            setFragmentData(allocations as ArrayList<ListAllocationItem>)
+                            setSalary()
+                            setFragmentData(allocations as ArrayList<ListAllocationItem>)
                             managementViewModel.setErrorVisibility(View.GONE)
                             managementViewModel.setLoadingVisibility(View.GONE)
                         }
@@ -110,35 +142,7 @@ class AllocationFragment : Fragment() {
                 }
             }
 
-        }
-
-        val apiService = ApiConfig.getApiService()
-        viewModel.apiService = apiService
-    }
-
-    private fun setSalary(userId: String) {
-        lifecycleScope.launch {
-            try {
-                val calendar = Calendar.getInstance()
-                val year = calendar.get(Calendar.YEAR)
-                val month = calendar.get(Calendar.MONTH) + 1
-                val currentDateString = "$year-$month"
-                viewModel.getSalaryFromApi(currentDateString, userId)
-
-                viewModel.salary.observe(viewLifecycleOwner) { salary ->
-                    salary?.let {
-                        Log.e("salary1", salary.toString())
-
-                        val TVMoney = getString(R.string.rupiah, salary.toInt())
-                        Log.e("salary2", TVMoney)
-
-                        binding.tvMoney.text = TVMoney
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("salary", "Error getting salary: ${e.message}")
-            }
-        }
+        }*/
     }
 
     private fun setUserData() {
