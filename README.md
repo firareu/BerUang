@@ -46,7 +46,7 @@ $ gcloud run deploy --image gcr.io/[project-id-kalian]/bear-fire-article --platf
   6. Once the cloning process is complete, direct the terminal or command prompt to the Flask directory you just cloned.
  
   7. Build a local Docker container by running the following command:
-    ` docker build -t gcr.io/[PROJECT_ID]/bear-api-articles . `
+    ` docker build -t gcr.io/[PROJECT_ID]/beruang-api-article . `
      Replace [PROJECT_ID] with the Google Cloud Platform project ID that you specified previously.
     
   8. After the build process is complete, verify that the local Docker container is running by running the following command:
