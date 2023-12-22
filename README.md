@@ -114,7 +114,7 @@ You can check API Documentation in the following link.
 We build android applications for end users so that everyone can use our applications. The following is the application flow based on the Mockup.
 <details>
   <summary>Application Flowchart</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Flowchart%20FUTON.jpg"/>
+  <img src="https://github.com/firareu/BerUang/blob/MDFiraTL/md-mockup/BerUangFlow.jpg"/>
 </details>
 
 And this is the libraries we used to build the android application:
