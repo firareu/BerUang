@@ -202,9 +202,13 @@ Here is our application's Screenshot
   <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp2.jpg" width="24%" /> 
   <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp3.jpg" width="24%" />
   <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp4.jpg" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/List%20Tumbuhan.png" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/List%20Hewan.png" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Scan%20before.png" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Scan%20after.png" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp5.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp6.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp7.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp8.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp9.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp10.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp11.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp12.jpg" width="24%" />
 </p>
 
