@@ -19,6 +19,14 @@
 | Putri Dian Shafira | Mobile Development | a296bsx2745@bangkit.academy |
 | Abdurrahman Al Aufa | Mobile Development | a283bsy2381@bangkit.academy |
 
+### BerUang TEAM | Branch
+
+| Role | Branch
+|---------|---------|
+| Machine Learning | ML | 
+| Cloud Computing | api-artikel , backend-API |
+| Mobile Development | BerUang-App |
+
 ## Machine Learning
 ### Overview
 We create a machine learning that detect a lot of kinds of endangered species in Indonesia, and also categorized non-endanged species in one category.
@@ -103,7 +111,7 @@ You can check API Documentation in the following link.
 
 ### Overview
 
-We build an android application for end user so everyone can use our application. This is our [flowchart](https://drive.google.com/file/d/1IoWHeYlkkhACOg2P4lvqJZR6DIS1DcWK/view?usp=sharing) to explain how our app is work
+We build android applications for end users so that everyone can use our applications. The following is the application flow based on the Mockup.
 <details>
   <summary>Application Flowchart</summary>
   <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Flowchart%20FUTON.jpg"/>
@@ -114,6 +122,7 @@ And this is the libraries we used to build the android application:
 * [Glide](https://bumptech.github.io/glide/)
 * [RecyclerView](https://www.geeksforgeeks.org/android-recyclerview/)
 * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
+* 
 
 
 Here is our application's Screenshot
