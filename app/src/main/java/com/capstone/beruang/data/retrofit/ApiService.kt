@@ -83,6 +83,7 @@ interface ApiService {
     //Article
     @GET("/v2/top-headlines")
     fun getTopHeadlines(@QueryMap params: Map<String, String>): Call<ArticleResponse>
+
     @POST("auth/login") // Adjust the endpoint accordingly
     suspend fun loginUser(@Body requestBody: RequestBody): Response<LoginResponse>
 
@@ -94,5 +95,6 @@ interface ApiService {
 
     @GET("recommend")
     suspend fun getNews(): Response<List<NewsResponseItem>>
+
 
 }

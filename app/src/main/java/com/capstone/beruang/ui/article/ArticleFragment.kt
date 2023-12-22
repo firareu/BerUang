@@ -46,19 +46,6 @@ class ArticleFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
     }
 
-//    private fun setupAdapters() {
-////        setupRowAdapter()
-//        setupArticleAdapter()
-//    }
-
-//    private fun setupRowAdapter() {
-//        viewModel.articleList.observe(viewLifecycleOwner) { articles ->
-//            binding.rvRow.adapter = RowAdapter(articles)
-//            binding.rvArticle.adapter = ArticleListAdapter(articles)
-//            binding.rvRow.layoutManager =
-//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//        }
-//    }
 
     private fun setupArticleAdapter() {
         binding.rvArticle.layoutManager = LinearLayoutManager(requireContext())
@@ -169,4 +156,3 @@ class ArticleFragment : Fragment() {
         _binding = null
     }
 }
-

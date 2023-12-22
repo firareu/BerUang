@@ -19,7 +19,9 @@
             android:name=".ui.profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.management.allocation.add.AddOutcomeActivity"
+            android:name=".ui.management.allocation.add.AddOutcomeActivity"/>
+        <activity
+            android:name=".ui.welcome.SlidePageActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
