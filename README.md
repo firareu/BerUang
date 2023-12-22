@@ -5,19 +5,19 @@
   <img src="https://github.com/firareu/BerUang/blob/MDFiraTL/BerUang.png" width="400"/>
 </p>
   
-Futon is an application to classify endangered species in Indonesia. This application was made to make people easily recognized endangered species in Indonesia so that they will not miss clasify them and increase their awareness about endangered species around us.
+"BerUang" is a financial management application developed by our team to tackle the prevalent issue of online lending and poor financial decision-making. This app addresses the challenges by offering a monthly expense tracking feature that analyzes individual budgets, providing spending recommendations. Users receive notifications if they exceed predefined financial category budgets. Moreover, the app includes an article section that leverages machine learning to offer personalized financial guidance based on user behavior, enhancing financial planning capabilities. With these features, BerUang aims to empower users with better financial management practices and insightful guidance for improved monetary decision-making.
 
-Based on our research, Indonesian people have slightly low awareness about endangered species in Indonesia, and risking its species' existence. Based on that problem, we want to make an application and we call it FUTON, in hope that we can increase Indonesian people awareness about endangered species around us and help conservation areas to maintain their existence.
+### BerUang TEAM | CH2-PS111
 
-### FUTON TEAM | C22-PS317
-| Name | Role | Email | Branch
+| Name | Role | Email
 |---------|---------|---------|
-| Robbani Ariya Sena | Machine Learning | m2229f2109@bangkit.academy |
-| Raditya Farel Nashrullah | Machine Learning | m2004f0206@bangkit.academy |
-| Neola Tamarisa | Machine Learning | m2002g0080@bangkit.academy |
-| Risav Arrahman Firsttama | Cloud Computing | c2296f2510@bangkit.academy |
-| Muhammad Bintang Ardhiansyah | Cloud Computing | c7224w2083@bangkit.academy |
-| Fernadi Karim | Mobile Development | a7224w2081@bangkit.academy |
+| Ni Luh Ade Meina Rossalina | Machine Learning | m014bsx1813@bangkit.academy | 
+| Muhammad Akhsan Nurramdhan | Machine Learning | m267bsy1861@bangkit.academy |
+| Mutiq Anisa Tanjung | Machine Learning | m296bsx0487@bangkit.academy |
+| Lintang Arsa Naura | Cloud Computing | c227bsx3811@bangkit.academy |
+| Ferrari Romano | Cloud Computing | c227bsy4033@bangkit.academy |
+| Putri Dian Shafira | Mobile Development | a296bsx2745@bangkit.academy |
+| Abdurrahman Al Aufa | Mobile Development | a283bsy2381@bangkit.academy |
 
 ## Machine Learning
 ### Overview
