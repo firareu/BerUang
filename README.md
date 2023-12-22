@@ -24,7 +24,7 @@
 | Role | Branch
 |---------|---------|
 | Machine Learning | ML | 
-| Cloud Computing | ? |
+| Cloud Computing | api-artikel , backend-API |
 | Mobile Development | BerUang-App |
 
 ## Machine Learning
