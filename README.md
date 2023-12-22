@@ -25,7 +25,7 @@ This is the result of the dataset that we have processed:
 <h3> Model Result </h3>
 <details>
   <summary>Model Accuracy</summary>
-  <img src="https://github.com/firareu/BerUang/assets/125734108/c118ba4b-2890-480a-83da-1eeaa9c99386" width="500"/>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/0ad5ae40-5eef-4120-b9dd-cce9ef93dc8e" width="500"/>
 </details>
 
 <h3> Testing </h3>
@@ -35,7 +35,7 @@ This is the result of the dataset that we have processed:
 </details>
 <details>
   <summary>Testing for article category classification </summary>
-  <img src="![image](https://github.com/firareu/BerUang/assets/125734108/8126f520-5cb3-45d8-ab4e-fc34e4a39eaf)" width="500"/>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/728319f3-dd73-41ca-a236-5585ecff6fcf" width="500"/>
 </details>
 
 
