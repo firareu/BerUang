@@ -2,7 +2,7 @@
 > Manage Your Money With Us!
 
 <p align="center">
-  <img src="https://github.com/firareu/BerUang/blob/MDFiraTL/BerUang.png" width="400"/>
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/BerUang.png" width="400"/>
 </p>
   
 "BerUang" is a financial management application developed by our team to tackle the prevalent issue of online lending and poor financial decision-making. This app addresses the challenges by offering a monthly expense tracking feature that analyzes individual budgets, providing spending recommendations. Users receive notifications if they exceed predefined financial category budgets. Moreover, the app includes an article section that leverages machine learning to offer personalized financial guidance based on user behavior, enhancing financial planning capabilities. With these features, BerUang aims to empower users with better financial management practices and insightful guidance for improved monetary decision-making.
@@ -174,7 +174,7 @@ You can check API Documentation in the following link.
 We build android applications for end users so that everyone can use our applications. The following is the application flow based on the Mockup.
 <details>
   <summary>Application Flowchart</summary>
-  <img src="https://github.com/firareu/BerUang/blob/MDFiraTL/md-mockup/BerUangFlow.jpg"/>
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangFlow.jpg"/>
 </details>
 
 And this is the libraries we used to build the android application:
@@ -198,10 +198,10 @@ Pass: password123
 
 Here is our application's Screenshot
 <p float="left">
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Splash%20Screen.png" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Login.png" width="24%" /> 
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Register.png" width="24%" />
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Home.png" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp1.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp2.jpg" width="24%" /> 
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp3.jpg" width="24%" />
+  <img src="https://github.com/firareu/BerUang/blob/BerUang-App/md-mockup/BerUangApp4.jpg" width="24%" />
   <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/List%20Tumbuhan.png" width="24%" />
   <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/List%20Hewan.png" width="24%" />
   <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Scan%20before.png" width="24%" />
