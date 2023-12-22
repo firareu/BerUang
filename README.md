@@ -19,6 +19,13 @@
 | Putri Dian Shafira | Mobile Development | a296bsx2745@bangkit.academy |
 | Abdurrahman Al Aufa | Mobile Development | a283bsy2381@bangkit.academy |
 
+
+| Role | Branch
+|---------|---------|
+| Machine Learning | ML | 
+| Cloud Computing | ? |
+| Mobile Development | BerUang-App |
+
 ## Machine Learning
 ### Overview
 We create a machine learning that detect a lot of kinds of endangered species in Indonesia, and also categorized non-endanged species in one category.
