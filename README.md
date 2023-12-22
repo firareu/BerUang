@@ -28,53 +28,43 @@
 | Mobile Development | BerUang-App |
 
 ## Machine Learning
-### Overview
-We create a machine learning that detect a lot of kinds of endangered species in Indonesia, and also categorized non-endanged species in one category.
+<h3> Overview </h3>
+we create 2 machine learning models:
+(/n) -article recommendation system
+(/n) - article category classification
 
-The goal of this model is to recognize and give information about what kinds of endangered species are there in Indonesia, and which one is categorized as non-endangered as well.
+Dataset and Data Preparation
+The dataset we use is taken through scrapping several news potals including detik.com and bisnis.com.
+This training dataset is intended for the article category classification system.
+for this recommendation system is only a system of finding available articles with similar discussions through the cosine_similarity value.
 
-<details>
-  <summary>Output Example of Our Application</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Scan_after.png" width="500"/>
-</details>
-
-### Dataset and Data Preparation
-The dataset we use for this model is a combined dataset of our own collective dataset, [Indonesian Endangered Species 1](https://www.kaggle.com/datasets/nadyanurfadhila/indonesian-endangered-animal), and [Indonesian Endangered Species 2](https://www.kaggle.com/datasets/nadyanurfadhila/indonesia-endangered-animal2). You can download the dataset [here](https://drive.google.com/uc?export=download&id=1C2ML8iLXsRkCa-wz-grqHjMMsJzLJAf3). This dataset contains 5107 images of 58 kinds of endangered species in Indonesia, and one category for non-endangered species in Indonesia.
-
-We split the dataset using [split-folders](https://pypi.org/project/split-folders/) library in Python into three directories Training, Validation, Testing with Ratio (0.8, 0.1, 0.1). Then, we use image augmentation to rescale the dataset by 1/255 and resize it to 224x224, we think this number is not too big and not too small to affect loss and the performance of our CNN.
+This is the result of the dataset that we have processed:
+ [Dataset](https://storage.googleapis.com/data-artikel/hasil_akhir.csv).
 
 <details>
-  <summary>Example of Dataset with Each Labels</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Dataset%20Overview.png" width="500"/>
+  <summary>Example of Dataset with Each Labelsy</summary>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/c118ba4b-2890-480a-83da-1eeaa9c99386" width="500"/>
 </details>
-
-### Transfer Learning
-Our model in this application is using transfer learning from [Xception](https://keras.io/api/applications/xception/). We did some modification and adjustable to make the best model possible.
 
 <details>
   <summary>Model Summary</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Model%20Summary.png" width="500"/>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/1eb5be99-ab1c-426b-9441-6335e1d5d542" width="500"/>
 </details>
 
-<details>
-  <summary>Model Flowchart</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Model%20Flowchart.png" width="500"/>
-</details>
-
-### Model
+<h3> Model Result </h3>
 <details>
   <summary>Model Accuracy</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Model%20Accuracy.png" width="500"/>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/0ad5ae40-5eef-4120-b9dd-cce9ef93dc8e" width="500"/>
 </details>
 
+<h3> Testing </h3>
 <details>
-  <summary>Model Loss</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Model%20Loss.png" width="500"/>
+  <summary>Testing for article recommendation system </summary>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/8126f520-5cb3-45d8-ab4e-fc34e4a39eaf" width="500"/>
 </details>
-
 <details>
-  <summary>Testing Example</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Machine%20Learning/Media/Testing%20Example.png" width="500"/>
+  <summary>Testing for article category classification </summary>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/8dbc71f7-7277-474e-93b5-69aefacc6f40" width="500"/>
 </details>
 
 ## Cloud Computing
