@@ -79,8 +79,8 @@ class ArticleFragment : Fragment() {
     private fun setupChipGroup() {
         val chipGroup = binding.chipGroup
         val chipTexts = listOf(
-            "Asuransi", "Perbankan", "Korporasi", "Bursa dan Saham", "Bisnis",
-            "Berita", "dasda"
+            "Asuransi", "Perbankan", "Korporasi", "Bursa&Saham", "Bisnis",
+            "Berita", "Obligasi&Reksadana", "PersonalFinance", "Fintech", "Ekonomi", "Multifinance", "Manajemen", "Infrastruktur", "Trade"
         )
 
         for (chipText in chipTexts) {
