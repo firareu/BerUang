@@ -18,7 +18,7 @@ def get_recommendations(article_index):
     cosine_similarities = cosine_similarity(tfidf_matrix, tfidf_matrix[article_index]).flatten()
 
     # Get indices of similar articles
-    similar_indices = cosine_similarities.argsort()[-6:][::-1]  # Adjust the number as needed
+    similar_indices = cosine_similarities.argsort()[-30:][::-1]  # Adjust the number as needed
 
     # Exclude the original article and select top recommendations
     similar_indices = [i for i in similar_indices if i != article_index]
