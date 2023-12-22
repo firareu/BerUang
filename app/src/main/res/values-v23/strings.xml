@@ -31,4 +31,6 @@
     <string name="gender">Gender</string>
     <string name="date_of_birth_hint">Input your birthday</string>
     <string name="date_of_birth">Birthday</string>
+    <string name="author">Author</string>
+    <string name="recommend">Recomendation</string>
 </resources>

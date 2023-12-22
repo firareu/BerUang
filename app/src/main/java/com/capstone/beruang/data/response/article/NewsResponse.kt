@@ -36,5 +36,7 @@ data class NewsResponseItem(
     val date: String,
 
     @field:SerializedName("Link")
-    val link: String
+    val link: String,
+
+    var isBookmarked: Boolean = false
 ): Parcelable

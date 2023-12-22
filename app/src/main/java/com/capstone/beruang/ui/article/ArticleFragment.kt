@@ -45,19 +45,6 @@ class ArticleFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
     }
 
-//    private fun setupAdapters() {
-////        setupRowAdapter()
-//        setupArticleAdapter()
-//    }
-
-//    private fun setupRowAdapter() {
-//        viewModel.articleList.observe(viewLifecycleOwner) { articles ->
-//            binding.rvRow.adapter = RowAdapter(articles)
-//            binding.rvArticle.adapter = ArticleListAdapter(articles)
-//            binding.rvRow.layoutManager =
-//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//        }
-//    }
 
     private fun setupArticleAdapter() {
         binding.rvArticle.layoutManager = LinearLayoutManager(requireContext())
@@ -79,8 +66,8 @@ class ArticleFragment : Fragment() {
     private fun setupChipGroup() {
         val chipGroup = binding.chipGroup
         val chipTexts = listOf(
-            "Asuransi", "Perbankan", "Korporasi", "Bursa dan Saham", "Bisnis",
-            "Berita", "dasda"
+            "Asuransi", "Perbankan", "Korporasi", "Bursa&Saham", "Bisnis",
+            "Berita", "Obligasi&Reksadana", "PersonalFinance", "Fintech", "Ekonomi", "Multifinance", "Manajemen", "Infrastruktur", "Trade"
         )
 
         for (chipText in chipTexts) {
@@ -134,4 +121,3 @@ class ArticleFragment : Fragment() {
         _binding = null
     }
 }
-

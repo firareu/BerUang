@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/title_article"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -42,32 +41,80 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
+        <TextView
+            android:id="@+id/author_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/author"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_title" />
+
+        <TextView
+            android:id="@+id/date_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/author"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/author_label" />
+
         <ImageView
             android:id="@+id/image_article"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/image_article"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/article_title"
+            app:layout_constraintTop_toBottomOf="@+id/date_article"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
 
         <TextView
             android:id="@+id/article_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
             android:text="@string/article_content"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_article" />
+
+        <TextView
+            android:id="@+id/recomend_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/recommend"
+            android:textAlignment="textStart"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recomend_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

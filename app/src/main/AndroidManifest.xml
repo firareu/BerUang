@@ -13,6 +13,9 @@
         android:theme="@style/Theme.BerUang"
         tools:targetApi="31">
         <activity
+            android:name=".ui.article.bookmark.BookmarkActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.welcome.SlidePageActivity"
             android:exported="false" />
         <activity

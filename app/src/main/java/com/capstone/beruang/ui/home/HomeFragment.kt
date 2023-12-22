@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         binding.rvAllocation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvAllocation.setHasFixedSize(true)
         binding.rvAllocation.adapter = homeAdapter
-        
+
         val repository = ArticleRepository()
         val viewModelFactory = ArticleViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
