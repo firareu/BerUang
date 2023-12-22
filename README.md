@@ -126,6 +126,7 @@ And this is the libraries we used to build the android application:
 Our application is not yet perfect where the application can only do the following things:
 * Display articles
 * Provide article recommendations
+* Filter articles by category
 * Displays income data
 * Displays outcome data
 * Displays historical outcome data
