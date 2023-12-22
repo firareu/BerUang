@@ -114,7 +114,7 @@ You can check API Documentation in the following link.
 We build android applications for end users so that everyone can use our applications. The following is the application flow based on the Mockup.
 <details>
   <summary>Application Flowchart</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Mobile%20Development/Media/Flowchart%20FUTON.jpg"/>
+  <img src="https://github.com/firareu/BerUang/blob/MDFiraTL/md-mockup/BerUangFlow.jpg"/>
 </details>
 
 And this is the libraries we used to build the android application:
@@ -122,8 +122,15 @@ And this is the libraries we used to build the android application:
 * [Glide](https://bumptech.github.io/glide/)
 * [RecyclerView](https://www.geeksforgeeks.org/android-recyclerview/)
 * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
-* 
 
+Our application is not yet perfect where the application can only do the following things:
+* Display articles
+* Provide article recommendations
+* Filter articles by category
+* Displays income data
+* Displays outcome data
+* Displays historical outcome data
+* And all the MVP UI of the application has been created
 
 Here is our application's Screenshot
 <p float="left">
