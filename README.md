@@ -1,5 +1,5 @@
-# FUTON
-> From Us To Nature
+# BerUang
+> Manage Your Money With Us!
 
 <p align="center">
   <img src="=https://github.com/firareu/BerUang/blob/MDFiraTL/BerUang.png" width="400"/>
