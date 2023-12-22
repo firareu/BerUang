@@ -31,7 +31,7 @@ This is the result of the dataset that we have processed:
 <h3> Testing </h3>
 <details>
   <summary>Testing for article recommendation system </summary>
-  <img src="![image](https://github.com/firareu/BerUang/assets/125734108/8126f520-5cb3-45d8-ab4e-fc34e4a39eaf)" width="500"/>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/8126f520-5cb3-45d8-ab4e-fc34e4a39eaf" width="500"/>
 </details>
 <details>
   <summary>Testing for article category classification </summary>
