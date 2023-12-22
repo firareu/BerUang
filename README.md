@@ -190,8 +190,8 @@ Our application is not perfect where the application can only do the following t
 * And all the MVP UI of the application has been created
 
 Displays using the following user:
-Email: lynnarsa@example.com
-Pass: password123
+(/n)Email: lynnarsa@example.com
+(/n)Pass: password123
 * Displays income data
 * Displays outcome data
 * Displays historical outcome data
