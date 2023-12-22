@@ -1,8 +1,8 @@
 <h1> Machine Learning </h1>
 <h3> Overview </h3>
 we create 2 machine learning models:
-- article recommendation system
-- article category classification
+(/n) -article recommendation system
+(/n) - article category classification
 
 Dataset and Data Preparation
 The dataset we use is taken through scrapping several news potals including detik.com and bisnis.com.
