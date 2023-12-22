@@ -16,7 +16,7 @@ Enable the following API :
 - Make a service account and download the file. (Make sure to integrate the serviceAccount.json with the code later)
 
 #### 4. Clone Project and set Google Cloud Account
-- Use 'git clone https://github.com/firareu/BerUang.git -b test-api' to copy the project.
+- Use 'git clone https://github.com/firareu/BerUang.git -b backend-API' to copy the project.
 - In terminal use "git init" and connect your google cloud account
 
 #### 5. Deploy the project on App Engine
