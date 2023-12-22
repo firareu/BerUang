@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
 import com.capstone.beruang.adapter.ArticleListAdapter
-import com.capstone.beruang.data.dataclass.ArticleRepository
+import com.capstone.beruang.data.ArticleRepository
 import com.capstone.beruang.data.repository.PreferenceManager
 import com.capstone.beruang.data.repository.UserRepository
 import com.capstone.beruang.data.retrofit.ApiConfig

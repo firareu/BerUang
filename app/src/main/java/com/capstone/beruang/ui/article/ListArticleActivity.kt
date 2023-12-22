@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.adapter.ArticleListAdapter
-import com.capstone.beruang.data.dataclass.ArticleRepository
+import com.capstone.beruang.data.ArticleRepository
 import com.capstone.beruang.databinding.ActivityListArticleBinding
 
 class ListArticleActivity : AppCompatActivity() {

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.beruang.R
 import com.capstone.beruang.adapter.ArticleListAdapter
 import com.capstone.beruang.adapter.RowAdapter
-import com.capstone.beruang.data.dataclass.ArticleRepository
+import com.capstone.beruang.data.ArticleRepository
 /*import com.capstone.beruang.data.ArticleData.articleList
 import com.capstone.beruang.data.ArticleRepository*/
 import com.capstone.beruang.databinding.FragmentArticleBinding
