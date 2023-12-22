@@ -122,8 +122,14 @@ And this is the libraries we used to build the android application:
 * [Glide](https://bumptech.github.io/glide/)
 * [RecyclerView](https://www.geeksforgeeks.org/android-recyclerview/)
 * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
-* 
 
+Our application is not yet perfect where the application can only do the following things:
+* Display articles
+* Provide article recommendations
+* Displays income data
+* Displays outcome data
+* Displays historical outcome data
+* And all the MVP UI of the application has been created
 
 Here is our application's Screenshot
 <p float="left">
