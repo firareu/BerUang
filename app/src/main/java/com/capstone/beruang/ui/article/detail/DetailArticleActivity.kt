@@ -1,6 +1,7 @@
 package com.capstone.beruang.ui.article.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.beruang.R
 import com.capstone.beruang.adapter.ArticleListAdapter
-import com.capstone.beruang.data.ArticleData
 import com.capstone.beruang.data.ArticleRepository
 import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.databinding.ActivityDetailArticleBinding
@@ -39,6 +39,7 @@ class DetailArticleActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         detailArticle()
         setupAdapter()
+        setupAction()
     }
 
     @Suppress("DEPRECATION")
@@ -59,12 +60,11 @@ class DetailArticleActivity : AppCompatActivity() {
         }
     }
     private fun setupAdapter() {
-        val dataArticle = ArticleData.articleList.take(5)
         viewModel.articleList.observe(this) { articles ->
             // Update the RecyclerView adapter with the new list of articles
             val adapter = ArticleListAdapter(articles)
-            binding.rvRecommend.adapter = adapter
-            binding.rvRecommend.layoutManager =
+            binding.rvArticlelist.adapter = adapter
+            binding.rvArticlelist.layoutManager =
                 LinearLayoutManager(this)
         }
 //        recyclerView.setHasFixedSize(true)
@@ -104,5 +104,9 @@ class DetailArticleActivity : AppCompatActivity() {
         menuItem.setIcon(bookmarkIcon)
     }
 
-
+    private fun setupAction() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+    }
 }

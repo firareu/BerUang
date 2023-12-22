@@ -1,4 +1,4 @@
-package com.capstone.beruang.data.dataclass
+package com.capstone.beruang.data
 
 import com.capstone.beruang.data.response.article.NewsResponseItem
 import com.capstone.beruang.data.retrofit.ApiConfig2

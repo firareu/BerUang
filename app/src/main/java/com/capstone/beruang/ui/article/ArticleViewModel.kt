@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.capstone.beruang.data.dataclass.ArticleRepository
+import com.capstone.beruang.data.ArticleRepository
 import com.capstone.beruang.data.response.article.ArticlesItem
 import com.capstone.beruang.data.response.article.NewsResponseItem
 import kotlinx.coroutines.launch
