@@ -99,10 +99,9 @@ We build an android application for end user so everyone can use our application
 
 And this is the libraries we used to build the android application:
 * [Retrofit](https://square.github.io/retrofit/)
-* [Tensorflow Lite](https://www.tensorflow.org/lite)
-* [Dagger-Hilt](https://dagger.dev/hilt/)
-* [Tasty Toasty](https://github.com/usman18/TastyToasty)
 * [Glide](https://bumptech.github.io/glide/)
+* [RecyclerView](https://www.geeksforgeeks.org/android-recyclerview/)
+* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 
 
 Here is our application's Screenshot
