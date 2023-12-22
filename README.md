@@ -183,14 +183,18 @@ And this is the libraries we used to build the android application:
 * [RecyclerView](https://www.geeksforgeeks.org/android-recyclerview/)
 * [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
 
-Our application is not yet perfect where the application can only do the following things:
+Our application is not perfect where the application can only do the following things:
+* Login and register
 * Display articles
 * Provide article recommendations
-* Filter articles by category
+* And all the MVP UI of the application has been created
+
+Displays using the following user:
+Email: lynnarsa@example.com
+Pass: password123
 * Displays income data
 * Displays outcome data
 * Displays historical outcome data
-* And all the MVP UI of the application has been created
 
 Here is our application's Screenshot
 <p float="left">
