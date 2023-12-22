@@ -9,11 +9,16 @@ The dataset we use is taken through scrapping several news potals including deti
 This training dataset is intended for the article category classification system.
 for this recommendation system is only a system of finding available articles with similar discussions through the cosine_similarity value.
 
-Example of Dataset with Each Labels
-![image](https://github.com/firareu/BerUang/assets/125734108/c118ba4b-2890-480a-83da-1eeaa9c99386)
+<details>
+  <summary>Example of Dataset with Each Labelsy</summary>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/c118ba4b-2890-480a-83da-1eeaa9c99386" width="500"/>
+</details>
 
-Model Summary:
-![image](https://github.com/firareu/BerUang/assets/125734108/1eb5be99-ab1c-426b-9441-6335e1d5d542)
+<details>
+  <summary>Model Summary</summary>
+  <img src="https://github.com/firareu/BerUang/assets/125734108/1eb5be99-ab1c-426b-9441-6335e1d5d542" width="500"/>
+</details>
+
 
 
 
