@@ -19,6 +19,7 @@
 | Putri Dian Shafira | Mobile Development | a296bsx2745@bangkit.academy |
 | Abdurrahman Al Aufa | Mobile Development | a283bsy2381@bangkit.academy |
 
+### BerUang TEAM | Branch
 
 | Role | Branch
 |---------|---------|
