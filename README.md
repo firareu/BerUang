@@ -71,21 +71,33 @@ Our model in this application is using transfer learning from [Xception](https:/
 
 ## Cloud Computing
 
-### Overview
+### Requirements
+- Text Editor (Visual Studio Code)
+- Git
+- Google Cloud Account
+- Google Cloud SDK
 
-We create our private API for login/register, list animals & plants, and then we deploy it in VM on Google Cloud Platform.
+#### 1. Setup Google Cloud Platfrom
+Enable the following API : 
+- App Engine API
+- Cloud Firestore API
 
-### PRIVATE API (LOGIN/REGISTER, LIST ANIMALS AND PLANTS)
-we create the api use node js with express js. 
-for the source code, check this [link](https://github.com/risavarrahman/futon-capstone).
+#### 2. Install Google Cloud SDK
+#### 3. Setup Firebase
+- Login to Firebase, go to console and connect it to Google Cloud Project.
+- Enable Firebase Authentication and Firestore Database.
+- Make a service account and download the file. (Make sure to integrate the serviceAccount.json with the code later)
 
-### SERVER
-for the server, we use virtual machine (VM) in Google Cloud Platform to deploy our server. We use only VM because it easy to deploy and for us, it not hard to  for maintenance.
+#### 4. Clone Project and set Google Cloud Account
+- Use 'git clone https://github.com/firareu/BerUang.git -b test-api' to copy the project.
+- In terminal use "git init" and connect your google cloud account
 
-<details>
-<summary>Virtual Machine (VM)</summary>
-  <img src="https://github.com/nadikarim/FUTON/blob/main/Cloud%20Computing/media/Screenshot%202022-06-12%20225402.png" width="500"/>
-</details>
+#### 5. Deploy the project on App Engine
+- Deploy the project to App Engine using 'gcloud app deploy'
+
+#### 6. API Documentation
+You can check API Documentation in the following link. 
+[Postman API Beruang](https://dark-space-932472.postman.co/workspace/New-Team-Workspace~e1a57e86-16c4-4e9b-9f2e-8f205b6f8d22/collection/30258106-5688daea-5cdf-4924-aa11-5effcc6db047?action=share&creator=30258106)
 
 ## Mobile Development
 
